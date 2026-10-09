@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-urdu: "Noto Nastaliq Urdu", Arial, sans-serif;
+
+  /* 1981 Healthcare Heritage Color System */
+  --color-warm-ivory: #f8f7f2;
+  --color-deep-teal: #286c6a;
+  --color-deep-teal-hover: #1f5654;
+  --color-deep-teal-active: #174241;
+  --color-sage: #8ead9a;
+  --color-pale-sage: #eaf2ed;
+  --color-mist-blue: #e8f1f4;
+  --color-warm-sand: #d8b878;
+  --color-warm-sand-light: #f5eedf;
+  --color-charcoal: #243333;
+  --color-slate-text: #526363;
+  --color-error-red: #b84c4c;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: #f8f7f2;
+  color: #243333;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-urdu {
+  font-family: var(--font-urdu);
+}
+
+p {
+  line-height: 1.68;
+}
+
+/* Accessibility: Clear visible focus rings */
+:focus-visible {
+  outline: 2px solid #286c6a;
+  outline-offset: 2px;
+}
+
+/* Custom accessible scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f7f2;
+}
+::-webkit-scrollbar-thumb {
+  background: #cad4cf;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8ead9a;
+}
+
