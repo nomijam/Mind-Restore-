@@ -4,12 +4,26 @@ import { usePractice } from '../context/PracticeContext';
 import { MindRestoreLogo } from './MindRestoreLogo';
 
 export const Footer: React.FC = () => {
-  const { settings, openServiceDetail, openLegal, openAdmin, getPhoneCallLink } = usePractice();
+  const {
+    settings,
+    openServiceDetail,
+    openLegal,
+    openAdmin,
+    getPhoneCallLink,
+    activeConditionPage,
+    closeConditionPage,
+    openConditionPage,
+  } = usePractice();
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (activeConditionPage) {
+      closeConditionPage();
+    }
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   };
 
   return (
@@ -26,8 +40,8 @@ export const Footer: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-[#A3C2B1]">
-              <span className="font-semibold block text-white mb-0.5">Lahore Clinic & Worldwide Tele-Health</span>
-              <span>In-person consultations & encrypted digital video sessions.</span>
+              <span className="font-semibold block text-white mb-0.5">Nationwide & Worldwide Tele-Health</span>
+              <span>Encrypted digital video & confidential voice sessions.</span>
             </div>
           </div>
         </div>
@@ -116,9 +130,19 @@ export const Footer: React.FC = () => {
           {/* Column 4: LEGAL */}
           <div className="space-y-3">
             <h4 className="font-heading font-bold text-[#D8B878] uppercase tracking-wider text-[11px]">
-              LEGAL
+              LEGAL & GOVERNANCE
             </h4>
             <ul className="space-y-2 text-neutral-300">
+              <li>
+                <button onClick={() => openLegal('editorial')} className="hover:text-white text-left transition-colors cursor-pointer">
+                  Editorial & Review Policy
+                </button>
+              </li>
+              <li>
+                <button onClick={() => openLegal('disclaimer')} className="hover:text-white text-left transition-colors cursor-pointer">
+                  Medical Disclaimer
+                </button>
+              </li>
               <li>
                 <button onClick={() => openLegal('privacy')} className="hover:text-white text-left transition-colors cursor-pointer">
                   Privacy Policy
@@ -127,11 +151,6 @@ export const Footer: React.FC = () => {
               <li>
                 <button onClick={() => openLegal('terms')} className="hover:text-white text-left transition-colors cursor-pointer">
                   Terms of Service
-                </button>
-              </li>
-              <li>
-                <button onClick={() => openLegal('disclaimer')} className="hover:text-white text-left transition-colors cursor-pointer">
-                  Medical Disclaimer
                 </button>
               </li>
               <li>

@@ -95,9 +95,14 @@ export const Hero: React.FC = () => {
               <div className="relative rounded-3xl overflow-hidden border border-[#1C433E]/15 shadow-xl bg-white group">
                 <img
                   src={heritageHeroImg}
-                  alt="A qualified clinical psychologist in a calm, respectful consultation with a patient in an established healthcare room"
+                  alt="A qualified clinical psychologist in a calm, respectful consultation with a patient at Mind Restore"
                   referrerPolicy="no-referrer"
                   className="w-full h-[400px] sm:h-[460px] object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  width={640}
+                  height={460}
                 />
 
                 {/* Subtle calm caption strip */}
@@ -106,7 +111,7 @@ export const Hero: React.FC = () => {
                     Compassionate Outpatient Care & In-Depth Clinical Consultations
                   </p>
                   <p className="text-[11px] text-[#526363] mt-0.5">
-                    Available in-person at our Lahore clinic and worldwide through secure digital tele-health.
+                    Available across Pakistan and worldwide through secure digital tele-health.
                   </p>
                 </div>
               </div>
@@ -137,7 +142,7 @@ export const Hero: React.FC = () => {
                     Strict Confidentiality
                   </p>
                   <p className="text-[10px] text-[#526363]">
-                    In-Person & Secure Tele-Health
+                    Encrypted Video & Voice Tele-Health
                   </p>
                 </div>
               </div>

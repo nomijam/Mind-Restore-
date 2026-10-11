@@ -15,7 +15,7 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
   const [email, setEmail] = useState<string>('');
   const [preferredContactMethod, setPreferredContactMethod] = useState<'WhatsApp' | 'Phone Call' | 'Email'>('WhatsApp');
   const [reasonForContact, setReasonForContact] = useState<string>(prefillReason || 'General Consultation');
-  const [preferredAppointmentType, setPreferredAppointmentType] = useState<'In-Person Consultation' | 'Online Video' | 'Voice Consultation'>('In-Person Consultation');
+  const [preferredAppointmentType, setPreferredAppointmentType] = useState<'Online Video' | 'Voice Consultation'>('Online Video');
   const [preferredDate, setPreferredDate] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [consent, setConsent] = useState<boolean>(true);
@@ -237,9 +237,8 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                     onChange={(e) => setPreferredAppointmentType(e.target.value as any)}
                     className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
                   >
-                    <option value="In-Person Consultation">In-Person Consultation (Lahore Clinic)</option>
-                    <option value="Online Video">Online Video Consultation (Secure Tele-Health)</option>
-                    <option value="Voice Consultation">Voice Consultation (Telephone / Audio)</option>
+                    <option value="Online Video">Online Video Consultation (Secure HD Tele-Health)</option>
+                    <option value="Voice Consultation">Confidential Voice Consultation (Telephone / Audio)</option>
                   </select>
                 </div>
               </div>

@@ -67,9 +67,13 @@ export const ResourcesSection: React.FC = () => {
                 <div className="relative aspect-[16/10] bg-[#EAF2ED] overflow-hidden">
                   <img
                     src={resourcesImg}
-                    alt={art.title}
+                    alt={`Mental health psychoeducation: ${art.title}`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                    width={480}
+                    height={300}
                   />
                   <span className="absolute top-3 left-3 bg-white/95 text-[#286C6A] text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded">
                     {art.category}

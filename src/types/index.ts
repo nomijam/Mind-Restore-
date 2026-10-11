@@ -8,7 +8,7 @@ export interface Specialist {
   image: string;
   languages: string[];
   specialization: string[];
-  sessionFormats: ('In-Person' | 'Online Video' | 'Voice Consultation')[];
+  sessionFormats: ('Online Video' | 'Voice Consultation')[];
   about: string;
   therapeuticApproaches: string[];
   whoTheyWorkWith: string[];
@@ -36,11 +36,35 @@ export interface ConditionItem {
   id: string;
   slug: string;
   title: string;
+  category: 'common-concerns' | 'specialised-care';
   twoLineExplanation: string;
   iconName: string;
   relatedServiceId: string;
   signs: string[];
   gentleGuidance: string;
+
+  // Dedicated Condition Page attributes
+  badge?: string;
+  fullOverview?: string;
+  culturalContext?: string;
+  symptomsBreakdown?: {
+    emotional: string[];
+    physical: string[];
+    behavioral: string[];
+  };
+  therapeuticModalities?: {
+    name: string;
+    description: string;
+  }[];
+  treatmentRoadmap?: {
+    step: string;
+    title: string;
+    description: string;
+  }[];
+  whoItIsFor?: string[];
+  recommendedSpecialistIds?: string[];
+  faqs?: { question: string; answer: string }[];
+  keywords?: string[];
 }
 
 export interface EducationalTool {
@@ -98,7 +122,7 @@ export interface AppointmentInquiry {
   email: string;
   preferredContactMethod: 'WhatsApp' | 'Phone Call' | 'Email';
   reasonForContact: string;
-  preferredAppointmentType: 'In-Person Consultation' | 'Online Video' | 'Voice Consultation';
+  preferredAppointmentType: 'Online Video' | 'Voice Consultation';
   preferredDate?: string;
   message?: string;
   consent: boolean;

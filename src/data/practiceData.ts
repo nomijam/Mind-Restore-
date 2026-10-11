@@ -8,6 +8,7 @@ import {
   TimelineMilestone,
   PracticeSettings,
 } from '../types';
+import { CONDITIONS_DATA } from './conditionsData';
 
 import heritageHeroImg from '../assets/images/heritage_clinical_consultation_1791269818478.jpg';
 import drFarahImg from '../assets/images/psychologist_dr_farah_1791220174235.jpg';
@@ -158,128 +159,7 @@ export const SPECIALISTS: Specialist[] = [
   },
 ];
 
-export const CONDITIONS: ConditionItem[] = [
-  {
-    id: 'anxiety',
-    slug: 'anxiety',
-    title: 'Anxiety',
-    twoLineExplanation: 'Persistent worry, nervousness, racing heartbeat or physical tension that interferes with your daily sense of peace.',
-    iconName: 'Activity',
-    relatedServiceId: 'individual-counselling',
-    signs: ['Feeling restless or constantly on edge', 'Difficulty stopping or controlling anxious thoughts', 'Physical sensations such as chest tightness or shallow breathing', 'Avoidance of situations due to anticipatory fear'],
-    gentleGuidance: 'Anxiety is your body’s alarm system in overdrive. With professional guidance, you can learn to regulate physical arousal and gently retrain catastrophic thinking.',
-  },
-  {
-    id: 'depression',
-    slug: 'depression',
-    title: 'Depression',
-    twoLineExplanation: 'A persistent feeling of heaviness, loss of interest in activities, low energy, and feeling emotionally depleted.',
-    iconName: 'CloudRain',
-    relatedServiceId: 'individual-counselling',
-    signs: ['Pervasive low mood or feeling empty', 'Loss of enjoyment in things you once loved', 'Disrupted sleep patterns and chronic fatigue', 'Feelings of guilt, worthlessness or hopelessness'],
-    gentleGuidance: 'Depression is not a weakness of will or lack of faith. It is an understandable clinical state that responds to compassionate, paced therapeutic support.',
-  },
-  {
-    id: 'stress-burnout',
-    slug: 'stress-burnout',
-    title: 'Stress & Burnout',
-    twoLineExplanation: 'Exhaustion from relentless workplace demands, caregiver responsibilities, or life pressures leaving you drained.',
-    iconName: 'Flame',
-    relatedServiceId: 'stress-management',
-    signs: ['Feeling overwhelmed at the start of each day', 'Cynicism, detachment, or loss of professional efficacy', 'Frequent tension headaches and muscle tightness', 'Difficulty setting boundaries with demands'],
-    gentleGuidance: 'Recovery begins with restoring nervous system equilibrium and establishing realistic emotional boundaries without guilt.',
-  },
-  {
-    id: 'trauma-ptsd',
-    slug: 'trauma',
-    title: 'Trauma & PTSD',
-    twoLineExplanation: 'Distressing memories, flashbacks, or emotional numbness resulting from past adverse events or overwhelming shocks.',
-    iconName: 'ShieldAlert',
-    relatedServiceId: 'trauma-support',
-    signs: ['Intrusive memories or distressing nightmares', 'Hyper-vigilance or an easily triggered startle response', 'Emotional detachment from loved ones', 'Strong urge to avoid reminders of the event'],
-    gentleGuidance: 'Trauma work is paced gently around safety and stabilization first. You will never be rushed to discuss details before you feel ready.',
-  },
-  {
-    id: 'ocd',
-    slug: 'ocd',
-    title: 'OCD',
-    twoLineExplanation: 'Repetitive, intrusive distressing thoughts paired with mental or physical rituals performed to relieve intense anxiety.',
-    iconName: 'Repeat',
-    relatedServiceId: 'behavioural-support',
-    signs: ['Recurrent unwanted intrusive thoughts or images', 'Urgent rituals like checking, washing, or mental review', 'Temporary relief followed by rising anxiety', 'Significant time consumed by rituals each day'],
-    gentleGuidance: 'Evidence-based cognitive and exposure frameworks help loosen the grip of intrusive doubts and restore ease.',
-  },
-  {
-    id: 'relationship-difficulties',
-    slug: 'relationship-problems',
-    title: 'Relationship Difficulties',
-    twoLineExplanation: 'Repeated misunderstandings, emotional distance, erosion of trust, or difficulty expressing vulnerable feelings.',
-    iconName: 'HeartHandshake',
-    relatedServiceId: 'couples-counselling',
-    signs: ['Frequent escalating arguments without resolution', 'Feeling unheard, dismissed or unappreciated by your partner', 'Emotional withdrawal or silent treatment patterns', 'Navigating external family interference'],
-    gentleGuidance: 'Relationships heal when both partners can identify the underlying emotional needs hidden beneath surface defensiveness.',
-  },
-  {
-    id: 'family-concerns',
-    slug: 'family-concerns',
-    title: 'Family Concerns',
-    twoLineExplanation: 'Generational divides, parent-child tension, joint family friction, or navigating complex transitions together.',
-    iconName: 'Users',
-    relatedServiceId: 'family-counselling',
-    signs: ['Difficulty communicating across generations with mutual respect', 'Struggles around independence versus familial duty', 'Sibling disagreements or caregiver fatigue', 'Persistent tension during family gatherings'],
-    gentleGuidance: 'Family therapy respects cultural heritage while opening space for honest, respectful communication and healthy boundaries.',
-  },
-  {
-    id: 'grief-loss',
-    slug: 'grief',
-    title: 'Grief & Loss',
-    twoLineExplanation: 'The profound ache of losing a loved one, health, a relationship, or a significant life chapter.',
-    iconName: 'Moon',
-    relatedServiceId: 'individual-counselling',
-    signs: ['Intense waves of sorrow, yearning or numbness', 'Difficulty adjusting to daily routines without the person', 'Feelings of isolation in one’s mourning', 'Guilt or conflict regarding moments of relief'],
-    gentleGuidance: 'Grief is not a problem to be solved; it is a sacred human process to be witnessed and supported with tenderness.',
-  },
-  {
-    id: 'anger-management',
-    slug: 'anger-management',
-    title: 'Anger Management',
-    twoLineExplanation: 'Intense irritability, sudden outbursts, or persistent resentment that damages relationships and peace of mind.',
-    iconName: 'Zap',
-    relatedServiceId: 'behavioural-support',
-    signs: ['Snapping quickly at small inconveniences', 'Physical sensations of heat, tension, or clenched jaw', 'Regret and embarrassment after emotional outbursts', 'Difficulty expressing softer feelings like hurt or fear'],
-    gentleGuidance: 'Anger often acts as a protective shield for deeper vulnerability. Understanding the trigger allows constructive expression.',
-  },
-  {
-    id: 'self-esteem',
-    slug: 'self-esteem',
-    title: 'Self-Esteem',
-    twoLineExplanation: 'Persistent self-criticism, imposter syndrome, fear of judgment, and feeling fundamentally inadequate.',
-    iconName: 'Sparkles',
-    relatedServiceId: 'individual-counselling',
-    signs: ['A harsh internal dialogue that minimizes your achievements', 'Over-apologizing and chronic people-pleasing', 'Paralyzing fear of making mistakes in public', 'Difficulty accepting compliments or kindness'],
-    gentleGuidance: 'Self-worth can be cultivated through compassion-focused exercises that quiet the inner critic and foster healthy self-acceptance.',
-  },
-  {
-    id: 'sleep-difficulties',
-    slug: 'sleep-difficulties',
-    title: 'Sleep Difficulties',
-    twoLineExplanation: 'Tossing and turning, nighttime racing thoughts, restless awakenings, and unrefreshing rest.',
-    iconName: 'BedDouble',
-    relatedServiceId: 'stress-management',
-    signs: ['Taking more than 30–45 minutes to fall asleep regularly', 'Waking up with sudden alertness or worry at night', 'Daytime fatigue, brain fog, and irritability', 'Anxiety around bedtime about whether you will sleep'],
-    gentleGuidance: 'Cognitive Behavioural Therapy for Insomnia provides concrete, non-pharmacological methods to reset your natural rhythm.',
-  },
-  {
-    id: 'life-transitions',
-    slug: 'life-transitions',
-    title: 'Life Transitions',
-    twoLineExplanation: 'Adapting to major life shifts such as marriage, relocation, university, career resets, or retirement.',
-    iconName: 'Compass',
-    relatedServiceId: 'individual-counselling',
-    signs: ['Feeling unsettled, ungrounded or anxious about the future', 'Loss of familiar identity or routine anchors', 'Difficulty making major life decisions with confidence', 'Homesickness or cultural dislocation'],
-    gentleGuidance: 'Transitions require space to process what was left behind while consciously creating stability for the path ahead.',
-  },
-];
+export const CONDITIONS: ConditionItem[] = CONDITIONS_DATA;
 
 export const SERVICES: ServiceDetail[] = [
   {

@@ -8,19 +8,37 @@
       name="description"
       content="Mind Restore: Professional, confidential and accessible online psychological support for individuals, couples and families in Pakistan and worldwide (Est. 1981)."
     />
+    <link rel="canonical" href="https://mindrestore.pk/" />
+    <link rel="alternate" hreflang="en-pk" href="https://mindrestore.pk/" />
+    <link rel="alternate" hreflang="x-default" href="https://mindrestore.pk/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph & Social Cards -->
+    <meta property="og:locale" content="en_PK" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="Mind Restore – Online Counselling Pakistan & Worldwide (Est. 1981)" />
     <meta
       property="og:description"
       content="Mind Restore: Professional, confidential and accessible online psychological support for individuals, couples and families in Pakistan and worldwide (Est. 1981)."
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mindrestore.pk/" />
     <meta property="og:site_name" content="Mind Restore (Est. 1981)" />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mind Restore – Online Counselling Pakistan & Worldwide (Est. 1981)" />
     <meta
       name="twitter:description"
       content="Mind Restore: Professional, confidential and accessible online psychological support for individuals, couples and families in Pakistan and worldwide (Est. 1981)."
     />
+
+    <!-- Geographic & Regional Targeting for Pakistan -->
+    <meta name="geo.region" content="PK-PB" />
+    <meta name="geo.placename" content="Lahore, Punjab, Pakistan" />
+    <meta name="geo.position" content="31.5204;74.3587" />
+    <meta name="ICBM" content="31.5204, 74.3587" />
+    <meta name="theme-color" content="#1C433E" />
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Ccircle cx='80' cy='80' r='78' fill='%23F8F7F2'/%3E%3Cpath d='M108 34C88 23 63 28 47 44C33 58 29 79 33 99C34 104 36 107 38 106C40 105 38 98 38 93C38 76 46 59 58 48C72 35 91 32 108 34Z' fill='%237BA28E'/%3E%3Cpath d='M44 56C58 36 84 32 104 42C116 48 123 60 126 73C127 76 126 78 124 79C122 80 124 81 125 82C127 84 130 86 130 88C130 90 126 91 125 92C124 93 126 95 126 96C126 98 123 99 122 100C121 101 123 103 123 104C123 108 119 110 116 111C110 113 104 115 97 116C90 117 76 124 73 127C78 120 84 113 90 108C96 103 103 98 106 91C110 83 107 72 102 65C96 57 87 52 77 50C65 47 53 49 44 56Z' fill='%231C433E'/%3E%3Cpath d='M113 77C115 79.5 119 79.5 121 77' stroke='%23F8F7F2' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M83 95C79 81 81 67 89 54C98 67 100 81 94 95Z' fill='%237BA28E'/%3E%3Cpath d='M80 92C67 87 56 77 56 65C69 63 81 74 84 88Z' fill='%237BA28E'/%3E%3Cpath d='M89 91C97 81 108 75 115 76C113 89 101 95 91 92Z' fill='%237BA28E'/%3E%3C/svg%3E" />
     <!-- Typography: Manrope for Headings, Inter for Body, Noto Nastaliq Urdu for Urdu -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,43 +47,193 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Structured Data (JSON-LD) for Established 1981 Healthcare Organization -->
+
+    <!-- Comprehensive Schema.org JSON-LD Graph for Healthcare & Medical Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MedicalOrganization",
-      "name": "Mind Restore",
-      "foundingDate": "1981",
-      "description": "Trusted mental-health care since 1981, combining decades of clinical experience with modern, evidence-informed psychological support.",
-      "medicalSpecialty": "Psychiatric",
-      "availableService": [
+      "@graph": [
         {
-          "@type": "MedicalTherapy",
-          "name": "Individual Psychological Counselling"
+          "@type": "MedicalOrganization",
+          "@id": "https://mindrestore.pk/#organization",
+          "name": "Mind Restore",
+          "alternateName": "Mind Restore Psychological Services",
+          "foundingDate": "1981",
+          "url": "https://mindrestore.pk/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://mindrestore.pk/logo.png"
+          },
+          "description": "Mind Restore: Established in 1981, providing evidence-informed clinical psychology, psychotherapy, and confidential mental wellness support for individuals, couples and families across Pakistan and worldwide via secure tele-health.",
+          "medicalSpecialty": [
+            "ClinicalPsychology",
+            "Psychiatric"
+          ],
+          "telephone": "+923143162051",
+          "email": "care@mindrestore.pk",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "14-A Healthcare Avenue, Gulberg III",
+            "addressLocality": "Lahore",
+            "addressRegion": "Punjab",
+            "postalCode": "54660",
+            "addressCountry": "PK"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 31.5204,
+            "longitude": 74.3587
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "19:30"
+            }
+          ],
+          "priceRange": "$$",
+          "knowsLanguage": ["English", "Urdu", "Punjabi"],
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "Pakistan"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Worldwide Tele-Health Diaspora"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalTherapy",
+              "name": "Individual Psychological Counselling",
+              "description": "One-on-one evidence-informed psychotherapy tailored to depression, stress, life transitions, and self-esteem."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Anxiety & Panic Management",
+              "description": "Structured cognitive-behavioural and somatic therapy for generalized anxiety, social anxiety, and panic attacks."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Couples & Relationship Counselling",
+              "description": "Facilitated dialogue and emotion-focused therapy to restore relational connection and resolve communication friction."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Family Systems Counselling",
+              "description": "Restoring mutual understanding, boundary setting, and collaborative harmony in family units."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Child & Adolescent Emotional Support",
+              "description": "Developmentally attuned therapeutic interventions for school anxiety, emotional regulation, and behavioural challenges."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Trauma & PTSD Support",
+              "description": "Safe, paced trauma-informed care and somatic grounding to process difficult past events."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Formal Psychological Assessment",
+              "description": "Objective psychometric evaluations for ADHD, cognitive functioning, personality, and clinical diagnostics."
+            },
+            {
+              "@type": "MedicalTherapy",
+              "name": "Tele-Mental Health Online Consultations",
+              "description": "Encrypted high-definition tele-health consultations for clients across Pakistan and overseas."
+            }
+          ]
         },
         {
-          "@type": "MedicalTherapy",
-          "name": "Couples & Relationship Counselling"
+          "@type": "WebSite",
+          "@id": "https://mindrestore.pk/#website",
+          "url": "https://mindrestore.pk/",
+          "name": "Mind Restore",
+          "description": "Online Counselling & Mental Health Education in Pakistan (Est. 1981)",
+          "publisher": {
+            "@id": "https://mindrestore.pk/#organization"
+          },
+          "inLanguage": "en-PK"
         },
         {
-          "@type": "MedicalTherapy",
-          "name": "Family Counselling"
+          "@type": "BreadcrumbList",
+          "@id": "https://mindrestore.pk/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://mindrestore.pk/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Mental Wellness Services",
+              "item": "https://mindrestore.pk/#services"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Specialists",
+              "item": "https://mindrestore.pk/#specialists"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Resources & Articles",
+              "item": "https://mindrestore.pk/#resources"
+            }
+          ]
         },
         {
-          "@type": "MedicalTherapy",
-          "name": "Child & Adolescent Support"
-        },
-        {
-          "@type": "MedicalTherapy",
-          "name": "Trauma & PTSD Support"
-        },
-        {
-          "@type": "MedicalTherapy",
-          "name": "Psychological Assessment"
+          "@type": "FAQPage",
+          "@id": "https://mindrestore.pk/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What mental-health services does Mind Restore provide in Pakistan?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mind Restore provides comprehensive psychological services including individual counselling for adults, couples counselling, family therapy, child and adolescent psychological support, trauma-informed care, stress and burnout management, formal psychometric assessment, and tele-mental health. Consultations are available both in-person at our Lahore clinic and online via encrypted tele-health."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I book an online psychology appointment from Pakistan or abroad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can request an appointment through our online intake form, call our reception directly at +92 314 3162051, or message our patient care coordinator on WhatsApp (+92 314 3162051). Our team will help identify an appropriate specialist and schedule your session."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are online psychological consultations strictly confidential?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, strictly confidential. All appointments adhere to rigorous healthcare privacy ethics. Nothing you discuss is shared with employers, family members, or third parties without your explicit consent, with the sole legal exception of immediate, imminent risk of physical harm."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is online counselling as effective as meeting in-person?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Extensive clinical research demonstrates that online psychotherapy achieves clinical outcomes equivalent to in-person therapy for anxiety, depression, and stress, with the added benefit of privacy and scheduling ease."
+              }
+            }
+          ]
         }
-      ],
-      "knowsLanguage": ["English", "Urdu", "Punjabi"],
-      "areaServed": ["Pakistan", "International Clients"]
+      ]
     }
     </script>
   </head>

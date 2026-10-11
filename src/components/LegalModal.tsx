@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { X, Shield, FileText, AlertTriangle, Eye } from 'lucide-react';
+import { X, Shield, FileText, AlertTriangle, Eye, BookOpen } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 
 export const LegalModal: React.FC = () => {
   const { activeModal, selectedLegalTab, closeModal, settings } = usePractice();
-  const [tab, setTab] = useState<'privacy' | 'terms' | 'disclaimer' | 'accessibility'>(selectedLegalTab);
+  const [tab, setTab] = useState<'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial'>(selectedLegalTab);
 
   if (activeModal !== 'legal') return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+    <div
+      onClick={closeModal}
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
+    >
       <div
-        className="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#286C6A]/15 relative text-left"
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#286C6A]/15 relative text-left cursor-default"
         role="dialog"
         aria-modal="true"
       >
@@ -21,8 +25,9 @@ export const LegalModal: React.FC = () => {
             Legal, Clinical & Accessibility Governance
           </span>
           <button
+            type="button"
             onClick={closeModal}
-            className="p-2 rounded-full hover:bg-neutral-100 text-[#243333] transition-colors"
+            className="p-2 rounded-full hover:bg-neutral-100 active:bg-neutral-200 text-[#243333] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1C433E] cursor-pointer"
             aria-label="Close legal modal"
           >
             <X className="w-5 h-5" />
@@ -33,6 +38,7 @@ export const LegalModal: React.FC = () => {
         <div className="flex border-b border-[#286C6A]/10 px-6 bg-[#F8F7F2] overflow-x-auto">
           {[
             { id: 'disclaimer', label: 'Medical Disclaimer', icon: AlertTriangle },
+            { id: 'editorial', label: 'Editorial & Review Policy', icon: BookOpen },
             { id: 'privacy', label: 'Privacy Policy', icon: Shield },
             { id: 'terms', label: 'Terms of Service', icon: FileText },
             { id: 'accessibility', label: 'Accessibility Statement', icon: Eye },
@@ -54,6 +60,26 @@ export const LegalModal: React.FC = () => {
 
         {/* Tab Contents */}
         <div className="p-6 sm:p-8 space-y-4 text-xs sm:text-sm text-[#526363] leading-[1.7]">
+          {tab === 'editorial' && (
+            <div className="space-y-4">
+              <h3 className="text-xl font-heading font-bold text-[#243333]">
+                Editorial Policy & Clinical Review Standards
+              </h3>
+              <p>
+                <strong>1. Evidence-Informed Medical Sourcing:</strong> All psychoeducational articles and mental health resources published by {settings.organizationName} are grounded in reputable, evidence-based psychological science. We reference authoritative international guidelines including the American Psychological Association (APA), World Health Organization (WHO), and peer-reviewed psychiatric literature.
+              </p>
+              <p>
+                <strong>2. Qualified Professional Authorship:</strong> Content is authored or clinically reviewed by credentialed psychologists holding recognized academic degrees (M.Sc., M.Phil., Ph.D.) and accredited clinical registrations. Author and reviewer names, qualifications, and review dates are stated transparently on educational materials.
+              </p>
+              <p>
+                <strong>3. Non-Diagnostic Educational Purpose:</strong> All online articles, coping guides, and interactive reflection checks are provided strictly for educational purposes and emotional literacy. They do not constitute formal psychiatric evaluations, personalized treatment plans, or clinical diagnoses.
+              </p>
+              <p>
+                <strong>4. Corrections, Integrity & Conflict of Interest:</strong> Mind Restore maintains editorial independence. We do not accept sponsored pharmaceutical promotions or misleading commercial endorsements. If factual updates or clinical clarifications are identified, articles are promptly revised with an updated review timestamp.
+              </p>
+            </div>
+          )}
+
           {tab === 'disclaimer' && (
             <div className="space-y-4">
               <h3 className="text-xl font-heading font-bold text-[#243333]">

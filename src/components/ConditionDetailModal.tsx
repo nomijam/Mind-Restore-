@@ -4,14 +4,19 @@ import { usePractice } from '../context/PracticeContext';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const ConditionDetailModal: React.FC = () => {
-  const { selectedCondition, closeModal, openAppointment } = usePractice();
+  const { activeModal, selectedCondition, closeModal, openAppointment, openConditionPage } =
+    usePractice();
 
-  if (!selectedCondition) return null;
+  if (activeModal !== 'condition' || !selectedCondition) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+    <div
+      onClick={closeModal}
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
+    >
       <div
-        className="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#1C433E]/15 relative text-left"
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#1C433E]/15 relative text-left cursor-default"
         role="dialog"
         aria-modal="true"
       >
@@ -24,8 +29,9 @@ export const ConditionDetailModal: React.FC = () => {
             </span>
           </div>
           <button
+            type="button"
             onClick={closeModal}
-            className="p-2 rounded-full hover:bg-neutral-100 text-[#243333] transition-colors"
+            className="p-2 rounded-full hover:bg-neutral-100 active:bg-neutral-200 text-[#243333] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1C433E] cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -81,15 +87,27 @@ export const ConditionDetailModal: React.FC = () => {
               </p>
             </div>
 
-            <button
-              onClick={() => {
-                closeModal();
-                openAppointment(selectedCondition.title);
-              }}
-              className="px-6 py-3 text-xs font-semibold tracking-wider text-[#243333] bg-white hover:bg-neutral-100 rounded-xl whitespace-nowrap shadow-xs transition-all"
-            >
-              TALK TO A PROFESSIONAL
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  closeModal();
+                  openConditionPage(selectedCondition.slug);
+                }}
+                className="px-4 py-3 text-xs font-semibold tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl whitespace-nowrap transition-all"
+              >
+                VIEW FULL PAGE
+              </button>
+
+              <button
+                onClick={() => {
+                  closeModal();
+                  openAppointment(selectedCondition.title);
+                }}
+                className="px-6 py-3 text-xs font-semibold tracking-wider text-[#243333] bg-white hover:bg-neutral-100 rounded-xl whitespace-nowrap shadow-xs transition-all"
+              >
+                TALK TO A PROFESSIONAL
+              </button>
+            </div>
           </div>
         </div>
       </div>

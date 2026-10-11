@@ -19,6 +19,8 @@ import {
   TIMELINE_MILESTONES,
   CORE_VALUES,
 } from '../data/practiceData';
+import { findCondition } from '../data/conditionsData';
+import { findCity, CityInfo } from '../data/citiesData';
 
 interface PracticeContextType {
   settings: PracticeSettings;
@@ -32,7 +34,17 @@ interface PracticeContextType {
   selectedCondition: ConditionItem | null;
   selectedTool: EducationalTool | null;
   selectedArticle: ResourceArticle | null;
-  selectedLegalTab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility';
+  selectedLegalTab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial';
+
+  // Dedicated Condition Page
+  activeConditionPage: ConditionItem | null;
+  openConditionPage: (conditionIdOrSlug: string) => void;
+  closeConditionPage: () => void;
+
+  // Dedicated City Page
+  activeCityPage: CityInfo | null;
+  openCityPage: (cityIdOrSlug: string) => void;
+  closeCityPage: () => void;
 
   // Navigation Handlers
   openAppointment: (prefillReason?: string, specialistId?: string) => void;
@@ -41,7 +53,7 @@ interface PracticeContextType {
   openConditionDetail: (conditionId: string) => void;
   openEducationalTool: (toolId: string) => void;
   openArticle: (articleId: string) => void;
-  openLegal: (tab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility') => void;
+  openLegal: (tab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial') => void;
   openAdmin: () => void;
   closeModal: () => void;
 
@@ -110,12 +122,44 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
   const [selectedSpecialist, setSelectedSpecialist] = useState<Specialist | null>(null);
   const [selectedCondition, setSelectedCondition] = useState<ConditionItem | null>(null);
+  const [activeConditionPage, setActiveConditionPage] = useState<ConditionItem | null>(null);
+  const [activeCityPage, setActiveCityPage] = useState<CityInfo | null>(null);
   const [selectedTool, setSelectedTool] = useState<EducationalTool | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<ResourceArticle | null>(null);
-  const [selectedLegalTab, setSelectedLegalTab] = useState<'privacy' | 'terms' | 'disclaimer' | 'accessibility'>('disclaimer');
+  const [selectedLegalTab, setSelectedLegalTab] = useState<'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial'>('disclaimer');
 
   const [prefillReason, setPrefillReason] = useState<string>('');
   const [prefillSpecialistId, setPrefillSpecialistId] = useState<string>('');
+
+  // Handle URL hash changes for direct condition deep links e.g. #/condition/anxiety-counselling or #/city/lahore
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#/condition/')) {
+        const slug = hash.replace('#/condition/', '');
+        const cond = findCondition(slug);
+        if (cond) {
+          setActiveConditionPage(cond);
+          setSelectedCondition(cond);
+          setActiveCityPage(null);
+        }
+      } else if (hash.startsWith('#/city/')) {
+        const slug = hash.replace('#/city/', '');
+        const city = findCity(slug);
+        if (city) {
+          setActiveCityPage(city);
+          setActiveConditionPage(null);
+        }
+      } else if (hash === '' || hash === '#home') {
+        setActiveConditionPage(null);
+        setActiveCityPage(null);
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     try {
@@ -156,11 +200,50 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const openConditionDetail = (conditionId: string) => {
-    const c = CONDITIONS.find((item) => item.id === conditionId || item.slug === conditionId);
+  const openConditionPage = (conditionIdOrSlug: string) => {
+    const c = findCondition(conditionIdOrSlug);
     if (c) {
+      setActiveConditionPage(c);
       setSelectedCondition(c);
-      setActiveModal('condition');
+      window.location.hash = `#/condition/${c.slug}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const closeConditionPage = () => {
+    setActiveConditionPage(null);
+    if (window.location.hash.startsWith('#/condition/')) {
+      window.location.hash = '';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openCityPage = (cityIdOrSlug: string) => {
+    const c = findCity(cityIdOrSlug);
+    if (c) {
+      setActiveCityPage(c);
+      setActiveConditionPage(null);
+      window.location.hash = `#/city/${c.slug}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const closeCityPage = () => {
+    setActiveCityPage(null);
+    if (window.location.hash.startsWith('#/city/')) {
+      window.location.hash = '';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openConditionDetail = (conditionId: string) => {
+    const c = findCondition(conditionId);
+    if (c) {
+      // Direct full-page navigation as requested: "I need every page for every different page for every condition"
+      setSelectedCondition(c);
+      setActiveConditionPage(c);
+      window.location.hash = `#/condition/${c.slug}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -180,7 +263,7 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const openLegal = (tab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility') => {
+  const openLegal = (tab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial') => {
     setSelectedLegalTab(tab);
     setActiveModal('legal');
   };
@@ -189,8 +272,26 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setActiveModal('admin');
   };
 
+  // Global keyboard listener for Escape key to close any modal or active overlay
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (activeModal) {
+          closeModal();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeModal]);
+
   const closeModal = () => {
     setActiveModal(null);
+    setSelectedCondition(null);
+    setSelectedService(null);
+    setSelectedSpecialist(null);
+    setSelectedTool(null);
+    setSelectedArticle(null);
   };
 
   const getWhatsAppLink = (message?: string) => {
@@ -270,6 +371,12 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         selectedService,
         selectedSpecialist,
         selectedCondition,
+        activeConditionPage,
+        openConditionPage,
+        closeConditionPage,
+        activeCityPage,
+        openCityPage,
+        closeCityPage,
         selectedTool,
         selectedArticle,
         selectedLegalTab,

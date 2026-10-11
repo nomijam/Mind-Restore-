@@ -1,0 +1,14 @@
+# robots.txt for Mind Restore (https://mindrestore.pk)
+# Mental Wellness & Clinical Psychological Care Pakistan (Est. 1981)
+
+User-agent: *
+Allow: /
+
+# Prevent indexing of administrative drawers or internal development parameters
+Disallow: /admin
+Disallow: /*?*preview=*
+Disallow: /*?*draft=*
+
+# Host & Sitemap Location
+Host: https://mindrestore.pk
+Sitemap: https://mindrestore.pk/sitemap.xml

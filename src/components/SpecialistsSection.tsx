@@ -36,9 +36,13 @@ export const SpecialistsSection: React.FC = () => {
               >
                 <img
                   src={spec.image}
-                  alt={spec.name}
+                  alt={`${spec.name} - ${spec.title} at Mind Restore`}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-top group-hover:scale-102 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={300}
                 />
 
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#243333]/85 via-transparent to-transparent p-4 text-white">

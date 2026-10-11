@@ -57,7 +57,7 @@ export const AboutSection: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-[#8EAD9A]" />
-                <span>In-Person & Secure Digital Consultations</span>
+                <span>Encrypted Video & Voice Digital Consultations</span>
               </div>
             </div>
 

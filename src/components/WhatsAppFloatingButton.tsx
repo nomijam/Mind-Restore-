@@ -12,9 +12,13 @@ export const WhatsAppFloatingButton: React.FC = () => {
       {!minimized && (
         <div className="bg-white rounded-2xl p-3 shadow-lg border border-[#286C6A]/15 max-w-xs text-left animate-in slide-in-from-bottom-2 duration-200 relative group">
           <button
-            onClick={() => setMinimized(true)}
-            className="absolute top-2 right-2 text-neutral-400 hover:text-neutral-600 p-0.5 rounded-full"
-            aria-label="Dismiss chat tip"
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setMinimized(true);
+            }}
+            className="absolute top-2 right-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200 p-1 rounded-full transition-colors cursor-pointer"
+            aria-label="Dismiss chat prompt"
           >
             <X className="w-3.5 h-3.5" />
           </button>

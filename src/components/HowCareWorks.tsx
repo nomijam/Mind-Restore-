@@ -21,7 +21,7 @@ export const HowCareWorks: React.FC = () => {
     {
       stepNumber: '03',
       title: 'Meet Your Professional',
-      description: 'Begin your session with an appropriate member of our team in-person at our clinic or online via secure tele-health.',
+      description: 'Begin your session with an appropriate member of our team online via secure tele-health.',
       icon: UserCheck,
     },
     {
@@ -78,7 +78,7 @@ export const HowCareWorks: React.FC = () => {
                 <div className="mt-5 pt-3 border-t border-[#286C6A]/10 text-[11px] text-[#526363]">
                   {idx === 0 && 'Simple 2-minute request'}
                   {idx === 1 && 'Friendly intake coordinator'}
-                  {idx === 2 && 'In-person or tele-health'}
+                  {idx === 2 && 'Encrypted video or voice tele-health'}
                   {idx === 3 && 'At your comfortable pace'}
                 </div>
               </div>
