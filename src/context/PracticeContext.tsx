@@ -80,15 +80,11 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const saved = localStorage.getItem('inst_1981_practice_settings');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (
-          !parsed.organizationName ||
-          parsed.organizationName === 'Institute of Psychological Care' ||
-          parsed.organizationName.includes('Sukoon')
-        ) {
-          parsed.organizationName = 'Mind Restore';
+        if (!parsed.organizationName || parsed.organizationName !== 'MindSukoon') {
+          parsed.organizationName = 'MindSukoon';
         }
-        if (parsed.email === 'care@psychologicalcare.org.pk') {
-          parsed.email = 'care@mindrestore.pk';
+        if (!parsed.email || parsed.email.includes('restore') || parsed.email.includes('psychologicalcare')) {
+          parsed.email = 'care@mindsukoon.pk';
         }
         if (
           !parsed.phoneNumber ||

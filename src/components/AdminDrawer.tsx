@@ -191,7 +191,7 @@ export const AdminDrawer: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-medium text-[#243333] mb-1">
-                  In-Person Clinic Address
+                  Registered Clinic / Office Address
                 </label>
                 <input
                   type="text"

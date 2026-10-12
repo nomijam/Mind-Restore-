@@ -12,7 +12,6 @@ import { TrustSection } from './components/TrustSection';
 import { YouAreNotAloneSection } from './components/YouAreNotAloneSection';
 import { ConditionsSection } from './components/ConditionsSection';
 import { ServicesSection } from './components/ServicesSection';
-import { SpecialistsSection } from './components/SpecialistsSection';
 import { HowCareWorks } from './components/HowCareWorks';
 import { TimelineSection } from './components/TimelineSection';
 import { AboutSection } from './components/AboutSection';
@@ -92,9 +91,6 @@ function AppContent() {
 
             {/* Section 14: Services (10 real services) */}
             <ServicesSection />
-
-            {/* Section 15: Our Specialists (Meet the People Behind the Care) */}
-            <SpecialistsSection />
 
             {/* Section 17: How Care Works (4 steps) */}
             <HowCareWorks />

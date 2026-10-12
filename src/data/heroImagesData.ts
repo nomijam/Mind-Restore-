@@ -15,7 +15,7 @@ export const CITY_HERO_IMAGES: Record<string, HeroImageData> = {
     src: '/src/assets/images/hero_lahore_badshahi_1791725023747.jpg',
     alt: 'Badshahi Mosque and historic Lahore Mughal architecture at twilight with warm lantern reflections in Gulberg and Old City Lahore, Pakistan',
     landmark: 'Badshahi Mosque & Lahore Heritage Practice (Est. 1981)',
-    description: 'Centrally located in Lahore since 1981, offering in-person clinic appointments and secure online tele-mental health.'
+    description: 'Founded in Lahore in 1981, offering confidential, encrypted tele-mental health and psychological support across Pakistan and worldwide.'
   },
   karachi: {
     id: 'karachi',

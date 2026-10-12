@@ -9,7 +9,7 @@ interface MindRestoreLogoProps {
 }
 
 /**
- * Pure SVG Vector Emblem of the Mind Restore Logo
+ * Pure SVG Vector Emblem of the MindSukoon Logo
  * Features the serene profile silhouette with closed peaceful eye,
  * the 3 flourishing sage leaves inside the mind, and the arching crescent halo.
  */
@@ -34,7 +34,7 @@ export const MindRestoreEmblem: React.FC<{
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={size ? { width: size, height: size } : undefined}
-      aria-label="Mind Restore Emblem"
+      aria-label="MindSukoon Emblem"
     >
       {/* Outer Sweeping Crescent Halo */}
       <path
@@ -163,7 +163,7 @@ export const MindRestoreLogo: React.FC<MindRestoreLogoProps> = ({
           }`}
           style={{ letterSpacing: '-0.02em' }}
         >
-          Mind Restore
+          MindSukoon
         </h1>
 
         {showTagline && (
@@ -194,7 +194,7 @@ export const MindRestoreLogo: React.FC<MindRestoreLogoProps> = ({
           className={`font-heading font-extrabold ${textColor} tracking-tight leading-none ${titleSizeClass}`}
           style={{ letterSpacing: '-0.02em' }}
         >
-          Mind Restore
+          MindSukoon
         </span>
 
         {showTagline && (

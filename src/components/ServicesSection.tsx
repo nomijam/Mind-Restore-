@@ -10,6 +10,7 @@ import {
   Zap,
   Monitor,
   Building,
+  Globe,
   ArrowRight,
 } from 'lucide-react';
 import { SERVICES } from '../data/practiceData';
@@ -41,6 +42,8 @@ export const ServicesSection: React.FC = () => {
         return <Monitor {...props} />;
       case 'Building':
         return <Building {...props} />;
+      case 'Globe':
+        return <Globe {...props} />;
       default:
         return <User {...props} />;
     }

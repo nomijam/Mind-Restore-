@@ -27,7 +27,7 @@ export const CITIES_DATA: CityInfo[] = [
       'Confidential online video and audio psychotherapy for individuals, couples, and families across Lahore and surrounding areas.',
     serviceType: 'Online Tele-Mental Health',
     description:
-      'Lahore is where our clinical practice was founded in 1981. For over four decades, Mind Restore has provided high-trust, ethical psychotherapy in Lahore. Through secure, encrypted digital video and confidential voice consultations from the comfort of your home, our licensed clinical psychologists offer compassionate, evidence-based care.',
+      'Lahore is where our clinical practice was founded in 1981. For over four decades, MindSukoon has provided high-trust, ethical psychotherapy in Lahore. Through secure, encrypted digital video and confidential voice consultations from the comfort of your home, our licensed clinical psychologists offer compassionate, evidence-based care.',
     localContext:
       'Living in Lahore brings vibrant culture alongside modern lifestyle pressures—traffic strain, competitive academic institutions (LUMS, FC College, King Edward, GCU), extended family expectations, and fast-paced professional demands. Our clinicians understand the unique domestic and social dynamics of Lahori households.',
     sessionFormats: [
@@ -63,7 +63,7 @@ export const CITIES_DATA: CityInfo[] = [
       'Evidence-based psychotherapy and counselling delivered via secure, encrypted digital video directly to your home in Clifton, DHA, Gulshan, PECHS, and across Karachi.',
     serviceType: 'Online Tele-Mental Health',
     description:
-      'Karachi is Pakistan’s bustling economic metropolis, where high-pressure corporate deadlines, demanding commutes, and economic stressors often leave little room for self-care. Mind Restore provides confidential online psychotherapy tailored to Karachi professionals, university students, and families, removing the burden of traversing city traffic.',
+      'Karachi is Pakistan’s bustling economic metropolis, where high-pressure corporate deadlines, demanding commutes, and economic stressors often leave little room for self-care. MindSukoon provides confidential online psychotherapy tailored to Karachi professionals, university students, and families, removing the burden of traversing city traffic.',
     localContext:
       'Our Karachi clients frequently navigate acute workplace burnout, corporate performance anxiety, marital strain in nuclear and joint setups, and security-related chronic hyper-arousal. Online sessions provide a private sanctuary without stepping into traffic on Shahrah-e-Faisal.',
     sessionFormats: [
@@ -99,7 +99,7 @@ export const CITIES_DATA: CityInfo[] = [
       'Confidential psychotherapy and mental wellness care for government professionals, diplomats, development sector workers, and families in the Twin Cities.',
     serviceType: 'Online Tele-Mental Health',
     description:
-      'Mind Restore provides structured, private psychological counselling for residents of Islamabad (F, G, E, and Bahria sectors) and Rawalpindi. Our senior clinicians work extensively with civil servants, development sector and NGO professionals, tech entrepreneurs, and university students facing stress and emotional strain.',
+      'MindSukoon provides structured, private psychological counselling for residents of Islamabad (F, G, E, and Bahria sectors) and Rawalpindi. Our senior clinicians work extensively with civil servants, development sector and NGO professionals, tech entrepreneurs, and university students facing stress and emotional strain.',
     localContext:
       'Clients in Islamabad and Rawalpindi often experience unique career pressures—competitive civil service examinations (CSS), high-stakes public sector responsibilities, relocation adjustments for expatriates and diplomats, and balancing traditional twin-city family expectations.',
     sessionFormats: [
@@ -131,7 +131,7 @@ export const CITIES_DATA: CityInfo[] = [
       'Discreet, culturally respectful mental wellness support for business leaders, textile professionals, homemakers, and students across Faisalabad.',
     serviceType: 'Online Tele-Mental Health',
     description:
-      'In industrial and commercial hubs like Faisalabad, mental health concerns are often kept hidden due to strong social ties and fear of community gossip. Mind Restore offers a secure digital bridge, connecting you with elite clinical psychologists based in Lahore without anyone in your local circle knowing.',
+      'In industrial and commercial hubs like Faisalabad, mental health concerns are often kept hidden due to strong social ties and fear of community gossip. MindSukoon offers a secure digital bridge, connecting you with elite clinical psychologists based in Lahore without anyone in your local circle knowing.',
     localContext:
       'Commercial entrepreneurship, family business succession friction, marital and joint family conflicts, and academic pressure are common themes among our Faisalabad clients.',
     sessionFormats: ['Encrypted HD Video Consultation', 'Confidential Voice Consultation'],
@@ -155,7 +155,7 @@ export const CITIES_DATA: CityInfo[] = [
       'Respectful, compassionate psychotherapy for individuals and families in Peshawar and Khyber Pakhtunkhwa, honoring local culture and traditions.',
     serviceType: 'Online Tele-Mental Health',
     description:
-      'Mind Restore provides confidential online psychological care for clients in Peshawar, Hayatabad, Mardan, and across Khyber Pakhtunkhwa. We understand that modesty, honor, and family privacy are sacred values in KP, and our clinicians provide deeply respectful, non-judgmental guidance.',
+      'MindSukoon provides confidential online psychological care for clients in Peshawar, Hayatabad, Mardan, and across Khyber Pakhtunkhwa. We understand that modesty, honor, and family privacy are sacred values in KP, and our clinicians provide deeply respectful, non-judgmental guidance.',
     localContext:
       'Our clinicians address trauma recovery, domestic stress, female mental wellness, and student anxiety while deeply honoring Pashtun cultural ethos and Islamic principles.',
     sessionFormats: ['Encrypted HD Video Consultation', 'Voice-Only Consultation for Privacy'],
@@ -203,7 +203,7 @@ export const CITIES_DATA: CityInfo[] = [
       'Therapy in your native language with clinicians who truly understand Pakistani cultural values, family dynamics, and diaspora identity.',
     serviceType: 'Global Telehealth',
     description:
-      'Living abroad in the United Kingdom, United States, UAE, Saudi Arabia, Canada, or Australia often brings distinct psychological challenges: cultural isolation, diaspora identity conflict, loneliness, long-distance family guilt, and finding a local therapist who truly understands South Asian joint family dynamics and Muslim values. Mind Restore offers international video appointments tailored to global time zones.',
+      'Living abroad in the United Kingdom, United States, UAE, Saudi Arabia, Canada, or Australia often brings distinct psychological challenges: cultural isolation, diaspora identity conflict, loneliness, long-distance family guilt, and finding a local therapist who truly understands South Asian joint family dynamics and Muslim values. MindSukoon offers international video appointments tailored to global time zones.',
     localContext:
       'Western therapists often misunderstand cultural expectations around parent reverence, rishta arrangements, and extended family duties. Our registered psychologists provide culturally native psychotherapy that bridges your Eastern heritage with your Western lifestyle.',
     sessionFormats: [

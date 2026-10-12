@@ -36,7 +36,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = `${city.name} Online Tele-Mental Health & Therapy | Mind Restore`;
+    document.title = `${city.name} Online Tele-Mental Health & Therapy | MindSukoon`;
   }, [city]);
 
   const toggleFaq = (index: number) => {
@@ -114,7 +114,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#1C433E]/90 text-white border border-white/20 shadow-xs backdrop-blur-xs">
               <MindRestoreEmblem className="w-3.5 h-3.5" />
-              <span>Mind Restore (Est. 1981)</span>
+              <span>MindSukoon (Est. 1981)</span>
             </span>
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-[#112A27]/85 text-[#D8B878] border border-[#D8B878]/35 shadow-xs backdrop-blur-xs">
               <MapPin className="w-3 h-3 text-[#D8B878]" />
@@ -183,7 +183,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
             <a
               href={getWhatsAppLink(
-                `Hello Mind Restore, I would like to inquire about booking a confidential consultation from ${city.name}.`
+                `Hello MindSukoon, I would like to inquire about booking a confidential consultation from ${city.name}.`
               )}
               target="_blank"
               rel="noopener noreferrer"

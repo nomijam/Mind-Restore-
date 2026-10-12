@@ -25,7 +25,7 @@ export const ServiceDetailModal: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <MindRestoreEmblem className="w-5 h-5" />
             <span className="text-xs font-semibold uppercase tracking-wider text-[#1C433E]">
-              Mind Restore · Clinical Service Guide
+              MindSukoon · Clinical Service Guide
             </span>
           </div>
           <button

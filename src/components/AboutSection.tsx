@@ -5,7 +5,7 @@ import { usePractice } from '../context/PracticeContext';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const AboutSection: React.FC = () => {
-  const { settings } = usePractice();
+  const { settings, openAppointment } = usePractice();
 
   const getValueIcon = (title: string) => {
     switch (title) {
@@ -63,13 +63,10 @@ export const AboutSection: React.FC = () => {
 
             <div className="pt-4 flex flex-wrap gap-3">
               <button
-                onClick={() => {
-                  const el = document.querySelector('#specialists');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs transition-colors"
+                onClick={() => openAppointment('General Clinical Consultation')}
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs transition-colors cursor-pointer"
               >
-                <span>MEET OUR SPECIALISTS</span>
+                <span>BOOK CONFIDENTIAL CONSULTATION</span>
               </button>
 
               <button
@@ -77,7 +74,7 @@ export const AboutSection: React.FC = () => {
                   const el = document.querySelector('#timeline');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-[#243333] bg-[#F8F7F2] hover:bg-[#EAF2ED] border border-[#286C6A]/20 rounded-xl transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-[#243333] bg-[#F8F7F2] hover:bg-[#EAF2ED] border border-[#286C6A]/20 rounded-xl transition-colors cursor-pointer"
               >
                 <span>VIEW 1981 TIMELINE</span>
               </button>
@@ -94,7 +91,7 @@ export const AboutSection: React.FC = () => {
                   Our Clinical Mission
                 </h3>
                 <span className="text-[10px] uppercase tracking-wider text-[#7BA28E] font-semibold">
-                  Mind Restore · Established 1981
+                  MindSukoon · Established 1981
                 </span>
               </div>
             </div>
