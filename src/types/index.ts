@@ -122,7 +122,9 @@ export interface AppointmentInquiry {
   email: string;
   preferredContactMethod: 'WhatsApp' | 'Phone Call' | 'Email';
   reasonForContact: string;
-  preferredAppointmentType: 'Online Video' | 'Voice Consultation';
+  preferredAppointmentType: 'Online Video' | 'Voice Consultation' | 'WhatsApp Text Counselling';
+  preferredLanguage?: string;
+  selectedPlan?: string;
   preferredDate?: string;
   message?: string;
   consent: boolean;

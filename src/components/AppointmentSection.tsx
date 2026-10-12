@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Check, Calendar, Phone, Mail, Shield, MessageCircle, Clock, ArrowRight } from 'lucide-react';
+import { Check, Calendar, Phone, Mail, Shield, MessageCircle, Clock, ArrowRight, Database } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 
 interface AppointmentSectionProps {
@@ -8,14 +8,15 @@ interface AppointmentSectionProps {
 }
 
 export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose, isModal = false }) => {
-  const { prefillReason, prefillSpecialistId, submitAppointment, getWhatsAppLink, settings } = usePractice();
+  const { prefillReason, prefillSpecialistId, selectedPlan, setSelectedPlan, submitAppointment, getWhatsAppLink, settings } = usePractice();
 
   const [fullName, setFullName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [preferredContactMethod, setPreferredContactMethod] = useState<'WhatsApp' | 'Phone Call' | 'Email'>('WhatsApp');
-  const [reasonForContact, setReasonForContact] = useState<string>(prefillReason || 'General Consultation');
-  const [preferredAppointmentType, setPreferredAppointmentType] = useState<'Online Video' | 'Voice Consultation'>('Online Video');
+  const [preferredLanguage, setPreferredLanguage] = useState<'Urdu' | 'English' | 'Urdu & English'>('Urdu & English');
+  const [reasonForContact, setReasonForContact] = useState<string>(selectedPlan || prefillReason || 'General Consultation');
+  const [preferredAppointmentType, setPreferredAppointmentType] = useState<'Online Video' | 'Voice Consultation' | 'WhatsApp Text Counselling'>('Online Video');
   const [preferredDate, setPreferredDate] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [consent, setConsent] = useState<boolean>(true);
@@ -28,12 +29,24 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
   } | null>(null);
 
   useEffect(() => {
-    if (prefillReason) {
+    if (selectedPlan) {
+      setReasonForContact(selectedPlan);
+      if (selectedPlan.toLowerCase().includes('text')) {
+        setPreferredAppointmentType('WhatsApp Text Counselling');
+      }
+    } else if (prefillReason) {
       setReasonForContact(prefillReason);
+      if (prefillReason.toLowerCase().includes('text')) {
+        setPreferredAppointmentType('WhatsApp Text Counselling');
+      }
     }
-  }, [prefillReason]);
+  }, [prefillReason, selectedPlan]);
 
   const reasonsList = [
+    'Single Session (Rs. 2,500)',
+    '5-Session Package (Rs. 10,000)',
+    'Weekly Text Plan (Rs. 3,500)',
+    'Monthly Text Plan (Rs. 11,000)',
     'General Consultation',
     'Anxiety & Worry',
     'Low Mood & Depression',
@@ -45,6 +58,11 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
     'Psychological Assessment',
     'Other Concerns',
   ];
+
+  // Ensure current reason is present in options list
+  const fullReasonsList = reasonsList.includes(reasonForContact)
+    ? reasonsList
+    : [reasonForContact, ...reasonsList];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +79,8 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
         phone,
         email,
         preferredContactMethod,
+        preferredLanguage,
+        selectedPlan: selectedPlan || (reasonForContact.includes('Rs.') ? reasonForContact : undefined),
         reasonForContact,
         preferredAppointmentType,
         preferredDate,
@@ -141,14 +161,39 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                 )}
               </div>
 
-              <div className="mt-8 pt-5 border-t border-[#286C6A]/10 text-left text-xs text-[#526363]">
-                <p className="font-semibold text-[#243333] mb-1">Intake Record Verified:</p>
-                <p>Status: <span className="font-mono text-[#286C6A]">NEW INQUIRY (EST. 1981 PIPELINE)</span></p>
+              <div className="mt-8 pt-5 border-t border-[#286C6A]/10 text-left text-xs text-[#526363] space-y-1">
+                <p className="font-semibold text-[#243333]">Intake Record Verified & Stored:</p>
+                <p>Pipeline Status: <span className="font-mono text-[#286C6A]">NEW INQUIRY (EST. 1981)</span></p>
+                <p className="text-[11px] text-[#286C6A] flex items-center gap-1.5 pt-0.5">
+                  <Database className="w-3.5 h-3.5 text-[#286C6A]" />
+                  <span>Synced with Supabase Backend (Project: bvjzskzlwcbycmnmhsqf)</span>
+                </p>
               </div>
             </div>
           ) : (
             /* Appointment Form */
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Selected Plan Notification Banner */}
+              {selectedPlan && (
+                <div className="p-3.5 rounded-2xl bg-[#EAF2ED] border border-[#1C433E]/20 flex items-center justify-between gap-3 text-xs text-[#1C433E]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#286C6A]" />
+                    <span className="font-semibold">Selected Plan:</span>
+                    <span className="font-bold">{selectedPlan}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedPlan(null);
+                      setReasonForContact('General Consultation');
+                    }}
+                    className="text-[11px] text-[#526363] hover:text-[#1C433E] underline font-medium cursor-pointer"
+                  >
+                    Change
+                  </button>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-[#243333] mb-1">
@@ -213,14 +258,19 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-[#243333] mb-1">
-                    Reason for Contact
+                    Counselling Plan / Reason for Contact
                   </label>
                   <select
                     value={reasonForContact}
-                    onChange={(e) => setReasonForContact(e.target.value)}
+                    onChange={(e) => {
+                      setReasonForContact(e.target.value);
+                      if (e.target.value.toLowerCase().includes('text')) {
+                        setPreferredAppointmentType('WhatsApp Text Counselling');
+                      }
+                    }}
                     className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
                   >
-                    {reasonsList.map((r) => (
+                    {fullReasonsList.map((r) => (
                       <option key={r} value={r}>
                         {r}
                       </option>
@@ -230,7 +280,7 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
 
                 <div>
                   <label className="block text-xs font-medium text-[#243333] mb-1">
-                    Preferred Appointment Type
+                    Preferred Session Format
                   </label>
                   <select
                     value={preferredAppointmentType}
@@ -239,21 +289,39 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                   >
                     <option value="Online Video">Online Video Consultation (Secure HD Tele-Health)</option>
                     <option value="Voice Consultation">Confidential Voice Consultation (Telephone / Audio)</option>
+                    <option value="WhatsApp Text Counselling">WhatsApp Text Counselling (Daily Replies 9 AM – 9 PM)</option>
                   </select>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-medium text-[#243333] mb-1">
-                  Preferred Date or General Availability (Optional)
-                </label>
-                <input
-                  type="text"
-                  value={preferredDate}
-                  onChange={(e) => setPreferredDate(e.target.value)}
-                  placeholder="e.g. Tuesday mornings, or upcoming Saturday"
-                  className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                    Preferred Language
+                  </label>
+                  <select
+                    value={preferredLanguage}
+                    onChange={(e) => setPreferredLanguage(e.target.value as any)}
+                    className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
+                  >
+                    <option value="Urdu & English">Urdu & English (Bilingual / Mixed)</option>
+                    <option value="Urdu">Urdu (اردو)</option>
+                    <option value="English">English</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                    Preferred Appointment Time or Date (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={preferredDate}
+                    onChange={(e) => setPreferredDate(e.target.value)}
+                    placeholder="e.g. Weekdays 6 PM, or Saturdays"
+                    className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
+                  />
+                </div>
               </div>
 
               <div>

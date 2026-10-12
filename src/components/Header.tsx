@@ -342,7 +342,7 @@ export const Header: React.FC = () => {
               onClick={(e) => handleNavClick(e, '#pricing')}
               className="px-3 py-2 text-xs sm:text-[13px] font-medium text-[#526363] hover:text-[#1C433E] transition-colors"
             >
-              Pricing
+              Plans & Pricing
             </a>
 
             {/* 4. BLOG / RESOURCES */}
@@ -573,7 +573,7 @@ export const Header: React.FC = () => {
               onClick={(e) => handleNavClick(e, '#pricing')}
               className="text-base font-medium text-[#243333] py-2 border-b border-[#1C433E]/10 hover:text-[#1C433E]"
             >
-              Pricing Guidance
+              Counselling Plans & Pricing
             </a>
 
             <a

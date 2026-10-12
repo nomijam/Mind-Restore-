@@ -21,6 +21,7 @@ import {
 } from '../data/practiceData';
 import { findCondition } from '../data/conditionsData';
 import { findCity, CityInfo } from '../data/citiesData';
+import { saveAppointmentToSupabase } from '../lib/supabase';
 
 interface PracticeContextType {
   settings: PracticeSettings;
@@ -47,7 +48,7 @@ interface PracticeContextType {
   closeCityPage: () => void;
 
   // Navigation Handlers
-  openAppointment: (prefillReason?: string, specialistId?: string) => void;
+  openAppointment: (prefillReason?: string, specialistId?: string, plan?: string) => void;
   openServiceDetail: (serviceId: string) => void;
   openSpecialistProfile: (specialistId: string) => void;
   openConditionDetail: (conditionId: string) => void;
@@ -60,6 +61,8 @@ interface PracticeContextType {
   // Prefilled states for appointment flow
   prefillReason: string;
   prefillSpecialistId: string;
+  selectedPlan: string | null;
+  setSelectedPlan: (plan: string | null) => void;
 
   // Appointment Submission (GHL Ready)
   submitAppointment: (inquiry: Omit<AppointmentInquiry, 'timestamp' | 'ghlPipelineStage' | 'ghlTags'>) => {
@@ -126,6 +129,7 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const [prefillReason, setPrefillReason] = useState<string>('');
   const [prefillSpecialistId, setPrefillSpecialistId] = useState<string>('');
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   // Handle URL hash changes for direct condition deep links e.g. #/condition/anxiety-counselling or #/city/lahore
   useEffect(() => {
@@ -174,9 +178,11 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     localStorage.removeItem('inst_1981_practice_settings');
   };
 
-  const openAppointment = (reason?: string, specialistId?: string) => {
+  const openAppointment = (reason?: string, specialistId?: string, plan?: string) => {
     if (reason) setPrefillReason(reason);
     if (specialistId) setPrefillSpecialistId(specialistId);
+    if (plan) setSelectedPlan(plan);
+    else if (reason && reason.includes('Rs.')) setSelectedPlan(reason);
     setActiveModal('appointment');
   };
 
@@ -288,6 +294,7 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setSelectedSpecialist(null);
     setSelectedTool(null);
     setSelectedArticle(null);
+    setSelectedPlan(null);
   };
 
   const getWhatsAppLink = (message?: string) => {
@@ -328,6 +335,17 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       console.warn('Could not save inquiry locally', e);
     }
 
+    // Save appointment inquiry to Supabase backend
+    saveAppointmentToSupabase(inquiry).then((res) => {
+      if (res.success) {
+        console.log(`[Supabase] Success: saved inquiry to table '${res.table}'`);
+      } else {
+        console.warn('[Supabase] Sync status:', res.message);
+      }
+    }).catch((err) => {
+      console.warn('[Supabase] Connection error:', err);
+    });
+
     // Dispatch webhook to GoHighLevel endpoint if configured
     if (settings.ghlWebhookUrl) {
       fetch(settings.ghlWebhookUrl, {
@@ -340,14 +358,18 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }).catch((err) => console.log('GHL webhook simulated:', err));
     }
 
-    const waText = encodeURIComponent(
-      `Hello, my name is ${inquiry.fullName}.\n` +
-      `I have submitted an appointment request for ${settings.organizationName}.\n` +
-      `• Reason for contact: ${inquiry.reasonForContact}\n` +
-      `• Preferred format: ${inquiry.preferredAppointmentType}\n` +
-      `• Contact method: ${inquiry.preferredContactMethod}\n` +
+    const details = [
+      `Hello, my name is ${inquiry.fullName}.`,
+      `I have submitted an appointment request for ${settings.organizationName}.`,
+      inquiry.selectedPlan ? `• Selected Plan: ${inquiry.selectedPlan}` : null,
+      `• Reason for contact: ${inquiry.reasonForContact}`,
+      `• Preferred format: ${inquiry.preferredAppointmentType}`,
+      inquiry.preferredLanguage ? `• Preferred language: ${inquiry.preferredLanguage}` : null,
+      inquiry.preferredDate ? `• Preferred timing: ${inquiry.preferredDate}` : null,
+      `• Contact method: ${inquiry.preferredContactMethod}`,
       `Please let me know the next available appointment.`
-    );
+    ].filter(Boolean).join('\n');
+    const waText = encodeURIComponent(details);
     const whatsappUrl = `https://wa.me/${settings.whatsappNumber}?text=${waText}`;
 
     return {
@@ -387,6 +409,8 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         closeModal,
         prefillReason,
         prefillSpecialistId,
+        selectedPlan,
+        setSelectedPlan,
         submitAppointment,
         getWhatsAppLink,
         getPhoneCallLink,

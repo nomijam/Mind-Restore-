@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { X, Save, RotateCcw, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Save, RotateCcw, Check, Database, Copy, ExternalLink, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
+import { SUPABASE_PROJECT_ID, SUPABASE_URL, checkSupabaseStatus, SUPABASE_SQL_SETUP } from '../lib/supabase';
 
 export const AdminDrawer: React.FC = () => {
   const { activeModal, closeModal, settings, updateSettings, resetSettings } = usePractice();
@@ -24,6 +25,46 @@ export const AdminDrawer: React.FC = () => {
 
   const [savedNotice, setSavedNotice] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [supabaseStatus, setSupabaseStatus] = useState<{
+    loading: boolean;
+    tested: boolean;
+    connected: boolean;
+    tableFound: boolean;
+    tableName?: string;
+    error?: string;
+  }>({
+    loading: false,
+    tested: false,
+    connected: true,
+    tableFound: false,
+  });
+  const [copiedSql, setCopiedSql] = useState(false);
+  const [showSql, setShowSql] = useState(false);
+
+  useEffect(() => {
+    if (activeModal === 'admin') {
+      checkSupabase();
+    }
+  }, [activeModal]);
+
+  const checkSupabase = async () => {
+    setSupabaseStatus((s) => ({ ...s, loading: true }));
+    const result = await checkSupabaseStatus();
+    setSupabaseStatus({
+      loading: false,
+      tested: true,
+      connected: result.connected,
+      tableFound: result.tableFound,
+      tableName: result.tableName,
+      error: result.error,
+    });
+  };
+
+  const handleCopySql = () => {
+    navigator.clipboard.writeText(SUPABASE_SQL_SETUP);
+    setCopiedSql(true);
+    setTimeout(() => setCopiedSql(false), 2000);
+  };
 
   if (activeModal !== 'admin') return null;
 
@@ -201,6 +242,94 @@ export const AdminDrawer: React.FC = () => {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Supabase Backend Integration */}
+          <div className="pt-4 border-t border-[#286C6A]/10 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Database className="w-4 h-4 text-[#286C6A]" />
+                <h3 className="text-xs font-heading font-bold uppercase tracking-wider text-[#1C433E]">
+                  Supabase Backend Storage
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={checkSupabase}
+                disabled={supabaseStatus.loading}
+                className="text-[11px] text-[#286C6A] hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <RefreshCw className={`w-3 h-3 ${supabaseStatus.loading ? 'animate-spin' : ''}`} />
+                <span>Test Connection</span>
+              </button>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-[#F8F7F2] border border-[#286C6A]/15 space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-[#526363]">Project ID:</span>
+                <span className="font-mono font-bold text-[#1C433E]">{SUPABASE_PROJECT_ID}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-[#526363]">Endpoint:</span>
+                <span className="font-mono text-[11px] text-[#526363] truncate max-w-[240px]">{SUPABASE_URL}</span>
+              </div>
+              <div className="flex items-center justify-between pt-1 border-t border-[#286C6A]/10">
+                <span className="text-[#526363]">Status:</span>
+                {supabaseStatus.loading ? (
+                  <span className="text-[#286C6A] font-medium animate-pulse">Checking status...</span>
+                ) : supabaseStatus.tableFound ? (
+                  <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Table '{supabaseStatus.tableName}' Active</span>
+                  </span>
+                ) : (
+                  <span className="text-amber-700 font-semibold flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Connected (Needs Table SQL)</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Quick Table Setup Guidance */}
+            {!supabaseStatus.tableFound && (
+              <div className="p-3 bg-amber-50/80 rounded-xl border border-amber-200 text-xs text-amber-900 space-y-2">
+                <p className="leading-relaxed">
+                  Your Supabase project is connected! To begin storing bookings in Supabase, run the one-click SQL schema in your Supabase SQL Editor.
+                </p>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopySql}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-700 text-white rounded-lg text-xs font-semibold hover:bg-amber-800 transition-colors cursor-pointer"
+                  >
+                    {copiedSql ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedSql ? 'Copied SQL!' : 'Copy SQL Schema'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowSql(!showSql)}
+                    className="text-xs text-amber-800 underline hover:text-amber-950 cursor-pointer"
+                  >
+                    {showSql ? 'Hide SQL' : 'View SQL'}
+                  </button>
+                  <a
+                    href={`https://supabase.com/dashboard/project/${SUPABASE_PROJECT_ID}/editor`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-auto inline-flex items-center gap-1 text-[11px] text-amber-800 hover:underline"
+                  >
+                    <span>Open SQL Editor</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+                {showSql && (
+                  <pre className="p-2.5 bg-black/90 text-emerald-300 rounded-lg text-[10.5px] font-mono overflow-x-auto max-h-48 select-all">
+                    {SUPABASE_SQL_SETUP}
+                  </pre>
+                )}
+              </div>
+            )}
           </div>
 
           {/* GoHighLevel Endpoint */}
