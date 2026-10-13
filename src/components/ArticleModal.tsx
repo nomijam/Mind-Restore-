@@ -94,14 +94,14 @@ export const ArticleModal: React.FC = () => {
                 <p>
                   <strong>Author:</strong> {selectedArticle.author} (Licensed Psychologist)
                 </p>
-                <p className="text-[11px] text-[#7BA28E]">
+                <p className="text-[11px] text-[#286C6A] font-medium">
                   <strong>Clinical Review:</strong> Dr. Farah Kamran, Ph.D. · {selectedArticle.date}
                 </p>
               </div>
 
               <div className="flex items-center gap-3 text-[11px]">
                 <span className="flex items-center gap-1 text-[#526363]">
-                  <Clock className="w-3.5 h-3.5 text-[#7BA28E]" />
+                  <Clock className="w-3.5 h-3.5 text-[#286C6A]" />
                   <span>{selectedArticle.readTime}</span>
                 </span>
                 <button
@@ -139,13 +139,13 @@ export const ArticleModal: React.FC = () => {
           {/* Peer-Reviewed References & Sourcing (Healthcare SEO Requirement) */}
           <div className="p-5 rounded-2xl bg-[#F8F7F2] border border-[#1C433E]/10 space-y-3">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#1C433E] uppercase tracking-wider">
-              <BookOpen className="w-4 h-4 text-[#7BA28E]" />
+              <BookOpen className="w-4 h-4 text-[#286C6A]" />
               <span>Evidence-Informed Clinical References</span>
             </div>
             <ul className="space-y-1.5 text-xs text-[#526363]">
               {citations.map((cite, idx) => (
                 <li key={idx} className="flex items-start gap-1.5">
-                  <span className="text-[#7BA28E] font-bold">[{idx + 1}]</span>
+                  <span className="text-[#286C6A] font-bold">[{idx + 1}]</span>
                   <span>{cite.citation} ({cite.year}).</span>
                 </li>
               ))}
@@ -163,9 +163,9 @@ export const ArticleModal: React.FC = () => {
           {/* Contextual Guidance & Appointment CTA */}
           <div className="p-6 rounded-2xl bg-[#1C433E] text-white flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <h4 className="text-sm font-heading font-bold">
+              <h2 className="text-sm font-heading font-bold">
                 Would you like personalized psychological support?
-              </h4>
+              </h2>
               <p className="text-xs text-neutral-300 mt-0.5">
                 Our specialists provide confidential care tailored to your circumstances.
               </p>

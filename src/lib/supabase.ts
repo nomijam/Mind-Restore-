@@ -128,6 +128,110 @@ export async function checkSupabaseStatus(): Promise<{
   }
 }
 
+export interface AdminBookingRecord {
+  id: string;
+  created_at: string;
+  full_name: string;
+  phone: string;
+  email: string;
+  preferred_contact_method: string;
+  reason_for_contact: string;
+  preferred_appointment_type: string;
+  preferred_language: string;
+  selected_plan?: string;
+  preferred_date?: string;
+  message?: string;
+  consent: boolean;
+  status: string;
+  source?: 'supabase' | 'local';
+}
+
+/**
+ * Fetches all appointments from Supabase tables.
+ */
+export async function fetchAppointmentsFromSupabase(): Promise<{
+  success: boolean;
+  data: AdminBookingRecord[];
+  table?: string;
+  error?: any;
+}> {
+  const candidateTables = ['appointments', 'appointment_inquiries', 'bookings', 'inquiries'];
+  for (const tbl of candidateTables) {
+    try {
+      const { data, error } = await supabase
+        .from(tbl)
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && Array.isArray(data)) {
+        const formatted: AdminBookingRecord[] = data.map((item: any, idx: number) => ({
+          id: item.id || `supa-${idx}-${Date.now()}`,
+          created_at: item.created_at || new Date().toISOString(),
+          full_name: item.full_name || item.fullName || 'Anonymous Patient',
+          phone: item.phone || item.phoneNumber || '',
+          email: item.email || '',
+          preferred_contact_method: item.preferred_contact_method || item.preferredContactMethod || 'WhatsApp',
+          reason_for_contact: item.reason_for_contact || item.reasonForContact || 'General Consultation',
+          preferred_appointment_type: item.preferred_appointment_type || item.preferredAppointmentType || 'Online Video',
+          preferred_language: item.preferred_language || item.preferredLanguage || 'Urdu & English',
+          selected_plan: item.selected_plan || item.selectedPlan || '',
+          preferred_date: item.preferred_date || item.preferredDate || '',
+          message: item.message || '',
+          consent: item.consent ?? true,
+          status: item.status || 'new',
+          source: 'supabase',
+        }));
+        return { success: true, data: formatted, table: tbl };
+      }
+    } catch (err) {
+      // try next table
+    }
+  }
+
+  return {
+    success: false,
+    data: [],
+    error: "No appointments table found in Supabase yet",
+  };
+}
+
+/**
+ * Updates the clinical status of an appointment.
+ */
+export async function updateAppointmentStatusInSupabase(
+  id: string,
+  newStatus: string
+): Promise<{ success: boolean; error?: any }> {
+  try {
+    const { error } = await supabase
+      .from('appointments')
+      .update({ status: newStatus })
+      .eq('id', id);
+    if (!error) return { success: true };
+    return { success: false, error };
+  } catch (err) {
+    return { success: false, error: err };
+  }
+}
+
+/**
+ * Deletes an appointment record.
+ */
+export async function deleteAppointmentFromSupabase(
+  id: string
+): Promise<{ success: boolean; error?: any }> {
+  try {
+    const { error } = await supabase
+      .from('appointments')
+      .delete()
+      .eq('id', id);
+    if (!error) return { success: true };
+    return { success: false, error };
+  } catch (err) {
+    return { success: false, error: err };
+  }
+}
+
 export const SUPABASE_SQL_SETUP = `-- Supabase SQL Setup for MindSukoon Appointments
 -- Copy and run this in your Supabase project (SQL Editor -> New query -> Run)
 
@@ -162,6 +266,21 @@ WITH CHECK (true);
 CREATE POLICY "Allow reading appointments"
 ON public.appointments
 FOR SELECT
+TO anon, authenticated
+USING (true);
+
+-- Allow updating appointments status
+CREATE POLICY "Allow updating appointments"
+ON public.appointments
+FOR UPDATE
+TO anon, authenticated
+USING (true)
+WITH CHECK (true);
+
+-- Allow deleting appointments
+CREATE POLICY "Allow deleting appointments"
+ON public.appointments
+FOR DELETE
 TO anon, authenticated
 USING (true);
 `;

@@ -22,8 +22,8 @@ export const TrustSection: React.FC = () => {
       title: 'PROFESSIONAL CARE',
       description: 'Support delivered by qualified mental-health professionals with accredited academic qualifications.',
       icon: UserCheck,
-      actionLabel: 'Meet Our Specialists',
-      onClick: () => scrollTo('#specialists'),
+      actionLabel: 'Explore Our Services',
+      onClick: () => scrollTo('#services'),
     },
     {
       title: 'CONFIDENTIAL',

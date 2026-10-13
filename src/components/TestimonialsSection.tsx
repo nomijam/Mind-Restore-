@@ -28,7 +28,7 @@ export const TestimonialsSection: React.FC = () => {
               className="bg-white rounded-2xl p-7 border border-[#286C6A]/10 shadow-xs flex flex-col justify-between"
             >
               <div>
-                <Quote className="w-5 h-5 text-[#8EAD9A] mb-4" />
+                <Quote className="w-5 h-5 text-[#286C6A] mb-4" />
                 <p className="text-xs text-[#243333] leading-[1.7] italic mb-6 font-normal">
                   "{t.reflection}"
                 </p>

@@ -157,14 +157,14 @@ export const MindRestoreLogo: React.FC<MindRestoreLogoProps> = ({
           />
         </div>
 
-        <h1
-          className={`font-heading font-bold ${textColor} tracking-tight leading-tight ${
+        <span
+          className={`font-heading font-bold ${textColor} tracking-tight leading-tight block ${
             size === 'xl' ? 'text-4xl' : size === 'lg' ? 'text-2xl' : 'text-xl sm:text-2xl'
           }`}
           style={{ letterSpacing: '-0.02em' }}
         >
           MindSukoon
-        </h1>
+        </span>
 
         {showTagline && (
           <div className="flex items-center justify-center gap-2.5 mt-1.5 w-full max-w-[220px]">

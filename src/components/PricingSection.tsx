@@ -212,7 +212,7 @@ export const PricingSection: React.FC = () => {
                         {plan.originalPrice && (
                           <span
                             className={`text-sm line-through ${
-                              isHighlight ? 'text-neutral-400' : 'text-neutral-400'
+                              isHighlight ? 'text-[#E2ECE7]/70' : 'text-[#526363]'
                             }`}
                           >
                             {plan.originalPrice}
@@ -383,7 +383,7 @@ export const PricingSection: React.FC = () => {
                         {plan.originalPrice && (
                           <span
                             className={`text-xs sm:text-sm line-through ${
-                              isHighlight ? 'text-neutral-400' : 'text-neutral-400'
+                              isHighlight ? 'text-[#E2ECE7]/70' : 'text-[#526363]'
                             }`}
                           >
                             {plan.originalPrice}

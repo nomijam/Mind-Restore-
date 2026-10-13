@@ -64,7 +64,7 @@ export const EducationalToolsSection: React.FC = () => {
                     {getToolIcon(tool.id)}
                   </div>
                   <div className="flex items-center gap-1 text-xs text-[#526363]">
-                    <Clock className="w-3.5 h-3.5 text-[#8EAD9A]" />
+                    <Clock className="w-3.5 h-3.5 text-[#286C6A]" />
                     <span>~{tool.estimatedMinutes} mins</span>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ export const EducationalToolsSection: React.FC = () => {
                   {tool.subtitle}
                 </p>
 
-                <p className="text-[11px] text-[#8EAD9A] italic mb-6">
+                <p className="text-[11px] text-[#526363] italic mb-6">
                   {tool.scientificContext}
                 </p>
               </div>

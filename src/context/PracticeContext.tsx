@@ -21,7 +21,7 @@ import {
 } from '../data/practiceData';
 import { findCondition } from '../data/conditionsData';
 import { findCity, CityInfo } from '../data/citiesData';
-import { saveAppointmentToSupabase } from '../lib/supabase';
+// Note: saveAppointmentToSupabase is dynamically loaded on demand during form submission to prevent render-blocking
 
 interface PracticeContextType {
   settings: PracticeSettings;
@@ -335,16 +335,19 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       console.warn('Could not save inquiry locally', e);
     }
 
-    // Save appointment inquiry to Supabase backend
-    saveAppointmentToSupabase(inquiry).then((res) => {
-      if (res.success) {
-        console.log(`[Supabase] Success: saved inquiry to table '${res.table}'`);
-      } else {
-        console.warn('[Supabase] Sync status:', res.message);
-      }
-    }).catch((err) => {
-      console.warn('[Supabase] Connection error:', err);
-    });
+    // Save appointment inquiry to Supabase backend asynchronously
+    import('../lib/supabase')
+      .then(({ saveAppointmentToSupabase }) => saveAppointmentToSupabase(inquiry))
+      .then((res) => {
+        if (res.success) {
+          console.log(`[Supabase] Success: saved inquiry to table '${res.table}'`);
+        } else {
+          console.warn('[Supabase] Sync status:', res.message);
+        }
+      })
+      .catch((err) => {
+        console.warn('[Supabase] Connection error:', err);
+      });
 
     // Dispatch webhook to GoHighLevel endpoint if configured
     if (settings.ghlWebhookUrl) {

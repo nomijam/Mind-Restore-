@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, ArrowRight, ShieldCheck, Check, Clock, UserCheck } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
-import { heritageHeroImg } from '../data/practiceData';
+import { heritageHeroImg, heritageHeroMobileWebp } from '../data/practiceData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const Hero: React.FC = () => {
@@ -68,42 +68,53 @@ export const Hero: React.FC = () => {
               </button>
             </div>
 
-            {/* Below Buttons Trust Elements (Section 9) */}
-            <div className="pt-5 border-t border-[#286C6A]/10">
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-[#526363] font-medium">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#286C6A]" />
-                  <span>Established in {settings.foundedYear}</span>
-                </div>
-                <span className="text-[#8EAD9A]" aria-hidden="true">·</span>
-                <div className="flex items-center gap-1.5">
-                  <UserCheck className="w-3.5 h-3.5 text-[#286C6A]" />
-                  <span>Experienced Professionals</span>
-                </div>
-                <span className="text-[#8EAD9A]" aria-hidden="true">·</span>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#286C6A]" />
-                  <span>Confidential Care</span>
+              {/* Below Buttons Trust Elements (Section 9) */}
+              <div className="pt-5 border-t border-[#286C6A]/10">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-[#3E5050] font-medium">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#286C6A]" />
+                    <span>Established in {settings.foundedYear}</span>
+                  </div>
+                  <span className="text-[#286C6A]" aria-hidden="true">·</span>
+                  <div className="flex items-center gap-1.5">
+                    <UserCheck className="w-3.5 h-3.5 text-[#286C6A]" />
+                    <span>Experienced Professionals</span>
+                  </div>
+                  <span className="text-[#286C6A]" aria-hidden="true">·</span>
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#286C6A]" />
+                    <span>Confidential Care</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Column: Authentic, Dignified Clinical Interaction Photograph */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div className="relative rounded-3xl overflow-hidden border border-[#1C433E]/15 shadow-xl bg-white group">
-                <img
-                  src={heritageHeroImg}
-                  alt="A qualified clinical psychologist in a calm, respectful consultation with a patient at MindSukoon"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-[400px] sm:h-[460px] object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  width={640}
-                  height={460}
-                />
+            {/* Right Column: Authentic, Dignified Clinical Interaction Photograph */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative mx-auto max-w-md lg:max-w-none">
+                <div className="relative rounded-3xl overflow-hidden border border-[#1C433E]/15 shadow-xl bg-white group">
+                  <picture>
+                    <source
+                      media="(max-width: 640px)"
+                      srcSet="/images/heritage_clinical_consultation_mobile.webp"
+                      type="image/webp"
+                    />
+                    <source
+                      srcSet="/images/heritage_clinical_consultation_1791269818478.webp"
+                      type="image/webp"
+                    />
+                    <img
+                      src="/images/heritage_clinical_consultation_1791269818478.webp"
+                      alt="A qualified clinical psychologist in a calm, respectful consultation with a patient at MindSukoon"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-[400px] sm:h-[460px] object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      width={640}
+                      height={460}
+                    />
+                  </picture>
 
                 {/* Subtle calm caption strip */}
                 <div className="p-4 bg-white/95 backdrop-blur-xs border-t border-[#1C433E]/10 text-left">
@@ -123,11 +134,11 @@ export const Hero: React.FC = () => {
                   MindSukoon
                 </span>
                 <div className="flex items-center justify-center gap-1.5 mt-1 w-full">
-                  <span className="h-[1px] w-3 bg-[#7BA28E]" aria-hidden="true" />
-                  <span className="text-[9px] font-semibold text-[#7BA28E] uppercase tracking-wider">
+                  <span className="h-[1px] w-3 bg-[#286C6A]/60" aria-hidden="true" />
+                  <span className="text-[9px] font-bold text-[#1C433E] uppercase tracking-wider">
                     EST. 1981
                   </span>
-                  <span className="h-[1px] w-3 bg-[#7BA28E]" aria-hidden="true" />
+                  <span className="h-[1px] w-3 bg-[#286C6A]/60" aria-hidden="true" />
                 </div>
                 <span className="text-[9.5px] text-[#526363] mt-1 font-medium">
                   Licensed Clinical Care
@@ -136,7 +147,7 @@ export const Hero: React.FC = () => {
 
               {/* Floating Confidential Care Badge */}
               <div className="flex items-center gap-2.5 absolute -bottom-4 -left-3 sm:-left-4 bg-white/95 backdrop-blur-md border border-[#1C433E]/15 px-3.5 py-2.5 rounded-xl text-xs text-[#1C433E] shadow-md">
-                <ShieldCheck className="w-4 h-4 text-[#7BA28E] shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-[#286C6A] shrink-0" />
                 <div>
                   <p className="font-semibold text-[11px] text-[#1C433E] leading-tight">
                     Strict Confidentiality

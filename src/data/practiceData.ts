@@ -10,13 +10,14 @@ import {
 } from '../types';
 import { CONDITIONS_DATA } from './conditionsData';
 
-import heritageHeroImg from '../assets/images/heritage_clinical_consultation_1791269818478.jpg';
-import drFarahImg from '../assets/images/psychologist_dr_farah_1791220174235.jpg';
-import drTariqImg from '../assets/images/psychologist_dr_tariq_1791220192786.jpg';
-import drAyeshaImg from '../assets/images/psychologist_dr_ayesha_1791220207594.jpg';
-import resourcesImg from '../assets/images/resources_wellness_journal_1791220222535.jpg';
+import heritageHeroImg from '../assets/images/heritage_clinical_consultation_1791269818478.webp';
+import heritageHeroMobileWebp from '../assets/images/heritage_clinical_consultation_mobile.webp';
+import drFarahImg from '../assets/images/psychologist_dr_farah_1791220174235.webp';
+import drTariqImg from '../assets/images/psychologist_dr_tariq_1791220192786.webp';
+import drAyeshaImg from '../assets/images/psychologist_dr_ayesha_1791220207594.webp';
+import resourcesImg from '../assets/images/resources_wellness_journal_1791220222535.webp';
 
-export { heritageHeroImg, drFarahImg, drTariqImg, drAyeshaImg, resourcesImg };
+export { heritageHeroImg, heritageHeroMobileWebp, drFarahImg, drTariqImg, drAyeshaImg, resourcesImg };
 
 export const DEFAULT_SETTINGS: PracticeSettings = {
   organizationName: 'MindSukoon',

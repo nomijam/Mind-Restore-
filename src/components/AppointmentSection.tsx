@@ -196,10 +196,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-full-name" className="block text-xs font-medium text-[#243333] mb-1">
                     Full Name *
                   </label>
                   <input
+                    id="intake-full-name"
+                    name="fullName"
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
@@ -210,10 +212,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-phone" className="block text-xs font-medium text-[#243333] mb-1">
                     Phone / WhatsApp Number *
                   </label>
                   <input
+                    id="intake-phone"
+                    name="phone"
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -226,10 +230,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-email" className="block text-xs font-medium text-[#243333] mb-1">
                     Email Address *
                   </label>
                   <input
+                    id="intake-email"
+                    name="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -240,10 +246,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-contact-method" className="block text-xs font-medium text-[#243333] mb-1">
                     Preferred Contact Method
                   </label>
                   <select
+                    id="intake-contact-method"
+                    name="preferredContactMethod"
                     value={preferredContactMethod}
                     onChange={(e) => setPreferredContactMethod(e.target.value as any)}
                     className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
@@ -257,10 +265,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-reason" className="block text-xs font-medium text-[#243333] mb-1">
                     Counselling Plan / Reason for Contact
                   </label>
                   <select
+                    id="intake-reason"
+                    name="reasonForContact"
                     value={reasonForContact}
                     onChange={(e) => {
                       setReasonForContact(e.target.value);
@@ -279,10 +289,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-session-format" className="block text-xs font-medium text-[#243333] mb-1">
                     Preferred Session Format
                   </label>
                   <select
+                    id="intake-session-format"
+                    name="preferredAppointmentType"
                     value={preferredAppointmentType}
                     onChange={(e) => setPreferredAppointmentType(e.target.value as any)}
                     className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
@@ -296,10 +308,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-language" className="block text-xs font-medium text-[#243333] mb-1">
                     Preferred Language
                   </label>
                   <select
+                    id="intake-language"
+                    name="preferredLanguage"
                     value={preferredLanguage}
                     onChange={(e) => setPreferredLanguage(e.target.value as any)}
                     className="w-full p-3 rounded-xl border border-[#286C6A]/20 bg-[#F8F7F2] text-sm text-[#243333] focus:outline-none focus:border-[#286C6A]"
@@ -311,10 +325,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#243333] mb-1">
+                  <label htmlFor="intake-timing" className="block text-xs font-medium text-[#243333] mb-1">
                     Preferred Appointment Time or Date (Optional)
                   </label>
                   <input
+                    id="intake-timing"
+                    name="preferredDate"
                     type="text"
                     value={preferredDate}
                     onChange={(e) => setPreferredDate(e.target.value)}
@@ -325,10 +341,12 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#243333] mb-1">
+                <label htmlFor="intake-message" className="block text-xs font-medium text-[#243333] mb-1">
                   Brief Message or Notes (Optional)
                 </label>
                 <textarea
+                  id="intake-message"
+                  name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={2}
@@ -338,8 +356,10 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
               </div>
 
               {/* Consent Checkbox */}
-              <label className="flex items-start gap-2.5 pt-1 cursor-pointer">
+              <label htmlFor="intake-consent" className="flex items-start gap-2.5 pt-1 cursor-pointer">
                 <input
+                  id="intake-consent"
+                  name="consent"
                   type="checkbox"
                   checked={consent}
                   onChange={(e) => setConsent(e.target.checked)}

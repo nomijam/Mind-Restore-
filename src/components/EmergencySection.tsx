@@ -14,9 +14,9 @@ export const EmergencySection: React.FC = () => {
               <AlertCircle className="w-5 h-5 stroke-[2]" />
             </div>
             <div>
-              <h3 className="text-base font-heading font-bold text-[#243333]">
+              <h2 className="text-base font-heading font-bold text-[#243333]">
                 Important Emergency Guidance
-              </h3>
+              </h2>
               <p className="text-xs text-[#526363]">
                 Outpatient clinical practice safety notice
               </p>
@@ -57,7 +57,7 @@ export const EmergencySection: React.FC = () => {
                 <span className="text-xs text-[#526363] leading-relaxed">{settings.emergencyNotice.internationalAdvice}</span>
               </div>
               <div className="mt-3">
-                <span className="text-[11px] text-[#8EAD9A]">Emergency care is available 24/7 via local emergency services worldwide.</span>
+                <span className="text-[11px] text-[#526363]">Emergency care is available 24/7 via local emergency services worldwide.</span>
               </div>
             </div>
           </div>

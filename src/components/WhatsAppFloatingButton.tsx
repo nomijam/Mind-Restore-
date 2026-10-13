@@ -17,7 +17,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
               e.stopPropagation();
               setMinimized(true);
             }}
-            className="absolute top-2 right-2 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200 p-1 rounded-full transition-colors cursor-pointer"
+            className="absolute top-2 right-2 text-[#526363] hover:text-[#1C433E] hover:bg-neutral-100 active:bg-neutral-200 p-1 rounded-full transition-colors cursor-pointer"
             aria-label="Dismiss chat prompt"
           >
             <X className="w-3.5 h-3.5" />

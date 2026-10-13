@@ -21,7 +21,7 @@ export const HeritageBar: React.FC = () => {
           >
             Trusted Mental Health Care Since {settings.foundedYear}
           </button>
-          <span className="hidden sm:inline text-[#8EAD9A]">·</span>
+          <span className="hidden sm:inline text-[#286C6A]" aria-hidden="true">·</span>
           <span className="hidden sm:inline text-[#526363] text-[12px]">
             Four Decades of Clinical Experience and Human Compassion
           </span>
@@ -34,7 +34,7 @@ export const HeritageBar: React.FC = () => {
           >
             Outpatient Practice & Tele-Mental Health
           </button>
-          <span className="text-[#8EAD9A]">·</span>
+          <span className="text-[#286C6A]" aria-hidden="true">·</span>
           <span className="font-medium text-[#243333]">Urdu & English</span>
         </div>
       </div>

@@ -89,7 +89,7 @@ export const ServicesSection: React.FC = () => {
                   <div className="w-11 h-11 rounded-xl bg-white border border-[#286C6A]/10 flex items-center justify-center group-hover:bg-[#EAF2ED] transition-colors">
                     {getServiceIcon(srv.iconName)}
                   </div>
-                  <span className="text-xs font-heading text-[#8EAD9A] font-bold">
+                  <span className="text-xs font-heading text-[#286C6A] font-bold">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>

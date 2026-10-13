@@ -163,7 +163,8 @@ export const ConditionsSection: React.FC = () => {
               <div className="pt-4 mt-2 border-t border-[#286C6A]/10 flex items-center justify-between">
                 <button
                   onClick={() => openConditionDetail(cond.slug || cond.id)}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#1C433E] hover:text-[#122e2a] transition-colors group-hover:underline"
+                  aria-label={`Read comprehensive clinical guide on ${cond.title}`}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#1C433E] hover:text-[#122e2a] transition-colors group-hover:underline cursor-pointer"
                 >
                   <span>READ FULL PAGE</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

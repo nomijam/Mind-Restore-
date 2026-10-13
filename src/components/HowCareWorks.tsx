@@ -58,7 +58,7 @@ export const HowCareWorks: React.FC = () => {
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <span className="text-2xl font-heading font-bold text-[#D8B878]">
+                    <span className="text-2xl font-heading font-extrabold text-[#1C433E]">
                       {step.stepNumber}
                     </span>
                     <div className="w-10 h-10 rounded-xl bg-white text-[#286C6A] flex items-center justify-center border border-[#286C6A]/10">

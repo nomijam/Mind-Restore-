@@ -44,19 +44,19 @@ export const AboutSection: React.FC = () => {
             </p>
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#243333] font-medium">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#8EAD9A]" />
+                <CheckCircle className="w-4 h-4 text-[#286C6A]" />
                 <span>Established in {settings.foundedYear}</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#8EAD9A]" />
+                <CheckCircle className="w-4 h-4 text-[#286C6A]" />
                 <span>Modern, Evidence-Informed Practice</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#8EAD9A]" />
+                <CheckCircle className="w-4 h-4 text-[#286C6A]" />
                 <span>Strict Healthcare Privacy Standards</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#8EAD9A]" />
+                <CheckCircle className="w-4 h-4 text-[#286C6A]" />
                 <span>Encrypted Video & Voice Digital Consultations</span>
               </div>
             </div>
@@ -90,7 +90,7 @@ export const AboutSection: React.FC = () => {
                 <h3 className="text-lg font-heading font-bold text-[#1C433E]">
                   Our Clinical Mission
                 </h3>
-                <span className="text-[10px] uppercase tracking-wider text-[#7BA28E] font-semibold">
+                <span className="text-[10px] uppercase tracking-wider text-[#1C433E] font-bold">
                   MindSukoon · Established 1981
                 </span>
               </div>

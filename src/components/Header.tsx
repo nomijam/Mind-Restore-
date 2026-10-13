@@ -292,7 +292,7 @@ export const Header: React.FC = () => {
                       ? 'rotate-180 text-[#D8B878]'
                       : activeCityPage
                       ? 'text-[#D8B878]'
-                      : 'text-[#8EAD9A]'
+                      : 'text-[#286C6A]'
                   }`}
                 />
               </button>
@@ -385,7 +385,7 @@ export const Header: React.FC = () => {
                 <span>About</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    aboutDropdownOpen ? 'rotate-180 text-[#D8B878]' : 'text-[#8EAD9A]'
+                    aboutDropdownOpen ? 'rotate-180 text-[#D8B878]' : 'text-[#286C6A]'
                   }`}
                 />
               </button>

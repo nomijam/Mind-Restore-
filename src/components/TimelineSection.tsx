@@ -75,7 +75,7 @@ export const TimelineSection: React.FC = () => {
                         {displayYear}
                       </span>
                       {isCurrentEra && (
-                        <span className="text-[11px] font-semibold text-[#8EAD9A] uppercase tracking-wide">
+                        <span className="text-[11px] font-bold text-[#286C6A] uppercase tracking-wide">
                           (Current Era)
                         </span>
                       )}
