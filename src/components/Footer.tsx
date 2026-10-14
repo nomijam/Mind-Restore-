@@ -210,7 +210,7 @@ export const Footer: React.FC = () => {
             <button
               onClick={() => openAdmin()}
               className="text-[#D8B878] hover:text-white transition-colors flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-[#D8B878]/30 cursor-pointer"
-              title="MindSukoon Administrator Portal"
+              title="Life Reset Pakistan Administrator Portal"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#D8B878]" />
               <span>Admin Sign-up / Login</span>

@@ -12,16 +12,14 @@ import {
   DEFAULT_SETTINGS,
   SPECIALISTS,
   SERVICES,
-  CONDITIONS,
   EDUCATIONAL_TOOLS,
   ARTICLES,
   TESTIMONIALS,
   TIMELINE_MILESTONES,
   CORE_VALUES,
 } from '../data/practiceData';
-import { findCondition } from '../data/conditionsData';
-import { findCity, CityInfo } from '../data/citiesData';
-// Note: saveAppointmentToSupabase is dynamically loaded on demand during form submission to prevent render-blocking
+import type { CityInfo } from '../data/citiesData';
+// Note: findCondition, findCity, and saveAppointmentToSupabase are dynamically imported on demand to keep initial bundle lean
 
 interface PracticeContextType {
   settings: PracticeSettings;
@@ -83,11 +81,11 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const saved = localStorage.getItem('inst_1981_practice_settings');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (!parsed.organizationName || parsed.organizationName !== 'MindSukoon') {
-          parsed.organizationName = 'MindSukoon';
+        if (!parsed.organizationName || parsed.organizationName !== 'Life Reset Pakistan') {
+          parsed.organizationName = 'Life Reset Pakistan';
         }
-        if (!parsed.email || parsed.email.includes('restore') || parsed.email.includes('psychologicalcare')) {
-          parsed.email = 'care@mindsukoon.pk';
+        if (!parsed.email || !parsed.email.includes('liferesetpakistan.com')) {
+          parsed.email = 'care@liferesetpakistan.com';
         }
         if (
           !parsed.phoneNumber ||
@@ -133,10 +131,11 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Handle URL hash changes for direct condition deep links e.g. #/condition/anxiety-counselling or #/city/lahore
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleHashChange = async () => {
       const hash = window.location.hash;
       if (hash.startsWith('#/condition/')) {
         const slug = hash.replace('#/condition/', '');
+        const { findCondition } = await import('../data/conditionsData');
         const cond = findCondition(slug);
         if (cond) {
           setActiveConditionPage(cond);
@@ -145,6 +144,7 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         }
       } else if (hash.startsWith('#/city/')) {
         const slug = hash.replace('#/city/', '');
+        const { findCity } = await import('../data/citiesData');
         const city = findCity(slug);
         if (city) {
           setActiveCityPage(city);
@@ -202,7 +202,8 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const openConditionPage = (conditionIdOrSlug: string) => {
+  const openConditionPage = async (conditionIdOrSlug: string) => {
+    const { findCondition } = await import('../data/conditionsData');
     const c = findCondition(conditionIdOrSlug);
     if (c) {
       setActiveConditionPage(c);
@@ -220,7 +221,8 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openCityPage = (cityIdOrSlug: string) => {
+  const openCityPage = async (cityIdOrSlug: string) => {
+    const { findCity } = await import('../data/citiesData');
     const c = findCity(cityIdOrSlug);
     if (c) {
       setActiveCityPage(c);
@@ -238,10 +240,10 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openConditionDetail = (conditionId: string) => {
+  const openConditionDetail = async (conditionId: string) => {
+    const { findCondition } = await import('../data/conditionsData');
     const c = findCondition(conditionId);
     if (c) {
-      // Direct full-page navigation as requested: "I need every page for every different page for every condition"
       setSelectedCondition(c);
       setActiveConditionPage(c);
       window.location.hash = `#/condition/${c.slug}`;

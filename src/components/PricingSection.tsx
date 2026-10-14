@@ -113,7 +113,7 @@ export const PricingSection: React.FC = () => {
   };
 
   const getPlanWhatsAppLink = (plan: PricingPlan) => {
-    const msg = `Hello MindSukoon, I would like to book the ${plan.name} (${plan.price}). Please guide me through scheduling and payment.`;
+    const msg = `Hello Life Reset Pakistan, I would like to book the ${plan.name} (${plan.price}). Please guide me through scheduling and payment.`;
     return getWhatsAppLink(msg);
   };
 
@@ -485,7 +485,7 @@ export const PricingSection: React.FC = () => {
               Ask a Clinical Intake Question
             </button>
             <a
-              href={getWhatsAppLink('Hello MindSukoon, I have a question regarding your counselling fees and booking process.')}
+              href={getWhatsAppLink('Hello Life Reset Pakistan, I have a question regarding your counselling fees and booking process.')}
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#1C433E] bg-white hover:bg-neutral-50 border border-[#1C433E]/15 transition-colors inline-flex items-center gap-1.5 shadow-2xs"

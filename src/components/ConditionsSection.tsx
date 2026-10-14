@@ -21,7 +21,7 @@ import {
   GraduationCap,
   UserCheck,
 } from 'lucide-react';
-import { CONDITIONS } from '../data/practiceData';
+import { CONDITIONS_CARDS } from '../data/conditionsCardsData';
 import { usePractice } from '../context/PracticeContext';
 
 export const ConditionsSection: React.FC = () => {
@@ -74,7 +74,7 @@ export const ConditionsSection: React.FC = () => {
     }
   };
 
-  const filteredConditions = CONDITIONS.filter((c) => {
+  const filteredConditions = CONDITIONS_CARDS.filter((c) => {
     if (activeTab === 'all') return true;
     return c.category === activeTab;
   });

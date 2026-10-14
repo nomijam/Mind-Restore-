@@ -75,7 +75,7 @@ export const LegalModal: React.FC = () => {
                 <strong>3. Non-Diagnostic Educational Purpose:</strong> All online articles, coping guides, and interactive reflection checks are provided strictly for educational purposes and emotional literacy. They do not constitute formal psychiatric evaluations, personalized treatment plans, or clinical diagnoses.
               </p>
               <p>
-                <strong>4. Corrections, Integrity & Conflict of Interest:</strong> MindSukoon maintains editorial independence. We do not accept sponsored pharmaceutical promotions or misleading commercial endorsements. If factual updates or clinical clarifications are identified, articles are promptly revised with an updated review timestamp.
+                <strong>4. Corrections, Integrity & Conflict of Interest:</strong> Life Reset Pakistan maintains editorial independence. We do not accept sponsored pharmaceutical promotions or misleading commercial endorsements. If factual updates or clinical clarifications are identified, articles are promptly revised with an updated review timestamp.
               </p>
             </div>
           )}

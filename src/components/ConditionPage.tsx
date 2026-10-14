@@ -44,7 +44,11 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
   // Scroll to top when condition changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = `${condition.title} | MindSukoon (Est. 1981)`;
+    document.title = `${condition.title} | Life Reset Pakistan (Est. 1981)`;
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', `https://liferesetpakistan.com/#condition-${condition.id}`);
+    }
   }, [condition]);
 
   const toggleFaq = (index: number) => {
@@ -197,7 +201,7 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
 
             <a
               href={getWhatsAppLink(
-                `Hello MindSukoon, I would like to inquire about booking a confidential consultation for ${condition.title}.`
+                `Hello Life Reset Pakistan, I would like to inquire about booking a confidential consultation for ${condition.title}.`
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -371,7 +375,7 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
                 What to Expect in Your Sessions
               </h2>
               <p className="text-sm text-[#526363] mt-1">
-                Therapy with MindSukoon is collaborative, paced, and clear. You always know where
+                Therapy with Life Reset Pakistan is collaborative, paced, and clear. You always know where
                 you are in your journey.
               </p>
             </div>

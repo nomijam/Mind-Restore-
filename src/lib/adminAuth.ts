@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 
-const ADMIN_STORAGE_KEY = 'mindsukoon_admin_master_account';
-const SESSION_STORAGE_KEY = 'mindsukoon_admin_session';
+const ADMIN_STORAGE_KEY = 'liferesetpakistan_admin_master_account';
+const SESSION_STORAGE_KEY = 'liferesetpakistan_admin_session';
 
 export interface AdminAccount {
   id: string;
@@ -89,7 +89,7 @@ export async function registerSingleAdminAccount(
 
   const passwordHash = await hashPassword(cleanPassword);
   const account: AdminAccount = {
-    id: 'mindsukoon-admin-primary',
+    id: 'liferesetpakistan-admin-primary',
     name: cleanName,
     email: cleanEmail,
     passwordHash,

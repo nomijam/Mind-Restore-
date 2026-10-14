@@ -13,8 +13,7 @@ import {
 } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 import { MindRestoreLogo, MindRestoreEmblem } from './MindRestoreLogo';
-import { CONDITIONS_DATA } from '../data/conditionsData';
-import { CITIES_DATA } from '../data/citiesData';
+import { HEADER_CONDITIONS, HEADER_CITIES } from '../data/headerNavData';
 
 export const Header: React.FC = () => {
   const {
@@ -80,8 +79,8 @@ export const Header: React.FC = () => {
   }, []);
 
   // Filter conditions into Common Concerns and Specialised Care
-  const commonConcerns = CONDITIONS_DATA.filter((c) => c.category === 'common-concerns');
-  const specialisedCare = CONDITIONS_DATA.filter((c) => c.category === 'specialised-care');
+  const commonConcerns = HEADER_CONDITIONS.filter((c) => c.category === 'common-concerns');
+  const specialisedCare = HEADER_CONDITIONS.filter((c) => c.category === 'specialised-care');
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -140,13 +139,13 @@ export const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Left: MindSukoon Official Logo (Est. 1981) */}
+          {/* Left: Life Reset Pakistan Official Logo (Est. 1981) */}
           <div className="flex items-center">
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
               className="group flex items-center transition-transform hover:opacity-95 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1C433E]"
-              aria-label="MindSukoon Established 1981 - Home"
+              aria-label="Life Reset Pakistan Established 1981 - Home"
             >
               <MindRestoreLogo variant="horizontal" size="md" />
             </a>
@@ -154,7 +153,7 @@ export const Header: React.FC = () => {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-5 text-[14px] font-medium text-[#526363]">
-            {/* 1. CONDITIONS MEGA DROPDOWN (MindSukoon Deep Pine & Heritage Gold Branding) */}
+            {/* 1. CONDITIONS MEGA DROPDOWN (Life Reset Pakistan Deep Pine & Heritage Gold Branding) */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -185,7 +184,7 @@ export const Header: React.FC = () => {
                 />
               </button>
 
-              {/* Conditions Dropdown Menu styled with MindSukoon Dark Heritage Pine (#112A27) and Gold (#D8B878) */}
+              {/* Conditions Dropdown Menu styled with Life Reset Pakistan Dark Heritage Pine (#112A27) and Gold (#D8B878) */}
               {conditionsDropdownOpen && (
                 <div
                   className="absolute top-full left-0 mt-1.5 w-[630px] bg-[#112A27] text-white rounded-2xl shadow-2xl border border-[#1C433E]/80 p-7 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
@@ -249,7 +248,7 @@ export const Header: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Bottom MindSukoon Reassurance Bar */}
+                  {/* Bottom Life Reset Pakistan Reassurance Bar */}
                   <div className="mt-5 pt-3.5 border-t border-[#1C433E] flex items-center justify-between text-[11px] text-[#A3C2B1]">
                     <span className="flex items-center gap-1.5">
                       <MindRestoreEmblem className="w-3.5 h-3.5" colorTheme="light" />
@@ -310,7 +309,7 @@ export const Header: React.FC = () => {
                   </div>
 
                   <div className="space-y-1">
-                    {CITIES_DATA.map((city) => (
+                    {HEADER_CITIES.map((city) => (
                       <button
                         key={city.id}
                         onClick={() => handleSelectCity(city.slug)}
@@ -363,7 +362,7 @@ export const Header: React.FC = () => {
               FAQ
             </a>
 
-            {/* 6. ABOUT DROPDOWN (MindSukoon Deep Pine & Gold Styling) */}
+            {/* 6. ABOUT DROPDOWN (Life Reset Pakistan Deep Pine & Gold Styling) */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -396,7 +395,7 @@ export const Header: React.FC = () => {
                   style={{ boxShadow: '0 25px 50px -12px rgba(17, 42, 39, 0.65)' }}
                 >
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#D8B878] block px-2 pb-1.5 border-b border-[#1C433E]">
-                    MINDSUKOON HERITAGE
+                    LIFE RESET PAKISTAN HERITAGE
                   </span>
                   <a
                     href="#about"
@@ -464,13 +463,13 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown with MindSukoon Palette */}
+      {/* Mobile Menu Dropdown with Life Reset Pakistan Palette */}
       {mobileMenuOpen && (
         <div className="xl:hidden border-b border-[#1C433E]/10 bg-[#F8F7F2] px-6 py-4 space-y-4 animate-in fade-in duration-200 max-h-[85vh] overflow-y-auto">
           {/* Top close header inside mobile drawer */}
           <div className="flex items-center justify-between pb-3 border-b border-[#1C433E]/10">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#1C433E]">
-              MindSukoon Menu
+              Life Reset Pakistan Menu
             </span>
             <button
               type="button"
@@ -555,13 +554,13 @@ export const Header: React.FC = () => {
 
               {mobileCitiesOpen && (
                 <div className="pl-3 pt-1 space-y-1 text-xs">
-                  {CITIES_DATA.map((city) => (
+                  {HEADER_CITIES.map((city) => (
                     <button
                       key={city.id}
                       onClick={() => handleSelectCity(city.slug)}
                       className="w-full text-left py-1 text-[#526363] hover:text-[#1C433E]"
                     >
-                      {city.name} ({city.serviceType})
+                      {city.name}
                     </button>
                   ))}
                 </div>
@@ -597,7 +596,7 @@ export const Header: React.FC = () => {
               onClick={(e) => handleNavClick(e, '#about')}
               className="text-base font-medium text-[#243333] py-2 border-b border-[#1C433E]/10 hover:text-[#1C433E]"
             >
-              About MindSukoon (Est. 1981)
+              About Life Reset Pakistan (Est. 1981)
             </a>
           </nav>
 

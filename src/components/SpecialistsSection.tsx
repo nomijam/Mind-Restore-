@@ -36,7 +36,7 @@ export const SpecialistsSection: React.FC = () => {
               >
                 <img
                   src={spec.image}
-                  alt={`${spec.name} - ${spec.title} at MindSukoon`}
+                  alt={`${spec.name} - ${spec.title} at Life Reset Pakistan`}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-top group-hover:scale-102 transition-transform duration-300"
                   loading="lazy"

@@ -14,6 +14,22 @@ export default defineConfig(() => {
     build: {
       cssCodeSplit: true,
       sourcemap: false,
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/react') || id.includes('node_modules/scheduler')) {
+              return 'vendor-react';
+            }
+            if (id.includes('node_modules/lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('src/data/conditionsData') || id.includes('src/data/citiesData')) {
+              return 'clinical-data';
+            }
+          },
+        },
+      },
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

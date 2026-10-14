@@ -21,10 +21,10 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left Column: Clear, Calm, Dignified Messaging */}
           <div className="lg:col-span-7 space-y-7 text-left">
-            {/* Eyebrow: MINDSUKOON · ESTABLISHED 1981 */}
+            {/* Eyebrow: LIFE RESET PAKISTAN · ESTABLISHED 1981 */}
             <div className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-wider text-[#1C433E] uppercase bg-white px-4 py-2 rounded-full border border-[#1C433E]/15 shadow-2xs">
               <MindRestoreEmblem className="w-4 h-4 text-[#1C433E]" />
-              <span>MINDSUKOON · ESTABLISHED {settings.foundedYear}</span>
+              <span>LIFE RESET PAKISTAN · ESTABLISHED {settings.foundedYear}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5" />
             </div>
 
@@ -105,7 +105,7 @@ export const Hero: React.FC = () => {
                     />
                     <img
                       src="/images/heritage_clinical_consultation_1791269818478.webp"
-                      alt="A qualified clinical psychologist in a calm, respectful consultation with a patient at MindSukoon"
+                      alt="A qualified clinical psychologist in a calm, respectful consultation with a patient at Life Reset Pakistan"
                       referrerPolicy="no-referrer"
                       className="w-full h-[400px] sm:h-[460px] object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
                       loading="eager"
@@ -127,11 +127,11 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
 
-              {/* Floating Official MindSukoon Seal (Direct Logo Artwork) */}
+              {/* Floating Official Life Reset Pakistan Seal (Direct Logo Artwork) */}
               <div className="hidden sm:flex flex-col items-center absolute -top-5 -right-5 bg-white/95 backdrop-blur-md border border-[#1C433E]/15 p-4 rounded-2xl shadow-xl max-w-[190px] text-center transition-transform hover:-translate-y-0.5 duration-200">
                 <MindRestoreEmblem className="w-12 h-12 mb-1" />
                 <span className="font-heading font-extrabold text-[#1C433E] text-sm leading-tight tracking-tight">
-                  MindSukoon
+                  Life Reset Pakistan
                 </span>
                 <div className="flex items-center justify-center gap-1.5 mt-1 w-full">
                   <span className="h-[1px] w-3 bg-[#286C6A]/60" aria-hidden="true" />

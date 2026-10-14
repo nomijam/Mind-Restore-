@@ -20,7 +20,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Difficulty falling asleep or waking up with an immediate knot in your stomach',
       'Avoiding social gatherings, workplace presentations, or stressful phone calls'
     ],
-    fullOverview: 'Anxiety is one of the most prevalent yet treatable psychological challenges in Pakistan. Many people endure chronic tension silently, assuming that constant worry is just a personality trait or an inevitable reaction to societal pressures, family obligations, and career demands. At MindSukoon, our licensed clinical psychologists offer a non-judgmental, structured therapeutic pathway to deconstruct anxious thought loops, quiet physiological hyper-arousal, and restore emotional stability.',
+    fullOverview: 'Anxiety is one of the most prevalent yet treatable psychological challenges in Pakistan. Many people endure chronic tension silently, assuming that constant worry is just a personality trait or an inevitable reaction to societal pressures, family obligations, and career demands. At Life Reset Pakistan, our licensed clinical psychologists offer a non-judgmental, structured therapeutic pathway to deconstruct anxious thought loops, quiet physiological hyper-arousal, and restore emotional stability.',
     culturalContext: 'In Pakistani households, chronic anxiety is often dismissed as "zyada sochna" (overthinking) or lack of willpower. In reality, anxiety involves biological nervous system dysregulation and learned cognitive filters. Seeking professional therapy is a proactive, courageous act of health care.',
     symptomsBreakdown: {
       emotional: [
@@ -118,7 +118,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Severe morning exhaustion where getting out of bed feels like moving mountains',
       'Excessive self-blame, worthlessness, or feeling like a burden to loved ones'
     ],
-    fullOverview: 'Clinical depression is more than temporary sadness; it is an invisible weight that slows thinking, drains vitality, and colors future prospects with hopelessness. In Pakistan, individuals experiencing depression frequently suffer in silence due to cultural misconceptions that equate depression with a lack of gratitude or faith. At MindSukoon, our practitioners provide a safe, respectful sanctuary where you do not have to put on a brave face. We help you gradually rebuild energy, process suppressed grief, and reconnect with meaningful living.',
+    fullOverview: 'Clinical depression is more than temporary sadness; it is an invisible weight that slows thinking, drains vitality, and colors future prospects with hopelessness. In Pakistan, individuals experiencing depression frequently suffer in silence due to cultural misconceptions that equate depression with a lack of gratitude or faith. At Life Reset Pakistan, our practitioners provide a safe, respectful sanctuary where you do not have to put on a brave face. We help you gradually rebuild energy, process suppressed grief, and reconnect with meaningful living.',
     culturalContext: 'Often in our society, well-meaning relatives tell struggling individuals to "stay busy" or "count their blessings." While social connection is vital, clinical depression requires evidence-based psychological treatment that addresses cognitive loops and neurochemical exhaustion.',
     symptomsBreakdown: {
       emotional: [
@@ -216,7 +216,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Brain fog, memory lapses, and dropping productivity on simple tasks',
       'Frequent tension headaches, irritability, and snapping at colleagues or family'
     ],
-    fullOverview: 'Modern professional and familial life in Pakistan often demands relentless availability. Corporate deadlines, financial inflation, competitive academic tracks, and intense family expectations can push the autonomic nervous system into chronic overload. When stress shifts into clinical burnout, rest alone is no longer enough to recover. MindSukoon provides executive and personal stress counselling to help you establish firm boundaries, restore vitality, and build sustainable work-life alignment.',
+    fullOverview: 'Modern professional and familial life in Pakistan often demands relentless availability. Corporate deadlines, financial inflation, competitive academic tracks, and intense family expectations can push the autonomic nervous system into chronic overload. When stress shifts into clinical burnout, rest alone is no longer enough to recover. Life Reset Pakistan provides executive and personal stress counselling to help you establish firm boundaries, restore vitality, and build sustainable work-life alignment.',
     culturalContext: 'In South Asian society, saying "no" to authority figures, extended relatives, or workplace demands is often penalized as disrespect. Learning assertiveness and healthy boundary-setting is essential for preserving long-term mental and physical wellbeing.',
     symptomsBreakdown: {
       emotional: [
@@ -314,7 +314,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Dreading bedtime during the afternoon because you anticipate another sleepless night',
       'Severe daytime brain fog, caffeine dependency, and unpredictable mood swings'
     ],
-    fullOverview: 'Sleep is the foundation of emotional resilience, cognitive clarity, and physical health. When insomnia strikes, the bed transforms from a place of sanctuary into an arena of frustration and dread. Many people in Pakistan turn to over-the-counter sleep aids or benzodiazepines, which provide temporary sedation but fail to address the underlying psychological drivers of chronic insomnia. MindSukoon utilizes Cognitive Behavioural Therapy for Insomnia (CBT-I)—the internationally recognized gold standard for lasting sleep restoration.',
+    fullOverview: 'Sleep is the foundation of emotional resilience, cognitive clarity, and physical health. When insomnia strikes, the bed transforms from a place of sanctuary into an arena of frustration and dread. Many people in Pakistan turn to over-the-counter sleep aids or benzodiazepines, which provide temporary sedation but fail to address the underlying psychological drivers of chronic insomnia. Life Reset Pakistan utilizes Cognitive Behavioural Therapy for Insomnia (CBT-I)—the internationally recognized gold standard for lasting sleep restoration.',
     culturalContext: 'Late dinners, family visits extending past midnight, and excessive screen exposure in bed are common cultural patterns in Pakistani cities that disrupt sleep hygiene. We help you adapt proven sleep science to fit your cultural and familial lifestyle.',
     symptomsBreakdown: {
       emotional: [
@@ -412,7 +412,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Temporary relief from normal lab reports followed immediately by new doubt',
       'Obsessive checking of pulse, blood pressure, moles, or lymph nodes throughout the day'
     ],
-    fullOverview: 'Health anxiety (often referred to clinically as Illness Anxiety Disorder) is an exhausting cycle where benign, normal bodily fluctuations are interpreted by the brain as proof of a catastrophic medical condition (such as cancer, heart attack, or neurological disease). In Pakistan, easy access to private diagnostic labs and doctor hopping often fuels the cycle, leaving individuals with mounting bills and persistent terror. At MindSukoon, we help clients understand how hyper-vigilance amplifies bodily sensations, break the checking cycle, and regain peace.',
+    fullOverview: 'Health anxiety (often referred to clinically as Illness Anxiety Disorder) is an exhausting cycle where benign, normal bodily fluctuations are interpreted by the brain as proof of a catastrophic medical condition (such as cancer, heart attack, or neurological disease). In Pakistan, easy access to private diagnostic labs and doctor hopping often fuels the cycle, leaving individuals with mounting bills and persistent terror. At Life Reset Pakistan, we help clients understand how hyper-vigilance amplifies bodily sensations, break the checking cycle, and regain peace.',
     culturalContext: 'In South Asian families, discussing health scares frequently elicits dramatic reactions or superstitious explanations ("nazar" or black magic), which further amplifies health panic. We provide a grounded, scientific psychological approach.',
     symptomsBreakdown: {
       emotional: [
@@ -510,7 +510,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Deep shame, guilt, and regret after saying hurtful things to loved ones',
       'Relationship tension, distancing by your children, or friction with colleagues'
     ],
-    fullOverview: 'Anger is rarely a standalone emotion. In clinical psychology, anger is understood as a "secondary emotion"—a protective armor that masks deeper feelings of hurt, powerlessness, exhaustion, betrayal, or fear. In Pakistan, men in particular are often socialized to believe anger is the only acceptable emotional expression, leading to marital breakdown, damaged relationships with children, and workplace disciplinary issues. MindSukoon provides evidence-based anger regulation therapy that equips you with emotional pause mechanisms, empathetic communication tools, and somatic cooling strategies.',
+    fullOverview: 'Anger is rarely a standalone emotion. In clinical psychology, anger is understood as a "secondary emotion"—a protective armor that masks deeper feelings of hurt, powerlessness, exhaustion, betrayal, or fear. In Pakistan, men in particular are often socialized to believe anger is the only acceptable emotional expression, leading to marital breakdown, damaged relationships with children, and workplace disciplinary issues. Life Reset Pakistan provides evidence-based anger regulation therapy that equips you with emotional pause mechanisms, empathetic communication tools, and somatic cooling strategies.',
     culturalContext: 'In South Asian cultures, anger by heads of households or senior figures is sometimes normalized as authority ("ghussa ana qudrati hai"). However, chronic anger damages cardiovascular health and destroys domestic emotional safety. Our therapy is respectful, practical, and highly transformational.',
     symptomsBreakdown: {
       emotional: [
@@ -608,7 +608,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Knowing logically that the danger is minimal, yet feeling helpless against the physical terror',
       'Anticipatory dread days or weeks before an inevitable exposure (e.g., flight or presentation)'
     ],
-    fullOverview: 'A specific phobia is far more severe than normal dislike or nervousness. It is an overwhelming, involuntary panic response triggered by a specific stimulus—such as flying on an airplane, public speaking, driving on motorways, elevators, medical needles, dental visits, or certain animals/insects. In Pakistan, people frequently alter their career trajectories or miss family weddings and pilgrimages to avoid facing their phobias. MindSukoon uses gentle, evidence-based Systematic Desensitization and graded exposure to free you from debilitating avoidance.',
+    fullOverview: 'A specific phobia is far more severe than normal dislike or nervousness. It is an overwhelming, involuntary panic response triggered by a specific stimulus—such as flying on an airplane, public speaking, driving on motorways, elevators, medical needles, dental visits, or certain animals/insects. In Pakistan, people frequently alter their career trajectories or miss family weddings and pilgrimages to avoid facing their phobias. Life Reset Pakistan uses gentle, evidence-based Systematic Desensitization and graded exposure to free you from debilitating avoidance.',
     culturalContext: 'Phobias in Pakistan are sometimes mocked as "nakhray" (pretentiousness) or "darrpok hona" (cowardice). Our psychologists treat your fear with clinical dignity, creating a safe step-by-step roadmap where you remain in complete control at all times.',
     symptomsBreakdown: {
       emotional: [
@@ -706,7 +706,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Living in remote cities or overseas without access to qualified Pakistani female therapists',
       'Carrying heavy domestic and professional responsibilities with no safe outlet for yourself'
     ],
-    fullOverview: 'In Pakistan, women often carry the emotional weight of extended households, marital expectations, childcare, and professional duties—often while silencing their own psychological pain. For many women, consulting a male psychologist or traveling to a physical clinic raises logistical hurdles, family privacy concerns, and cultural discomfort. MindSukoon provides a dedicated online care track led by senior registered female clinical psychologists. Sessions are conducted over encrypted video or voice calls, allowing you to speak freely from the safety and privacy of your room.',
+    fullOverview: 'In Pakistan, women often carry the emotional weight of extended households, marital expectations, childcare, and professional duties—often while silencing their own psychological pain. For many women, consulting a male psychologist or traveling to a physical clinic raises logistical hurdles, family privacy concerns, and cultural discomfort. Life Reset Pakistan provides a dedicated online care track led by senior registered female clinical psychologists. Sessions are conducted over encrypted video or voice calls, allowing you to speak freely from the safety and privacy of your room.',
     culturalContext: 'We recognize the intricate cultural landscape of Pakistani families—joint family pressures, rishta anxieties, divorce stigmas, and gendered emotional expectations. Our female clinicians provide deeply respectful, culturally intelligent therapy that honours your values while empowering your mental wellbeing.',
     symptomsBreakdown: {
       emotional: [
@@ -807,7 +807,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Spending hours seeking reassurance from loved ones: "Did I do something wrong?"',
       'Mental compulsions like counting, reciting silent phrases, or mentally replaying events'
     ],
-    fullOverview: 'Obsessive-Compulsive Disorder (OCD) is one of the most misunderstood and debilitating psychological conditions. In Pakistan, OCD frequently manifests as religious scrupulosity (obsessions regarding purity, repetitive wudu, involuntary doubts about faith or blasphemous thoughts) as well as contamination fears, symmetry obsessions, and catastrophic checking rituals. Sufferers often live in agonizing shame, believing they are sinful or evil. In reality, OCD is an egodystonic neurobiological anxiety condition. MindSukoon specializes in Exposure and Response Prevention (ERP)—the scientifically proven gold standard for OCD recovery.',
+    fullOverview: 'Obsessive-Compulsive Disorder (OCD) is one of the most misunderstood and debilitating psychological conditions. In Pakistan, OCD frequently manifests as religious scrupulosity (obsessions regarding purity, repetitive wudu, involuntary doubts about faith or blasphemous thoughts) as well as contamination fears, symmetry obsessions, and catastrophic checking rituals. Sufferers often live in agonizing shame, believing they are sinful or evil. In reality, OCD is an egodystonic neurobiological anxiety condition. Life Reset Pakistan specializes in Exposure and Response Prevention (ERP)—the scientifically proven gold standard for OCD recovery.',
     culturalContext: 'Scrupulosity OCD (religious obsessions) is extremely common in Pakistan and is often misdiagnosed as spiritual weakness or demonic influence. Our clinicians understand Islamic religious nuances and work with clients to untangle religious practice from compulsive OCD rituals.',
     symptomsBreakdown: {
       emotional: [
@@ -905,7 +905,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Emotional detachment, feeling numb, or feeling disconnected from your body',
       'Severe avoidance of places, people, smells, or conversations that remind you of the event'
     ],
-    fullOverview: 'Trauma can stem from a single overwhelming event (such as a severe road accident, medical emergency, sudden death of a loved one, or violent assault) or chronic relational adversity (childhood neglect, domestic emotional abuse, or prolonged marital invalidation). When trauma is unprocessed, the brain’s amygdala remains stuck in emergency mode, treating past events as current threats. MindSukoon provides phased, trauma-informed clinical care that prioritizes stabilization, somatic regulation, and gentle narrative integration.',
+    fullOverview: 'Trauma can stem from a single overwhelming event (such as a severe road accident, medical emergency, sudden death of a loved one, or violent assault) or chronic relational adversity (childhood neglect, domestic emotional abuse, or prolonged marital invalidation). When trauma is unprocessed, the brain’s amygdala remains stuck in emergency mode, treating past events as current threats. Life Reset Pakistan provides phased, trauma-informed clinical care that prioritizes stabilization, somatic regulation, and gentle narrative integration.',
     culturalContext: 'In Pakistan, people are frequently told to "forget the past and move forward" ("jo ho gaya so ho gaya"). However, the body keeps the score. Unprocessed trauma cannot simply be willed away; it requires specialized psychological processing in a safe, compassionate container.',
     symptomsBreakdown: {
       emotional: [
@@ -1003,7 +1003,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Loss of appetite, disrupted sleep, and physical ache in the center of your chest',
       'Struggling to detach, compulsive social media checking, and fear of being forever alone'
     ],
-    fullOverview: 'The ending of an intimate relationship—whether a broken engagement, long-term breakup, or legal divorce—can feel like an emotional earthquake. In Pakistan, breakup distress is often intensified by societal judgment, family embarrassment, and lack of open dialogue about romantic relationships. The brain processes romantic heartbreak through the same neurological pathways as physical pain and chemical withdrawal. MindSukoon provides compassionate, practical guidance to help you process grief, break compulsive contact cycles, and rebuild self-worth.',
+    fullOverview: 'The ending of an intimate relationship—whether a broken engagement, long-term breakup, or legal divorce—can feel like an emotional earthquake. In Pakistan, breakup distress is often intensified by societal judgment, family embarrassment, and lack of open dialogue about romantic relationships. The brain processes romantic heartbreak through the same neurological pathways as physical pain and chemical withdrawal. Life Reset Pakistan provides compassionate, practical guidance to help you process grief, break compulsive contact cycles, and rebuild self-worth.',
     culturalContext: 'In South Asian society, broken engagements or divorces frequently bring intense familial pressure and social stigma, particularly for young adults and women. We provide a stigma-free, confidential haven where your pain is validated without judgment.',
     symptomsBreakdown: {
       emotional: [
@@ -1101,7 +1101,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Guilt over things left unsaid, past regrets, or moments of feeling momentarily okay',
       'Struggling to resume daily work, meals, or social routines months after the event'
     ],
-    fullOverview: 'Bereavement is among the most profound human experiences. Whether you have lost a parent, a child, a spouse, a sibling, or experienced the loss of health or livelihood, grief can feel disorienting and exhausting. In Pakistan, the initial days of mourning (qul, chehlum) provide communal presence, but once relatives return to their daily routines, the bereaved person is often left in profound isolation. MindSukoon offers specialized grief therapy to witness your pain, untangle unresolved grief, and help you integrate the loss into your continuing life story.',
+    fullOverview: 'Bereavement is among the most profound human experiences. Whether you have lost a parent, a child, a spouse, a sibling, or experienced the loss of health or livelihood, grief can feel disorienting and exhausting. In Pakistan, the initial days of mourning (qul, chehlum) provide communal presence, but once relatives return to their daily routines, the bereaved person is often left in profound isolation. Life Reset Pakistan offers specialized grief therapy to witness your pain, untangle unresolved grief, and help you integrate the loss into your continuing life story.',
     culturalContext: 'In South Asian society, well-meaning individuals often urge the grieving person to stop crying ("sabar karo", "ro mat"). However, healthy mourning requires expressing sorrow rather than suppressing it. Sabr is finding meaning in the storm, not choking back tears. Our therapy honors both faith and human emotional reality.',
     symptomsBreakdown: {
       emotional: [
@@ -1199,7 +1199,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Neglecting responsibilities, academic performance, or family relationships',
       'Feelings of guilt, secrecy, lying to loved ones, and failed attempts to quit alone'
     ],
-    fullOverview: 'Addiction—whether to tobacco, vaping, alcohol, prescription medications, cannabis, gaming, pornography, or screens—is fundamentally a coping mechanism for underlying psychological pain, boredom, trauma, or emotional isolation. In Pakistan, addiction is heavily moralized and treated as a criminal or shameful flaw, leading families to hide the problem until crisis occurs. MindSukoon provides confidential outpatient psychological therapy utilizing Motivational Interviewing and relapse prevention to help individuals regain control and reconstruct their lives.',
+    fullOverview: 'Addiction—whether to tobacco, vaping, alcohol, prescription medications, cannabis, gaming, pornography, or screens—is fundamentally a coping mechanism for underlying psychological pain, boredom, trauma, or emotional isolation. In Pakistan, addiction is heavily moralized and treated as a criminal or shameful flaw, leading families to hide the problem until crisis occurs. Life Reset Pakistan provides confidential outpatient psychological therapy utilizing Motivational Interviewing and relapse prevention to help individuals regain control and reconstruct their lives.',
     culturalContext: 'Due to severe stigma in Pakistan, individuals struggling with dependencies often avoid seeking help out of fear of family alienation or societal ostracization. Our outpatient sessions are strictly confidential, offering an empathetic, non-punitive environment.',
     symptomsBreakdown: {
       emotional: [
@@ -1297,7 +1297,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Struggling with issues considered deeply taboo in Pakistani society',
       'Wanting voice-only or encrypted chat consultations under an alias without video'
     ],
-    fullOverview: 'In Pakistan, mental health stigma and fear of gossip often prevent people from seeking the professional care they desperately need. Whether you are a public figure, a prominent family member, or someone navigating deeply sensitive personal matters (such as domestic distress, identity questions, or marital secrets), you should never have to sacrifice privacy for mental health care. MindSukoon offers a dedicated Anonymous Counselling option where you are welcome to use a pseudonym/alias, conduct sessions via audio call, and maintain complete confidentiality.',
+    fullOverview: 'In Pakistan, mental health stigma and fear of gossip often prevent people from seeking the professional care they desperately need. Whether you are a public figure, a prominent family member, or someone navigating deeply sensitive personal matters (such as domestic distress, identity questions, or marital secrets), you should never have to sacrifice privacy for mental health care. Life Reset Pakistan offers a dedicated Anonymous Counselling option where you are welcome to use a pseudonym/alias, conduct sessions via audio call, and maintain complete confidentiality.',
     culturalContext: 'We recognize that "log kya kahenge" (what will people say) is a very real societal barrier in Pakistan. Our anonymous clinical track removes this fear entirely, giving you a secure, professional therapeutic space.',
     symptomsBreakdown: {
       emotional: [
@@ -1395,7 +1395,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Desire for a private video session or audio-only consultation from home',
       'Looking for a practitioner with verifiable clinical degrees and registered credentials'
     ],
-    fullOverview: 'Finding the right therapist is the single most critical factor in successful psychological outcomes. Many patients in Pakistan—including women, young girls, couples, and parents—feel significantly more understood, safe, and comfortable when working with a female clinician. MindSukoon is led by experienced senior female clinical psychologists, including Dr. Farah Kamran (18 years clinical experience) and Ayesha Malik (10 years experience). Our clinicians combine rigorous evidence-based science with warm, compassionate holding.',
+    fullOverview: 'Finding the right therapist is the single most critical factor in successful psychological outcomes. Many patients in Pakistan—including women, young girls, couples, and parents—feel significantly more understood, safe, and comfortable when working with a female clinician. Life Reset Pakistan is led by experienced senior female clinical psychologists, including Dr. Farah Kamran (18 years clinical experience) and Ayesha Malik (10 years experience). Our clinicians combine rigorous evidence-based science with warm, compassionate holding.',
     culturalContext: 'Cultural modesty, shared gender experiences, and deep familiarity with Pakistani domestic realities allow our female psychologists to understand the unspoken nuances of your life without lengthy explanations.',
     symptomsBreakdown: {
       emotional: [
@@ -1493,7 +1493,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Friction surrounding extended joint-family interference, in-law boundaries, and money',
       'Erosion of trust, affection, or consideration of separation or divorce'
     ],
-    fullOverview: 'Marriage in Pakistan is a union not only of two individuals, but of two extended family systems. High cultural expectations, in-law dynamics, financial pressures, and differing communication styles frequently place immense strain on couples. Over time, unresolved hurt turns into emotional walls, defensive criticism, and contempt. MindSukoon offers evidence-based Marriage and Couples Counselling using Emotionally Focused Therapy (EFT) and Gottman-informed methods. Our psychologists remain strictly neutral, creating an emotionally safe environment where both partners can step out of the attack-defend cycle.',
+    fullOverview: 'Marriage in Pakistan is a union not only of two individuals, but of two extended family systems. High cultural expectations, in-law dynamics, financial pressures, and differing communication styles frequently place immense strain on couples. Over time, unresolved hurt turns into emotional walls, defensive criticism, and contempt. Life Reset Pakistan offers evidence-based Marriage and Couples Counselling using Emotionally Focused Therapy (EFT) and Gottman-informed methods. Our psychologists remain strictly neutral, creating an emotionally safe environment where both partners can step out of the attack-defend cycle.',
     culturalContext: 'In South Asian families, marital disputes are often brought before elders or in-laws, which can inadvertently heighten defensiveness and take sides. Professional counselling offers an objective, confidential, third-party setting where both voices are respected equally.',
     symptomsBreakdown: {
       emotional: [
@@ -1591,7 +1591,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Sibling disputes, inheritance tension, or caregiver fatigue in elder care',
       'A family member undergoing mental health or medical crises affecting the whole home'
     ],
-    fullOverview: 'In Pakistani culture, the family is the cornerstone of life. However, rapid generational shifts, modern career aspirations, and changing lifestyle norms can create painful friction between traditional parental expectations and younger generations. When miscommunication turns into estrangement or constant shouting, the entire household suffers. MindSukoon provides Systemic Family Therapy that honors family unity and respect while creating healthy emotional boundaries where every member’s dignity is preserved.',
+    fullOverview: 'In Pakistani culture, the family is the cornerstone of life. However, rapid generational shifts, modern career aspirations, and changing lifestyle norms can create painful friction between traditional parental expectations and younger generations. When miscommunication turns into estrangement or constant shouting, the entire household suffers. Life Reset Pakistan provides Systemic Family Therapy that honors family unity and respect while creating healthy emotional boundaries where every member’s dignity is preserved.',
     culturalContext: 'We recognize that Western family therapy models emphasizing radical individualism often fail in South Asian contexts. Our systemic model respects filial piety and family collectivism while eliminating toxic guilt and communication gridlocks.',
     symptomsBreakdown: {
       emotional: [
@@ -1689,7 +1689,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Noticeable changes in appetite, sleep, or personal hygiene in a teenager',
       'Frequent complaints of stomach aches or headaches with no medical cause'
     ],
-    fullOverview: 'Adolescence and childhood are formative stages vulnerable to immense modern pressures. Today’s Pakistani youth face relentless academic competition (O/A Levels, Matric/FSc, entrance exams), social media comparison, cyberbullying, body image concerns, and parental expectations. When young people struggle, they rarely say "I am depressed"; instead, they become irritable, rebellious, quiet, or somatic. MindSukoon provides specialized child and adolescent psychology led by senior practitioners who know how to connect with youth without condescension.',
+    fullOverview: 'Adolescence and childhood are formative stages vulnerable to immense modern pressures. Today’s Pakistani youth face relentless academic competition (O/A Levels, Matric/FSc, entrance exams), social media comparison, cyberbullying, body image concerns, and parental expectations. When young people struggle, they rarely say "I am depressed"; instead, they become irritable, rebellious, quiet, or somatic. Life Reset Pakistan provides specialized child and adolescent psychology led by senior practitioners who know how to connect with youth without condescension.',
     culturalContext: 'Parents in Pakistan often alternate between strict discipline and helplessness when facing teen distress. We work collaboratively with both the young person and the parents to rebuild emotional trust and healthy communication.',
     symptomsBreakdown: {
       emotional: [
@@ -1787,7 +1787,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       'Imposter syndrome: feeling you do not belong among high-achieving university peers',
       'Homesickness, isolation, or difficulty adapting to hostel and university life'
     ],
-    fullOverview: 'Students in Pakistan bear an enormous burden of societal and familial expectations. With intense competition for limited medical college, engineering, and civil service slots, students frequently push themselves to mental and physical collapse. When exam anxiety strikes, the brain’s working memory shuts down, causing students to freeze during the exact tests they studied months for. MindSukoon offers specialized Student Counselling to help young adults master focus, dismantle toxic perfectionism, manage academic stress, and navigate career transitions.',
+    fullOverview: 'Students in Pakistan bear an enormous burden of societal and familial expectations. With intense competition for limited medical college, engineering, and civil service slots, students frequently push themselves to mental and physical collapse. When exam anxiety strikes, the brain’s working memory shuts down, causing students to freeze during the exact tests they studied months for. Life Reset Pakistan offers specialized Student Counselling to help young adults master focus, dismantle toxic perfectionism, manage academic stress, and navigate career transitions.',
     culturalContext: 'In Pakistan, family sacrifices for education often translate into immense guilt for students ("if I fail, I ruin my family"). Our clinicians help students reframe this pressure, build genuine self-worth, and perform at their peak without panic.',
     symptomsBreakdown: {
       emotional: [
@@ -1859,7 +1859,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       },
       {
         question: 'Are special discounted student rates available?',
-        answer: 'MindSukoon offers accessible guidance and educational tools, with flexible consultation options designed to support aspiring students.'
+        answer: 'Life Reset Pakistan offers accessible guidance and educational tools, with flexible consultation options designed to support aspiring students.'
       },
       {
         question: 'Can I do sessions online around my study schedule?',

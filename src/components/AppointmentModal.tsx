@@ -24,7 +24,7 @@ export const AppointmentModal: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <MindRestoreEmblem className="w-6 h-6" />
             <span className="text-xs font-semibold uppercase tracking-wider text-[#1C433E]">
-              MindSukoon · Confidential Appointment Request
+              Life Reset Pakistan · Confidential Appointment Request
             </span>
           </div>
           <button

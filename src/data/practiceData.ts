@@ -8,7 +8,6 @@ import {
   TimelineMilestone,
   PracticeSettings,
 } from '../types';
-import { CONDITIONS_DATA } from './conditionsData';
 
 import heritageHeroImg from '../assets/images/heritage_clinical_consultation_1791269818478.webp';
 import heritageHeroMobileWebp from '../assets/images/heritage_clinical_consultation_mobile.webp';
@@ -20,14 +19,14 @@ import resourcesImg from '../assets/images/resources_wellness_journal_1791220222
 export { heritageHeroImg, heritageHeroMobileWebp, drFarahImg, drTariqImg, drAyeshaImg, resourcesImg };
 
 export const DEFAULT_SETTINGS: PracticeSettings = {
-  organizationName: 'MindSukoon',
+  organizationName: 'Life Reset Pakistan',
   foundedYear: 1981,
   heritageTagline: 'Trusted mental-health care since 1981, combining decades of experience with modern psychological support.',
   phoneDisplay: '+92 314 3162051',
   phoneNumber: '+923143162051',
   whatsappDisplayNumber: '+92 314 3162051',
   whatsappNumber: '923143162051',
-  email: 'care@mindsukoon.pk',
+  email: 'care@liferesetpakistan.com',
   inPersonClinicAddress: '14-A Healthcare Avenue, Gulberg III, Lahore, Pakistan',
   hoursOfOperation: 'Monday – Saturday: 9:00 AM – 7:30 PM PKT (Digital Appointments Accommodate Overseas Time Zones)',
   feeGuidanceText: 'Fees vary depending on service and professional. Transparent pricing is provided prior to confirming your appointment.',
@@ -159,8 +158,6 @@ export const SPECIALISTS: Specialist[] = [
     gender: 'Female',
   },
 ];
-
-export const CONDITIONS: ConditionItem[] = CONDITIONS_DATA;
 
 export const SERVICES: ServiceDetail[] = [
   {

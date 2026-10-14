@@ -1,0 +1,25 @@
+{
+  "name": "Life Reset Pakistan | Reset Your Life, Rebuild Your Future",
+  "short_name": "Life Reset Pakistan",
+  "description": "Life Reset Pakistan: Professional, confidential and accessible online psychological support for individuals, couples and families in Pakistan and worldwide (Est. 1981).",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F8F7F2",
+  "theme_color": "#1C433E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 192x192 256x256 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 192x192 256x256 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

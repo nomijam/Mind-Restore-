@@ -16,13 +16,29 @@ import { HowCareWorks } from './components/HowCareWorks';
 import { TimelineSection } from './components/TimelineSection';
 import { AboutSection } from './components/AboutSection';
 import { AppointmentSection } from './components/AppointmentSection';
-import { PricingSection } from './components/PricingSection';
-import { EducationalToolsSection } from './components/EducationalToolsSection';
-import { ResourcesSection } from './components/ResourcesSection';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { FAQSection } from './components/FAQSection';
-import { EmergencySection } from './components/EmergencySection';
-import { FinalCtaSection } from './components/FinalCtaSection';
+
+// Below-the-fold sections code-split to dramatically reduce initial JavaScript payload
+const PricingSection = React.lazy(() =>
+  import('./components/PricingSection').then((m) => ({ default: m.PricingSection }))
+);
+const EducationalToolsSection = React.lazy(() =>
+  import('./components/EducationalToolsSection').then((m) => ({ default: m.EducationalToolsSection }))
+);
+const ResourcesSection = React.lazy(() =>
+  import('./components/ResourcesSection').then((m) => ({ default: m.ResourcesSection }))
+);
+const TestimonialsSection = React.lazy(() =>
+  import('./components/TestimonialsSection').then((m) => ({ default: m.TestimonialsSection }))
+);
+const FAQSection = React.lazy(() =>
+  import('./components/FAQSection').then((m) => ({ default: m.FAQSection }))
+);
+const EmergencySection = React.lazy(() =>
+  import('./components/EmergencySection').then((m) => ({ default: m.EmergencySection }))
+);
+const FinalCtaSection = React.lazy(() =>
+  import('./components/FinalCtaSection').then((m) => ({ default: m.FinalCtaSection }))
+);
 import { Footer } from './components/Footer';
 
 // Dedicated Condition & City Pages (Code-split for performance)
@@ -72,6 +88,26 @@ function AppContent() {
     closeCityPage,
     openCityPage,
   } = usePractice();
+
+  React.useEffect(() => {
+    let title = 'Life Reset Pakistan | Reset Your Life, Rebuild Your Future';
+    let canonical = 'https://liferesetpakistan.com/';
+
+    if (activeConditionPage) {
+      title = `${activeConditionPage.title} | Life Reset Pakistan (Est. 1981)`;
+      canonical = `https://liferesetpakistan.com/#condition-${activeConditionPage.id}`;
+    } else if (activeCityPage) {
+      title = `${activeCityPage.name} Online Counselling & Therapy | Life Reset Pakistan`;
+      canonical = `https://liferesetpakistan.com/#city-${activeCityPage.id}`;
+    }
+
+    document.title = title;
+
+    const linkCanonical = document.querySelector('link[rel="canonical"]');
+    if (linkCanonical) {
+      linkCanonical.setAttribute('href', canonical);
+    }
+  }, [activeConditionPage, activeCityPage]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F7F2] text-[#243333] selection:bg-[#286C6A]/20 selection:text-[#243333]">

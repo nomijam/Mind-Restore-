@@ -25,7 +25,7 @@ export const SpecialistProfileModal: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <MindRestoreEmblem className="w-5 h-5" />
             <span className="text-xs font-semibold uppercase tracking-wider text-[#1C433E]">
-              MindSukoon · Specialist Profile & Verified Credentials
+              Life Reset Pakistan · Specialist Profile & Verified Credentials
             </span>
           </div>
           <button

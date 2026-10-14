@@ -91,7 +91,7 @@ export const AboutSection: React.FC = () => {
                   Our Clinical Mission
                 </h3>
                 <span className="text-[10px] uppercase tracking-wider text-[#1C433E] font-bold">
-                  MindSukoon · Established 1981
+                  Life Reset Pakistan · Established 1981
                 </span>
               </div>
             </div>

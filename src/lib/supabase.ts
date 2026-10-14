@@ -232,7 +232,7 @@ export async function deleteAppointmentFromSupabase(
   }
 }
 
-export const SUPABASE_SQL_SETUP = `-- Supabase SQL Setup for MindSukoon Appointments
+export const SUPABASE_SQL_SETUP = `-- Supabase SQL Setup for LifeResetPakistan Appointments
 -- Copy and run this in your Supabase project (SQL Editor -> New query -> Run)
 
 CREATE TABLE IF NOT EXISTS public.appointments (

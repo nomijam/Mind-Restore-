@@ -450,7 +450,7 @@ export const AdminPortal: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `mindsukoon-bookings-${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `liferesetpakistan-bookings-${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -480,7 +480,7 @@ export const AdminPortal: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="font-heading font-extrabold text-base sm:text-lg text-white tracking-tight">
-                  MindSukoon Admin Portal
+                  Life Reset Pakistan Admin Portal
                 </h2>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#D8B878] text-[#112A27]">
                   Internal Management
@@ -549,7 +549,7 @@ export const AdminPortal: React.FC = () => {
                       Create Your Admin Account
                     </h3>
                     <p className="text-xs text-[#526363] leading-relaxed">
-                      Please establish your primary administrator credentials. MindSukoon permits only <strong>1 administrator account</strong>. Once registered, public registration is permanently disabled.
+                      Please establish your primary administrator credentials. Life Reset Pakistan permits only <strong>1 administrator account</strong>. Once registered, public registration is permanently disabled.
                     </p>
                   </div>
 
@@ -589,7 +589,7 @@ export const AdminPortal: React.FC = () => {
                           required
                           value={signupForm.email}
                           onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
-                          placeholder="admin@mindsukoon.pk"
+                          placeholder="admin@liferesetpakistan.com"
                           className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[#286C6A]/20 text-xs text-[#243333] focus:outline-none focus:border-[#1C433E] bg-[#F8F7F2]"
                         />
                       </div>
@@ -689,7 +689,7 @@ export const AdminPortal: React.FC = () => {
                           required
                           value={loginForm.email}
                           onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
-                          placeholder="admin@mindsukoon.pk"
+                          placeholder="admin@liferesetpakistan.com"
                           className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[#286C6A]/20 text-xs text-[#243333] focus:outline-none focus:border-[#1C433E] bg-[#F8F7F2]"
                         />
                       </div>
@@ -947,7 +947,7 @@ export const AdminPortal: React.FC = () => {
                       </h4>
                       <p className="text-xs text-[#526363] max-w-md mx-auto">
                         {bookings.length === 0
-                          ? 'When patients book sessions or inquiry forms on MindSukoon, their full details will appear here and sync to your Supabase tables.'
+                          ? 'When patients book sessions or inquiry forms on Life Reset Pakistan, their full details will appear here and sync to your Supabase tables.'
                           : 'Try clearing your search query or setting the status filter back to All.'}
                       </p>
                     </div>
@@ -965,7 +965,7 @@ export const AdminPortal: React.FC = () => {
 
                         const cleanPhone = b.phone.replace(/[^0-9]/g, '');
                         const waText = encodeURIComponent(
-                          `Hello ${b.full_name}, this is the MindSukoon clinical reception team regarding your appointment inquiry for ${b.selected_plan || b.reason_for_contact}. When is a good time to confirm your session?`
+                          `Hello ${b.full_name}, this is the Life Reset Pakistan clinical reception team regarding your appointment inquiry for ${b.selected_plan || b.reason_for_contact}. When is a good time to confirm your session?`
                         );
                         const clientWaLink = `https://wa.me/${cleanPhone}?text=${waText}`;
 
@@ -1101,7 +1101,7 @@ export const AdminPortal: React.FC = () => {
 
                                 {b.email && (
                                   <a
-                                    href={`mailto:${b.email}?subject=MindSukoon Appointment Inquiry`}
+                                    href={`mailto:${b.email}?subject=Life Reset Pakistan Appointment Inquiry`}
                                     className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-[#243333] text-xs font-medium transition-colors"
                                   >
                                     <Mail className="w-3 h-3" />
