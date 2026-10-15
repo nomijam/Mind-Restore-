@@ -93,15 +93,19 @@ export const Hero: React.FC = () => {
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 <div className="relative rounded-3xl overflow-hidden border border-[#1C433E]/15 shadow-xl bg-white group">
-                  <picture>
+                  <picture className="block w-full aspect-16/10 sm:aspect-auto">
                     <source
                       media="(max-width: 640px)"
                       srcSet="/images/heritage_clinical_consultation_mobile.webp"
                       type="image/webp"
+                      width="720"
+                      height="402"
                     />
                     <source
                       srcSet="/images/heritage_clinical_consultation_1791269818478.webp"
                       type="image/webp"
+                      width="1280"
+                      height="714"
                     />
                     <img
                       src="/images/heritage_clinical_consultation_1791269818478.webp"
@@ -111,8 +115,8 @@ export const Hero: React.FC = () => {
                       loading="eager"
                       fetchPriority="high"
                       decoding="async"
-                      width={640}
-                      height={460}
+                      width={1280}
+                      height={714}
                     />
                   </picture>
 

@@ -161,26 +161,29 @@ function AppContent() {
               {/* Section 21 & 38: Appointment Booking Section (GHL Pipeline Ready) */}
               <AppointmentSection />
 
-              {/* Section 23: Transparent Pricing Guidance */}
-              <PricingSection />
+              {/* Below-the-fold lazy sections wrapped in smooth Suspense boundaries */}
+              <React.Suspense fallback={<div className="min-h-[400px] bg-[#F8F7F2]" aria-hidden="true" />}>
+                {/* Section 23: Transparent Pricing Guidance */}
+                <PricingSection />
 
-              {/* Section 25: Free Educational Screening Tools */}
-              <EducationalToolsSection />
+                {/* Section 25: Free Educational Screening Tools */}
+                <EducationalToolsSection />
 
-              {/* Section 24: Educational Resources Library */}
-              <ResourcesSection />
+                {/* Section 24: Educational Resources Library */}
+                <ResourcesSection />
 
-              {/* Section 26: Testimonials (Verified Client / Anonymous Patient) */}
-              <TestimonialsSection />
+                {/* Section 26: Testimonials (Verified Client / Anonymous Patient) */}
+                <TestimonialsSection />
 
-              {/* Section 27: Frequently Asked Questions (11 Accordions) */}
-              <FAQSection />
+                {/* Section 27: Frequently Asked Questions (11 Accordions) */}
+                <FAQSection />
 
-              {/* Section 28: Clear Non-Alarmist Emergency Guidance */}
-              <EmergencySection />
+                {/* Section 28: Clear Non-Alarmist Emergency Guidance */}
+                <EmergencySection />
 
-              {/* Section 40: Final Calm CTA ("You Don't Have to Have Everything Figured Out") */}
-              <FinalCtaSection />
+                {/* Section 40: Final Calm CTA ("You Don't Have to Have Everything Figured Out") */}
+                <FinalCtaSection />
+              </React.Suspense>
             </>
           )}
         </React.Suspense>
