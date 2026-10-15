@@ -49,7 +49,7 @@ export const CITIES_DATA: CityInfo[] = [
       },
       {
         question: 'How do I book a consultation in Lahore?',
-        answer: 'You can book through our online intake form or directly message our reception via WhatsApp at +92 314 3162051.'
+        answer: 'You can book through our online intake form or directly message our reception via WhatsApp at +92300 0000000.'
       }
     ]
   },

@@ -90,22 +90,26 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         if (
           !parsed.phoneNumber ||
           parsed.phoneNumber.includes('3575') ||
+          parsed.phoneNumber.includes('3143162051') ||
           parsed.phoneNumber.includes('3003162051') ||
           parsed.phoneNumber === '+924235751981' ||
+          parsed.phoneNumber === '+923143162051' ||
           parsed.phoneNumber === '+923003162051'
         ) {
-          parsed.phoneDisplay = '+92 314 3162051';
-          parsed.phoneNumber = '+923143162051';
+          parsed.phoneDisplay = '+92300 0000000';
+          parsed.phoneNumber = '+923000000000';
         }
         if (
           !parsed.whatsappNumber ||
           parsed.whatsappNumber.includes('1231981') ||
+          parsed.whatsappNumber.includes('3143162051') ||
           parsed.whatsappNumber.includes('3003162051') ||
           parsed.whatsappNumber === '923001231981' ||
+          parsed.whatsappNumber === '923143162051' ||
           parsed.whatsappNumber === '923003162051'
         ) {
-          parsed.whatsappDisplayNumber = '+92 314 3162051';
-          parsed.whatsappNumber = '923143162051';
+          parsed.whatsappDisplayNumber = '+92300 0000000';
+          parsed.whatsappNumber = '923000000000';
         }
         return { ...DEFAULT_SETTINGS, ...parsed };
       }
