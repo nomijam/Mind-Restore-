@@ -92,24 +92,28 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           parsed.phoneNumber.includes('3575') ||
           parsed.phoneNumber.includes('3143162051') ||
           parsed.phoneNumber.includes('3003162051') ||
+          parsed.phoneNumber.includes('3000000000') ||
           parsed.phoneNumber === '+924235751981' ||
           parsed.phoneNumber === '+923143162051' ||
-          parsed.phoneNumber === '+923003162051'
+          parsed.phoneNumber === '+923003162051' ||
+          parsed.phoneNumber === '+923000000000'
         ) {
-          parsed.phoneDisplay = '+92300 0000000';
-          parsed.phoneNumber = '+923000000000';
+          parsed.phoneDisplay = '+92 326 8791594';
+          parsed.phoneNumber = '+923268791594';
         }
         if (
           !parsed.whatsappNumber ||
           parsed.whatsappNumber.includes('1231981') ||
           parsed.whatsappNumber.includes('3143162051') ||
           parsed.whatsappNumber.includes('3003162051') ||
+          parsed.whatsappNumber.includes('3000000000') ||
           parsed.whatsappNumber === '923001231981' ||
           parsed.whatsappNumber === '923143162051' ||
-          parsed.whatsappNumber === '923003162051'
+          parsed.whatsappNumber === '923003162051' ||
+          parsed.whatsappNumber === '923000000000'
         ) {
-          parsed.whatsappDisplayNumber = '+92300 0000000';
-          parsed.whatsappNumber = '923000000000';
+          parsed.whatsappDisplayNumber = '+92 326 8791594';
+          parsed.whatsappNumber = '923268791594';
         }
         return { ...DEFAULT_SETTINGS, ...parsed };
       }

@@ -22,10 +22,10 @@ export const DEFAULT_SETTINGS: PracticeSettings = {
   organizationName: 'Life Reset Pakistan',
   foundedYear: 1981,
   heritageTagline: 'Trusted mental-health care since 1981, combining decades of experience with modern psychological support.',
-  phoneDisplay: '+92300 0000000',
-  phoneNumber: '+923000000000',
-  whatsappDisplayNumber: '+92300 0000000',
-  whatsappNumber: '923000000000',
+  phoneDisplay: '+92 326 8791594',
+  phoneNumber: '+923268791594',
+  whatsappDisplayNumber: '+92 326 8791594',
+  whatsappNumber: '923268791594',
   email: 'care@liferesetpakistan.com',
   inPersonClinicAddress: '14-A Healthcare Avenue, Gulberg III, Lahore, Pakistan',
   hoursOfOperation: 'Monday – Saturday: 9:00 AM – 7:30 PM PKT (Digital Appointments Accommodate Overseas Time Zones)',
@@ -861,7 +861,7 @@ export const FAQS = [
   },
   {
     question: 'How do I book an appointment?',
-    answer: 'You can request an appointment through our online appointment form on this website, call our clinical reception directly at +92300 0000000, or message our patient care coordinator on WhatsApp (+92300 0000000). We will help identify an appropriate specialist and time slot.',
+    answer: 'You can request an appointment through our online appointment form on this website, call our clinical reception directly at +92 326 8791594, or message our patient care coordinator on WhatsApp (+92 326 8791594). We will help identify an appropriate specialist and time slot.',
   },
   {
     question: 'Can I request a specific professional?',
