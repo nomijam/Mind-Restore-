@@ -47,7 +47,7 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
     document.title = `${condition.title} | Life Reset Pakistan (Est. 1981)`;
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink) {
-      canonicalLink.setAttribute('href', `https://liferesetpakistan.com/#condition-${condition.id}`);
+      canonicalLink.setAttribute('href', 'https://liferesetpakistan.com/');
     }
   }, [condition]);
 

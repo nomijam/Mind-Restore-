@@ -105,7 +105,7 @@ function AppContent() {
 
     const linkCanonical = document.querySelector('link[rel="canonical"]');
     if (linkCanonical) {
-      linkCanonical.setAttribute('href', canonical);
+      linkCanonical.setAttribute('href', 'https://liferesetpakistan.com/');
     }
   }, [activeConditionPage, activeCityPage]);
 

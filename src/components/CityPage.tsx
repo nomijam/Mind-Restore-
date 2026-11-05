@@ -39,7 +39,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
     document.title = `${city.name} Online Counselling & Therapy | Life Reset Pakistan`;
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink) {
-      canonicalLink.setAttribute('href', `https://liferesetpakistan.com/#city-${city.id}`);
+      canonicalLink.setAttribute('href', 'https://liferesetpakistan.com/');
     }
   }, [city]);
 
