@@ -5,7 +5,7 @@ import { heritageHeroImg, heritageHeroMobileWebp } from '../data/practiceData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const Hero: React.FC = () => {
-  const { settings, openAppointment } = usePractice();
+  const { settings, getWhatsAppLink } = usePractice();
 
   const handleExploreClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -40,14 +40,16 @@ export const Hero: React.FC = () => {
 
             {/* Primary & Secondary Actions */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <button
-                onClick={() => openAppointment()}
+              <a
+                href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. ${settings.foundedYear || 1981}).`)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-xs font-semibold tracking-wider text-white bg-[#1C433E] hover:bg-[#153430] active:bg-[#112a27] rounded-xl shadow-xs hover:shadow-md transition-all group"
               >
                 <Calendar className="w-4 h-4 text-[#D8B878]" />
                 <span>BOOK AN APPOINTMENT</span>
                 <ArrowRight className="w-4 h-4 text-white/70 group-hover:translate-x-0.5 transition-transform" />
-              </button>
+              </a>
 
               <button
                 onClick={handleExploreClick}

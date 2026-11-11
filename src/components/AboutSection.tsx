@@ -5,7 +5,7 @@ import { usePractice } from '../context/PracticeContext';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const AboutSection: React.FC = () => {
-  const { settings, openAppointment } = usePractice();
+  const { settings, openAppointment, getWhatsAppLink } = usePractice();
 
   const getValueIcon = (title: string) => {
     switch (title) {
@@ -62,12 +62,14 @@ export const AboutSection: React.FC = () => {
             </div>
 
             <div className="pt-4 flex flex-wrap gap-3">
-              <button
-                onClick={() => openAppointment('General Clinical Consultation')}
+              <a
+                href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. 1981).')}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs transition-colors cursor-pointer"
               >
                 <span>BOOK CONFIDENTIAL CONSULTATION</span>
-              </button>
+              </a>
 
               <button
                 onClick={() => {

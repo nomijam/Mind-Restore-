@@ -21,6 +21,7 @@ import { SPECIALISTS } from '../data/practiceData';
 import { CITIES_DATA } from '../data/citiesData';
 import { getCityHeroImage } from '../data/heroImagesData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
+import { SEOHead } from './SEOHead';
 
 interface CityPageProps {
   city: CityInfo;
@@ -36,11 +37,6 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = `${city.name} Online Counselling & Therapy | Life Reset Pakistan`;
-    const canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (canonicalLink) {
-      canonicalLink.setAttribute('href', 'https://liferesetpakistan.com/');
-    }
   }, [city]);
 
   const toggleFaq = (index: number) => {
@@ -58,6 +54,70 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
   return (
     <article className="min-h-screen bg-[#F8F7F2] text-[#243333] pb-24 text-left">
+      <SEOHead
+        title={`${city.name} Online Counselling & Therapy | Life Reset Pakistan`}
+        description={city.subheadline || city.description.slice(0, 155)}
+        canonicalUrl={`https://liferesetpakistan.com/city/${city.slug}`}
+        schemaData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "MedicalBusiness",
+              "@id": `https://liferesetpakistan.com/city/${city.slug}#service`,
+              "name": `Life Reset Pakistan - ${city.name} Online Tele-Mental Health`,
+              "description": city.description,
+              "url": `https://liferesetpakistan.com/city/${city.slug}`,
+              "telephone": "+923268791594",
+              "priceRange": "$$",
+              "areaServed": {
+                "@type": "City",
+                "name": city.name,
+              },
+            },
+            {
+              "@type": "BreadcrumbList",
+              "@id": `https://liferesetpakistan.com/city/${city.slug}#breadcrumb`,
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://liferesetpakistan.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Regional Tele-Health",
+                  "item": "https://liferesetpakistan.com/#cities",
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": city.name,
+                  "item": `https://liferesetpakistan.com/city/${city.slug}`,
+                },
+              ],
+            },
+            ...(city.faqs && city.faqs.length > 0
+              ? [
+                  {
+                    "@type": "FAQPage",
+                    "@id": `https://liferesetpakistan.com/city/${city.slug}#faq`,
+                    "mainEntity": city.faqs.map((f) => ({
+                      "@type": "Question",
+                      "name": f.question,
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": f.answer,
+                      },
+                    })),
+                  },
+                ]
+              : []),
+          ],
+        }}
+      />
+
       {/* Top Breadcrumb Navigation */}
       <nav
         aria-label="Breadcrumb"
@@ -177,13 +237,17 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
           {/* Action Buttons */}
           <div className="pt-4 flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => openAppointment(`Consultation Inquiry from ${city.name}`)}
+            <a
+              href={getWhatsAppLink(
+                `Hello Life Reset Pakistan, I would like to book a confidential consultation from ${city.name} (Est. ${settings.foundedYear || 1981}).`
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 text-xs sm:text-sm font-semibold tracking-wide text-[#112A27] bg-[#D8B878] hover:bg-[#e0c489] rounded-xl shadow-md hover:shadow-lg transition-all active:scale-[0.98]"
             >
               <Calendar className="w-4 h-4 text-[#112A27]" />
               <span>BOOK APPOINTMENT FOR {city.name.toUpperCase()}</span>
-            </button>
+            </a>
 
             <a
               href={getWhatsAppLink(
@@ -218,7 +282,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
           <p className="text-base text-[#415352] leading-[1.75]">{city.description}</p>
 
           <div className="bg-white p-6 rounded-2xl border border-[#1C433E]/15 mt-4 space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#D8B878] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#8A5C14] block">
               Local Dynamics & Lifestyle Reality
             </span>
             <p className="text-sm text-[#415352] leading-relaxed">{city.localContext}</p>
@@ -229,7 +293,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-2xl border border-[#1C433E]/10 shadow-2xs space-y-3">
             <h3 className="text-base font-bold text-[#1C433E] flex items-center gap-2">
-              <Video className="w-4 h-4 text-[#D8B878]" />
+              <Video className="w-4 h-4 text-[#1C433E]" />
               <span>Available Session Formats</span>
             </h3>
             <ul className="space-y-2 text-xs sm:text-sm text-[#415352]">
@@ -244,7 +308,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
           <div className="bg-white p-6 rounded-2xl border border-[#1C433E]/10 shadow-2xs space-y-3">
             <h3 className="text-base font-bold text-[#1C433E] flex items-center gap-2">
-              <Shield className="w-4 h-4 text-[#D8B878]" />
+              <Shield className="w-4 h-4 text-[#1C433E]" />
               <span>Convenient & Secure Payment Options</span>
             </h3>
             <ul className="space-y-2 text-xs sm:text-sm text-[#415352]">
@@ -300,12 +364,14 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
                   >
                     Profile
                   </button>
-                  <button
-                    onClick={() => openAppointment(`Inquiry for ${spec.name} from ${city.name}`)}
-                    className="px-2.5 py-1 text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] rounded-lg transition-colors"
+                  <a
+                    href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a consultation with ${spec.name} from ${city.name}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] rounded-lg transition-colors inline-block"
                   >
                     Book Consult
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}

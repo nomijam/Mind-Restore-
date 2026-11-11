@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BookOpen, Clock, Calendar, ArrowRight } from 'lucide-react';
 import { ARTICLES, resourcesImg } from '../data/practiceData';
-import { usePractice } from '../context/PracticeContext';
 
 export const ResourcesSection: React.FC = () => {
-  const { openArticle } = usePractice();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const categories = [
@@ -60,8 +60,11 @@ export const ResourcesSection: React.FC = () => {
           {filteredArticles.map((art) => (
             <article
               key={art.id}
-              onClick={() => openArticle(art.id)}
-              className="bg-[#F8F7F2] rounded-2xl overflow-hidden border border-[#286C6A]/10 shadow-xs hover:border-[#286C6A]/40 transition-all flex flex-col justify-between group cursor-pointer"
+              onClick={() => {
+                navigate(`/blog/${art.slug}`);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="bg-[#F8F7F2] rounded-2xl overflow-hidden border border-[#286C6A]/10 shadow-xs hover:border-[#1C433E] hover:shadow-md transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="relative aspect-[16/10] bg-[#EAF2ED] overflow-hidden">
@@ -75,7 +78,7 @@ export const ResourcesSection: React.FC = () => {
                     width={480}
                     height={300}
                   />
-                  <span className="absolute top-3 left-3 bg-white/95 text-[#286C6A] text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded">
+                  <span className="absolute top-3 left-3 bg-white/95 text-[#1C433E] text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded">
                     {art.category}
                   </span>
                 </div>
@@ -87,7 +90,7 @@ export const ResourcesSection: React.FC = () => {
                     <span>{art.readTime}</span>
                   </div>
 
-                  <h3 className="text-base font-heading font-bold text-[#243333] group-hover:text-[#286C6A] transition-colors mb-2.5 leading-snug">
+                  <h3 className="text-base font-heading font-bold text-[#243333] group-hover:text-[#1C433E] transition-colors mb-2.5 leading-snug">
                     {art.title}
                   </h3>
 
@@ -102,9 +105,10 @@ export const ResourcesSection: React.FC = () => {
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    openArticle(art.id);
+                    navigate(`/blog/${art.slug}`);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#286C6A] hover:text-[#1f5654] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1C433E] hover:text-[#286C6A] transition-colors cursor-pointer"
                 >
                   <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -112,6 +116,22 @@ export const ResourcesSection: React.FC = () => {
               </div>
             </article>
           ))}
+        </div>
+
+        {/* Bottom CTA to View All Blog Articles */}
+        <div className="mt-12 text-center">
+          <button
+            type="button"
+            onClick={() => {
+              navigate('/blog');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#1C433E] hover:bg-[#286C6A] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all cursor-pointer active:scale-[0.99]"
+          >
+            <BookOpen className="w-4 h-4 text-[#D8B878]" />
+            <span>EXPLORE ALL BLOG & PSYCHOEDUCATIONAL ARTICLES</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </section>

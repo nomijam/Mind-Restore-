@@ -110,6 +110,28 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
             </p>
           </div>
 
+          {/* Quick WhatsApp Booking Option */}
+          <div className="mb-6 p-4 rounded-2xl bg-[#EAF2ED] border border-[#286C6A]/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-[#25D366]/20 flex items-center justify-center shrink-0">
+                <MessageCircle className="w-5 h-5 text-[#25D366]" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-[#1C433E]">Prefer Instant Scheduling?</h4>
+                <p className="text-[11px] text-[#526363]">Book directly via WhatsApp with our clinical coordinator for fastest confirmation</p>
+              </div>
+            </div>
+            <a
+              href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. 1981).')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] transition-colors shadow-2xs whitespace-nowrap"
+            >
+              <span>Book on WhatsApp</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#D8B878]" />
+            </a>
+          </div>
+
           {/* Submission Success State */}
           {submissionResult ? (
             <div className="text-center py-8 space-y-6 animate-in fade-in duration-200">

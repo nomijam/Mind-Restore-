@@ -11,6 +11,7 @@ import {
   Clock,
   Sparkles,
 } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { usePractice } from '../context/PracticeContext';
 import { MindRestoreLogo, MindRestoreEmblem } from './MindRestoreLogo';
 import { HEADER_CONDITIONS, HEADER_CITIES } from '../data/headerNavData';
@@ -20,6 +21,7 @@ export const Header: React.FC = () => {
     settings,
     openAppointment,
     getPhoneCallLink,
+    getWhatsAppLink,
     openConditionPage,
     closeConditionPage,
     activeConditionPage,
@@ -27,6 +29,9 @@ export const Header: React.FC = () => {
     closeCityPage,
     activeCityPage,
   } = usePractice();
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -89,43 +94,46 @@ export const Header: React.FC = () => {
     setCitiesDropdownOpen(false);
     setAboutDropdownOpen(false);
 
-    // If currently viewing a condition or city page, return to home first
-    if (activeConditionPage) {
-      closeConditionPage();
-    }
-    if (activeCityPage) {
-      closeCityPage();
+    if (href === '#home' || href === '/' || href === '') {
+      if (location.pathname !== '/') {
+        navigate('/');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
     }
 
-    if (href === '#home') {
+    if (href.startsWith('/')) {
+      navigate(href);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    setTimeout(() => {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 50);
+    const anchor = href.startsWith('#') ? href : `#${href.replace(/^\//, '')}`;
+    if (location.pathname !== '/') {
+      navigate(`/${anchor}`);
+    } else {
+      setTimeout(() => {
+        const element = document.querySelector(anchor);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+    }
   };
 
   const handleSelectCondition = (slug: string) => {
     setConditionsDropdownOpen(false);
     setMobileMenuOpen(false);
-    if (activeCityPage) {
-      closeCityPage();
-    }
-    openConditionPage(slug);
+    navigate(`/condition/${slug}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectCity = (slug: string) => {
     setCitiesDropdownOpen(false);
     setMobileMenuOpen(false);
-    if (activeConditionPage) {
-      closeConditionPage();
-    }
-    openCityPage(slug);
+    navigate(`/city/${slug}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -141,14 +149,14 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Left: Life Reset Pakistan Official Logo (Est. 1981) */}
           <div className="flex items-center">
-            <a
-              href="#home"
-              onClick={(e) => handleNavClick(e, '#home')}
+            <Link
+              to="/"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="group flex items-center transition-transform hover:opacity-95 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1C433E]"
               aria-label="Life Reset Pakistan Established 1981 - Home"
             >
               <MindRestoreLogo variant="horizontal" size="md" />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -324,7 +332,7 @@ export const Header: React.FC = () => {
                             {city.name}
                           </span>
                           <span className="text-[10px] text-[#A3C2B1] block">
-                            {city.serviceType}
+                            Online Tele-Mental Health
                           </span>
                         </div>
                         <ChevronRight className="w-3.5 h-3.5 text-[#D8B878] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -337,17 +345,17 @@ export const Header: React.FC = () => {
 
             {/* 3. PRICING */}
             <a
-              href="#pricing"
-              onClick={(e) => handleNavClick(e, '#pricing')}
+              href="/plans-and-pricing"
+              onClick={(e) => handleNavClick(e, '/plans-and-pricing')}
               className="px-3 py-2 text-xs sm:text-[13px] font-medium text-[#526363] hover:text-[#1C433E] transition-colors"
             >
               Plans & Pricing
             </a>
 
-            {/* 4. BLOG / RESOURCES */}
+            {/* 4. BLOG */}
             <a
-              href="#resources"
-              onClick={(e) => handleNavClick(e, '#resources')}
+              href="/blog"
+              onClick={(e) => handleNavClick(e, '/blog')}
               className="px-3 py-2 text-xs sm:text-[13px] font-medium text-[#526363] hover:text-[#1C433E] transition-colors"
             >
               Blog
@@ -355,8 +363,8 @@ export const Header: React.FC = () => {
 
             {/* 5. FAQ */}
             <a
-              href="#faq"
-              onClick={(e) => handleNavClick(e, '#faq')}
+              href="/faq"
+              onClick={(e) => handleNavClick(e, '/faq')}
               className="px-3 py-2 text-xs sm:text-[13px] font-medium text-[#526363] hover:text-[#1C433E] transition-colors"
             >
               FAQ
@@ -433,13 +441,15 @@ export const Header: React.FC = () => {
               <span>CALL US</span>
             </a>
 
-            <button
-              onClick={() => openAppointment()}
+            <a
+              href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. ${settings.foundedYear || 1981}).`)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-wide text-white bg-[#1C433E] hover:bg-[#153430] rounded-xl shadow-xs hover:shadow-md transition-all whitespace-nowrap active:scale-[0.98]"
             >
               <Calendar className="w-3.5 h-3.5 text-[#D8B878]" />
               <span>BOOK AN APPOINTMENT</span>
-            </button>
+            </a>
           </div>
 
       {/* Mobile hamburger menu toggle */}
@@ -568,24 +578,24 @@ export const Header: React.FC = () => {
             </div>
 
             <a
-              href="#pricing"
-              onClick={(e) => handleNavClick(e, '#pricing')}
+              href="/plans-and-pricing"
+              onClick={(e) => handleNavClick(e, '/plans-and-pricing')}
               className="text-base font-medium text-[#243333] py-2 border-b border-[#1C433E]/10 hover:text-[#1C433E]"
             >
-              Counselling Plans & Pricing
+              Plans & Pricing
             </a>
 
             <a
-              href="#resources"
-              onClick={(e) => handleNavClick(e, '#resources')}
+              href="/blog"
+              onClick={(e) => handleNavClick(e, '/blog')}
               className="text-base font-medium text-[#243333] py-2 border-b border-[#1C433E]/10 hover:text-[#1C433E]"
             >
-              Blog & Resources
+              Blog & Articles
             </a>
 
             <a
-              href="#faq"
-              onClick={(e) => handleNavClick(e, '#faq')}
+              href="/faq"
+              onClick={(e) => handleNavClick(e, '/faq')}
               className="text-base font-medium text-[#243333] py-2 border-b border-[#1C433E]/10 hover:text-[#1C433E]"
             >
               FAQ
@@ -609,16 +619,16 @@ export const Header: React.FC = () => {
               <span>Call: {settings.phoneDisplay}</span>
             </a>
 
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                openAppointment();
-              }}
+            <a
+              href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. ${settings.foundedYear || 1981}).`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center justify-center gap-2 py-3 bg-[#1C433E] text-white rounded-xl text-xs font-semibold shadow-xs"
             >
               <Calendar className="w-4 h-4 text-[#D8B878]" />
               <span>BOOK AN APPOINTMENT</span>
-            </button>
+            </a>
           </div>
         </div>
       )}

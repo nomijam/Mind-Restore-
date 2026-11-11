@@ -17,7 +17,7 @@ import { SERVICES } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const ServicesSection: React.FC = () => {
-  const { openServiceDetail, openAppointment } = usePractice();
+  const { openServiceDetail, openAppointment, getWhatsAppLink } = usePractice();
 
   const getServiceIcon = (name: string) => {
     const props = { className: 'w-5 h-5 text-[#286C6A]' };
@@ -67,13 +67,15 @@ export const ServicesSection: React.FC = () => {
           </div>
 
           <div className="shrink-0">
-            <button
-              onClick={() => openAppointment()}
+            <a
+              href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to request a confidential appointment.')}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-lg shadow-xs transition-all"
             >
               <span>REQUEST APPOINTMENT</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#D8B878]" />
-            </button>
+            </a>
           </div>
         </div>
 
@@ -118,12 +120,14 @@ export const ServicesSection: React.FC = () => {
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
 
-                <button
-                  onClick={() => openAppointment(srv.title)}
+                <a
+                  href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a consultation for ${srv.title}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-xs font-medium text-[#526363] hover:text-[#286C6A]"
                 >
                   Book
-                </button>
+                </a>
               </div>
             </div>
           ))}

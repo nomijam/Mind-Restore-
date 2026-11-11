@@ -3,7 +3,7 @@ import { Mail, MessageSquare, UserCheck, CalendarCheck, ArrowRight } from 'lucid
 import { usePractice } from '../context/PracticeContext';
 
 export const HowCareWorks: React.FC = () => {
-  const { openAppointment } = usePractice();
+  const { openAppointment, getWhatsAppLink } = usePractice();
 
   const steps = [
     {
@@ -87,13 +87,15 @@ export const HowCareWorks: React.FC = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <button
-            onClick={() => openAppointment()}
+          <a
+            href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to take the first step and book a confidential consultation.')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 text-xs font-semibold tracking-wider text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs transition-all"
           >
             <span>TAKE THE FIRST STEP</span>
             <ArrowRight className="w-4 h-4 text-[#D8B878]" />
-          </button>
+          </a>
         </div>
       </div>
     </section>

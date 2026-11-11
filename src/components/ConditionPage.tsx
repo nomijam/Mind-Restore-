@@ -24,6 +24,7 @@ import { SPECIALISTS } from '../data/practiceData';
 import { CONDITIONS_DATA } from '../data/conditionsData';
 import { getConditionHeroImage } from '../data/heroImagesData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
+import { SEOHead } from './SEOHead';
 
 interface ConditionPageProps {
   condition: ConditionItem;
@@ -44,11 +45,6 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
   // Scroll to top when condition changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = `${condition.title} | Life Reset Pakistan (Est. 1981)`;
-    const canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (canonicalLink) {
-      canonicalLink.setAttribute('href', 'https://liferesetpakistan.com/');
-    }
   }, [condition]);
 
   const toggleFaq = (index: number) => {
@@ -69,6 +65,69 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
 
   return (
     <article className="min-h-screen bg-[#F8F7F2] text-[#243333] pb-24">
+      <SEOHead
+        title={`${condition.title} | Life Reset Pakistan (Est. 1981)`}
+        description={`${condition.twoLineExplanation} Evidence-informed, confidential clinical psychology support in Pakistan & worldwide.`}
+        canonicalUrl={`https://liferesetpakistan.com/condition/${condition.slug}`}
+        ogType="article"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "MedicalCondition",
+              "@id": `https://liferesetpakistan.com/condition/${condition.slug}#condition`,
+              "name": condition.title,
+              "description": condition.twoLineExplanation,
+              "possibleTreatment": condition.therapeuticModalities?.map((m) => ({
+                "@type": "MedicalTherapy",
+                "name": m.name,
+                "description": m.description,
+              })),
+            },
+            {
+              "@type": "BreadcrumbList",
+              "@id": `https://liferesetpakistan.com/condition/${condition.slug}#breadcrumb`,
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://liferesetpakistan.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Clinical Focus Areas",
+                  "item": "https://liferesetpakistan.com/#conditions",
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": condition.title,
+                  "item": `https://liferesetpakistan.com/condition/${condition.slug}`,
+                },
+              ],
+            },
+            ...(condition.faqs && condition.faqs.length > 0
+              ? [
+                  {
+                    "@type": "FAQPage",
+                    "@id": `https://liferesetpakistan.com/condition/${condition.slug}#faq`,
+                    "mainEntity": condition.faqs.map((f) => ({
+                      "@type": "Question",
+                      "name": f.question,
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": f.answer,
+                      },
+                    })),
+                  },
+                ]
+              : []),
+          ],
+        }}
+      />
+
       {/* Top Breadcrumb & Navigation Bar */}
       <nav
         aria-label="Breadcrumb"
@@ -191,13 +250,17 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
 
           {/* Primary Action Buttons */}
           <div className="pt-4 flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => openAppointment(condition.title)}
+            <a
+              href={getWhatsAppLink(
+                `Hello Life Reset Pakistan, I would like to book a confidential consultation for ${condition.title} (Est. ${settings.foundedYear || 1981}).`
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 text-xs sm:text-sm font-semibold tracking-wide text-[#112A27] bg-[#D8B878] hover:bg-[#e0c489] rounded-xl shadow-md hover:shadow-lg transition-all active:scale-[0.98]"
             >
               <Calendar className="w-4 h-4 text-[#112A27]" />
               <span>BOOK A CONFIDENTIAL SESSION</span>
-            </button>
+            </a>
 
             <a
               href={getWhatsAppLink(
@@ -249,7 +312,7 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
               <p>{condition.fullOverview}</p>
               {condition.culturalContext && (
                 <div className="bg-white p-5 rounded-2xl border border-[#286C6A]/15 mt-4 space-y-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#D8B878] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#8A5C14] block">
                     Cultural Reality & Pakistani Context
                   </span>
                   <p className="text-sm text-[#415352] leading-relaxed">
@@ -462,12 +525,16 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
                     View Full Profile
                   </button>
 
-                  <button
-                    onClick={() => openAppointment(condition.title, spec.id)}
-                    className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] rounded-lg transition-colors"
+                  <a
+                    href={getWhatsAppLink(
+                      `Hello Life Reset Pakistan, I would like to book a consultation with ${spec.name} for ${condition.title}.`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] rounded-lg transition-colors inline-block"
                   >
                     Book with {spec.name.split(',')[0].split(' ')[1] || spec.name.split(',')[0]}
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}
@@ -545,12 +612,14 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 relative z-10">
-            <button
-              onClick={() => openAppointment(condition.title)}
-              className="px-7 py-3.5 text-xs sm:text-sm font-semibold tracking-wide text-[#1C433E] bg-[#D8B878] hover:bg-[#e2c78f] rounded-xl shadow-md transition-all active:scale-[0.98]"
+            <a
+              href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to schedule a session for ${condition.title}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-3.5 text-xs sm:text-sm font-semibold tracking-wide text-[#1C433E] bg-[#D8B878] hover:bg-[#e2c78f] rounded-xl shadow-md transition-all active:scale-[0.98] inline-block"
             >
               SCHEDULE A SESSION FOR {condition.title.toUpperCase()}
-            </button>
+            </a>
 
             <a
               href={getWhatsAppLink(`Inquiring about consultation for ${condition.title}`)}
@@ -585,7 +654,7 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
                 onClick={() => onSelectCondition(rel.slug)}
                 className="p-3.5 rounded-xl bg-white border border-[#286C6A]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-all group"
               >
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#D8B878] block">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8A5C14] block">
                   {rel.category === 'common-concerns' ? 'Common' : 'Specialised'}
                 </span>
                 <span className="text-xs sm:text-sm font-bold text-[#243333] group-hover:text-[#1C433E] line-clamp-1 mt-0.5 block">

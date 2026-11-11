@@ -30,14 +30,16 @@ export const MobileStickyBar: React.FC = () => {
       </a>
 
       {/* 3. BOOK */}
-      <button
-        onClick={() => openAppointment()}
+      <a
+        href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. 1981).')}
+        target="_blank"
+        rel="noopener noreferrer"
         className="flex-[1.2] h-10 flex items-center justify-center gap-1.5 px-2 text-[11px] font-semibold text-white bg-[#286C6A] active:bg-[#1f5654] rounded-lg shadow-2xs transition-colors"
-        aria-label="Book an appointment"
+        aria-label="Book an appointment on WhatsApp"
       >
         <Calendar className="w-3.5 h-3.5 text-[#D8B878]" />
         <span>BOOK</span>
-      </button>
+      </a>
     </div>
   );
 };

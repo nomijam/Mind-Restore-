@@ -4,7 +4,7 @@ import { TESTIMONIALS } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const TestimonialsSection: React.FC = () => {
-  const { openAppointment } = usePractice();
+  const { openAppointment, getWhatsAppLink } = usePractice();
   return (
     <section className="py-20 bg-[#F8F7F2] border-b border-[#286C6A]/10 text-left" id="testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,13 +51,15 @@ export const TestimonialsSection: React.FC = () => {
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <button
-            onClick={() => openAppointment('Appointment Request via Patient Reflections')}
+          <a
+            href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to begin a confidential consultation (Est. 1981).')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-xs font-semibold tracking-wider text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs transition-all"
           >
             <Calendar className="w-4 h-4 text-[#D8B878]" />
             <span>BEGIN YOUR CONFIDENTIAL CONSULTATION</span>
-          </button>
+          </a>
 
           <button
             onClick={() => {

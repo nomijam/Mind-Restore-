@@ -3,7 +3,7 @@ import { Calendar, Phone, ArrowRight, ShieldCheck } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 
 export const FinalCtaSection: React.FC = () => {
-  const { openAppointment, getPhoneCallLink, settings } = usePractice();
+  const { openAppointment, getPhoneCallLink, getWhatsAppLink, settings } = usePractice();
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -29,13 +29,15 @@ export const FinalCtaSection: React.FC = () => {
         </p>
 
         <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onClick={() => openAppointment()}
+          <a
+            href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. 1981).')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-xs font-semibold tracking-wider text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs hover:shadow transition-all"
           >
             <Calendar className="w-4 h-4 text-[#D8B878]" />
             <span>BOOK AN APPOINTMENT</span>
-          </button>
+          </a>
 
           <button
             onClick={handleContactClick}

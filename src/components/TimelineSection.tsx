@@ -1,16 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 import { TIMELINE_MILESTONES } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const TimelineSection: React.FC = () => {
-  const { settings, openAppointment } = usePractice();
+  const { settings, openAppointment, getWhatsAppLink } = usePractice();
+  const navigate = useNavigate();
 
-  const handleScrollToPricing = () => {
-    const el = document.querySelector('#pricing');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleGoToPricing = () => {
+    navigate('/plans-and-pricing');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -115,21 +115,22 @@ export const TimelineSection: React.FC = () => {
         <div className="mt-8 pt-8 border-t border-[#286C6A]/10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             type="button"
-            onClick={handleScrollToPricing}
+            onClick={handleGoToPricing}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold tracking-wider text-[#1C433E] bg-white border border-[#286C6A]/20 hover:border-[#286C6A] hover:bg-[#EAF2ED] rounded-xl transition-all shadow-2xs cursor-pointer active:scale-[0.99]"
           >
-            <span>EXPLORE COUNSELLING PLANS</span>
+            <span>EXPLORE COUNSELLING PLANS & PRICING</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#286C6A]" />
           </button>
 
-          <button
-            type="button"
-            onClick={() => openAppointment('Appointment Request via Heritage Timeline')}
+          <a
+            href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. 1981).')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold tracking-wider text-white bg-[#1C433E] hover:bg-[#122e2a] rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.99]"
           >
             <Calendar className="w-4 h-4 text-[#D8B878]" />
             <span>BOOK A CONFIDENTIAL CONSULTATION</span>
-          </button>
+          </a>
         </div>
       </div>
     </section>

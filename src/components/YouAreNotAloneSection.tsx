@@ -3,7 +3,7 @@ import { HeartHandshake, ArrowRight } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 
 export const YouAreNotAloneSection: React.FC = () => {
-  const { openAppointment } = usePractice();
+  const { openAppointment, getWhatsAppLink } = usePractice();
 
   return (
     <section className="py-20 bg-[#EAF2ED] border-b border-[#286C6A]/10 text-center" id="support">
@@ -25,13 +25,15 @@ export const YouAreNotAloneSection: React.FC = () => {
         </p>
 
         <div className="pt-4">
-          <button
-            onClick={() => openAppointment('Initial Psychological Inquiry')}
+          <a
+            href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to talk to a professional psychologist.')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-xs font-semibold tracking-wider text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-xl shadow-xs hover:shadow transition-all"
           >
             <span>TALK TO A PROFESSIONAL</span>
             <ArrowRight className="w-4 h-4 text-[#D8B878]" />
-          </button>
+          </a>
         </div>
       </div>
     </section>

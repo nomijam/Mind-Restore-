@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { ChevronDown, Phone, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronDown, Phone, MessageCircle, HelpCircle, ArrowRight } from 'lucide-react';
 import { FAQS } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const FAQSection: React.FC = () => {
+  const navigate = useNavigate();
   const { getWhatsAppLink, getPhoneCallLink, settings } = usePractice();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -58,6 +60,22 @@ export const FAQSection: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* View Dedicated Full FAQ Page Button */}
+        <div className="mt-8 text-center">
+          <button
+            type="button"
+            onClick={() => {
+              navigate('/faq');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-[#286C6A]/20 hover:border-[#1C433E] hover:bg-[#EAF2ED]/50 text-xs sm:text-sm font-semibold text-[#1C433E] transition-all cursor-pointer shadow-2xs"
+          >
+            <HelpCircle className="w-4 h-4 text-[#8A5C14]" />
+            <span>VIEW COMPLETE FAQ DIRECTORY & SEARCH</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
         {/* Still have questions banner */}

@@ -4,7 +4,7 @@ import { SPECIALISTS } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const SpecialistsSection: React.FC = () => {
-  const { openSpecialistProfile, openAppointment } = usePractice();
+  const { openSpecialistProfile, openAppointment, getWhatsAppLink } = usePractice();
 
   return (
     <section className="py-20 bg-[#F8F7F2] border-b border-[#286C6A]/10" id="specialists">
@@ -97,12 +97,14 @@ export const SpecialistsSection: React.FC = () => {
                     VIEW PROFILE
                   </button>
 
-                  <button
-                    onClick={() => openAppointment(undefined, spec.id)}
-                    className="flex-1 py-2.5 px-3 text-xs font-semibold text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-lg transition-colors text-center shadow-2xs"
+                  <a
+                    href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a confidential consultation with ${spec.name}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2.5 px-3 text-xs font-semibold text-white bg-[#286C6A] hover:bg-[#1f5654] rounded-lg transition-colors text-center shadow-2xs inline-block"
                   >
                     BOOK APPOINTMENT
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

@@ -18,8 +18,9 @@ import {
   TIMELINE_MILESTONES,
   CORE_VALUES,
 } from '../data/practiceData';
-import type { CityInfo } from '../data/citiesData';
-// Note: findCondition, findCity, and saveAppointmentToSupabase are dynamically imported on demand to keep initial bundle lean
+import { useNavigate, useLocation } from 'react-router-dom';
+import { findCondition } from '../data/conditionsData';
+import { findCity, type CityInfo } from '../data/citiesData';
 
 interface PracticeContextType {
   settings: PracticeSettings;
@@ -123,51 +124,62 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return DEFAULT_SETTINGS;
   });
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [activeModal, setActiveModal] = useState<PracticeContextType['activeModal']>(null);
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
   const [selectedSpecialist, setSelectedSpecialist] = useState<Specialist | null>(null);
   const [selectedCondition, setSelectedCondition] = useState<ConditionItem | null>(null);
-  const [activeConditionPage, setActiveConditionPage] = useState<ConditionItem | null>(null);
-  const [activeCityPage, setActiveCityPage] = useState<CityInfo | null>(null);
   const [selectedTool, setSelectedTool] = useState<EducationalTool | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<ResourceArticle | null>(null);
   const [selectedLegalTab, setSelectedLegalTab] = useState<'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial'>('disclaimer');
+
+  // Derive activeConditionPage and activeCityPage synchronously from clean pathname
+  const activeConditionSlug = location.pathname.startsWith('/condition/')
+    ? location.pathname.replace(/^\/condition\//, '').split('/')[0].split('#')[0]
+    : null;
+  const activeConditionPage = activeConditionSlug ? findCondition(activeConditionSlug) || null : null;
+
+  const activeCitySlug = location.pathname.startsWith('/city/')
+    ? location.pathname.replace(/^\/city\//, '').split('/')[0].split('#')[0]
+    : null;
+  const activeCityPage = activeCitySlug ? findCity(activeCitySlug) || null : null;
 
   const [prefillReason, setPrefillReason] = useState<string>('');
   const [prefillSpecialistId, setPrefillSpecialistId] = useState<string>('');
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
-  // Handle URL hash changes for direct condition deep links e.g. #/condition/anxiety-counselling or #/city/lahore
+  // Backward compatibility: automatically redirect any legacy hash URLs to clean URLs
   useEffect(() => {
-    const handleHashChange = async () => {
-      const hash = window.location.hash;
-      if (hash.startsWith('#/condition/')) {
-        const slug = hash.replace('#/condition/', '');
-        const { findCondition } = await import('../data/conditionsData');
-        const cond = findCondition(slug);
-        if (cond) {
-          setActiveConditionPage(cond);
-          setSelectedCondition(cond);
-          setActiveCityPage(null);
-        }
-      } else if (hash.startsWith('#/city/')) {
-        const slug = hash.replace('#/city/', '');
-        const { findCity } = await import('../data/citiesData');
-        const city = findCity(slug);
-        if (city) {
-          setActiveCityPage(city);
-          setActiveConditionPage(null);
-        }
-      } else if (hash === '' || hash === '#home') {
-        setActiveConditionPage(null);
-        setActiveCityPage(null);
-      }
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+    const hash = window.location.hash;
+    if (!hash) return;
+    if (hash.startsWith('#/condition/')) {
+      const slug = hash.replace('#/condition/', '');
+      navigate(`/condition/${slug}`, { replace: true });
+    } else if (hash.startsWith('#/city/')) {
+      const slug = hash.replace('#/city/', '');
+      navigate(`/city/${slug}`, { replace: true });
+    } else if (hash.startsWith('#condition-')) {
+      const slug = hash.replace('#condition-', '');
+      navigate(`/condition/${slug}`, { replace: true });
+    } else if (hash.startsWith('#city-')) {
+      const slug = hash.replace('#city-', '');
+      navigate(`/city/${slug}`, { replace: true });
+    } else if (hash === '#pricing' || hash === '#/pricing' || hash === '#/plans-and-pricing' || hash === '#plans-and-pricing') {
+      navigate('/plans-and-pricing', { replace: true });
+    } else if (hash === '#resources' || hash === '#/resources' || hash === '#blog' || hash === '#/blog') {
+      navigate('/blog', { replace: true });
+    } else if (hash.startsWith('#/blog/')) {
+      const slug = hash.replace('#/blog/', '');
+      navigate(`/blog/${slug}`, { replace: true });
+    } else if (hash.startsWith('#/article/')) {
+      const slug = hash.replace('#/article/', '');
+      navigate(`/blog/${slug}`, { replace: true });
+    } else if (hash === '#faq' || hash === '#/faq' || hash === '#faqs' || hash === '#/faqs') {
+      navigate('/faq', { replace: true });
+    }
+  }, [location.pathname, location.hash, navigate]);
 
   useEffect(() => {
     try {
@@ -191,7 +203,21 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (specialistId) setPrefillSpecialistId(specialistId);
     if (plan) setSelectedPlan(plan);
     else if (reason && reason.includes('Rs.')) setSelectedPlan(reason);
-    setActiveModal('appointment');
+
+    let message = `Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. ${settings.foundedYear || 1981}).`;
+    if (plan) {
+      message = `Hello Life Reset Pakistan, I would like to book an appointment for the "${plan}" plan.`;
+    } else if (specialistId) {
+      const spec = SPECIALISTS.find((s) => s.id === specialistId);
+      message = `Hello Life Reset Pakistan, I would like to book a consultation with ${spec ? spec.name : specialistId}.`;
+    } else if (reason) {
+      message = `Hello Life Reset Pakistan, I would like to book a consultation regarding ${reason}.`;
+    }
+
+    const whatsappUrl = getWhatsAppLink(message);
+    if (typeof window !== 'undefined') {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   const openServiceDetail = (serviceId: string) => {
@@ -210,51 +236,38 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const openConditionPage = async (conditionIdOrSlug: string) => {
-    const { findCondition } = await import('../data/conditionsData');
+  const openConditionPage = (conditionIdOrSlug: string) => {
     const c = findCondition(conditionIdOrSlug);
     if (c) {
-      setActiveConditionPage(c);
       setSelectedCondition(c);
-      window.location.hash = `#/condition/${c.slug}`;
+      navigate(`/condition/${c.slug}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const closeConditionPage = () => {
-    setActiveConditionPage(null);
-    if (window.location.hash.startsWith('#/condition/')) {
-      window.location.hash = '';
-    }
+    navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openCityPage = async (cityIdOrSlug: string) => {
-    const { findCity } = await import('../data/citiesData');
+  const openCityPage = (cityIdOrSlug: string) => {
     const c = findCity(cityIdOrSlug);
     if (c) {
-      setActiveCityPage(c);
-      setActiveConditionPage(null);
-      window.location.hash = `#/city/${c.slug}`;
+      navigate(`/city/${c.slug}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const closeCityPage = () => {
-    setActiveCityPage(null);
-    if (window.location.hash.startsWith('#/city/')) {
-      window.location.hash = '';
-    }
+    navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openConditionDetail = async (conditionId: string) => {
-    const { findCondition } = await import('../data/conditionsData');
+  const openConditionDetail = (conditionId: string) => {
     const c = findCondition(conditionId);
     if (c) {
       setSelectedCondition(c);
-      setActiveConditionPage(c);
-      window.location.hash = `#/condition/${c.slug}`;
+      navigate(`/condition/${c.slug}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -270,8 +283,8 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const openArticle = (articleId: string) => {
     const art = ARTICLES.find((item) => item.id === articleId || item.slug === articleId);
     if (art) {
-      setSelectedArticle(art);
-      setActiveModal('article');
+      navigate(`/blog/${art.slug}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

@@ -821,7 +821,95 @@ export const ARTICLES: ResourceArticle[] = [
       '3. Re-engage in Restorative Rest: True rest is not scrolling on your phone; it is reading, gentle walking, or quality conversation.',
     ],
   },
+  {
+    id: 'panic-attacks-emergency-toolkit',
+    title: 'How to Halt a Panic Attack in Its Tracks: Emergency Somatic Protocol',
+    slug: 'panic-attacks-emergency-toolkit',
+    category: 'Anxiety',
+    readTime: '4 min read',
+    date: 'Updated 2026',
+    author: 'Dr. Farah Kamran',
+    excerpt: 'Sudden dizziness, intense fear, and heart palpitations can feel like a medical crisis. Learn the science-backed 4-stage grounding routine to halt panic spirals.',
+    tags: ['Panic Attacks', 'Anxiety', 'Somatic Protocol'],
+    content: [
+      'Panic attacks frequently emerge without an obvious immediate trigger. Your chest feels tight, your heart pounds rapidly, and a wave of catastrophic thinking convinces you that something terrible is about to happen.',
+      'Clinically, a panic attack is a temporary adrenaline rush peaking within 10 minutes. While distressing, panic attacks are not medically dangerous to a healthy heart.',
+      'Emergency Grounding Protocol (The 4 Steps):',
+      '1. Drop Your Shoulders and Jaw: Physical tension amplifies the fight-or-flight feedback loop. Deliberately unclamp your teeth and let your shoulders drop away from your ears.',
+      '2. Box Breathing (4-4-4-4): Inhale for 4 seconds, hold for 4 seconds, exhale slowly for 4 seconds, and pause for 4 seconds. Repeat 4 cycles.',
+      '3. Temperature Shift: Splash cold water on your face or hold a cool glass of water against your wrist. This activates the mammalian dive reflex, immediately lowering heart rate.',
+      '4. Reality Reassurance: Repeat internally: "This is adrenaline, not danger. It will peak and pass within minutes."',
+    ],
+  },
+  {
+    id: 'overcoming-social-anxiety-pakistan',
+    title: 'Navigating Social Anxiety, Extended Family Gatherings, and Social Evaluation',
+    slug: 'overcoming-social-anxiety-pakistan',
+    category: 'Anxiety',
+    readTime: '5 min read',
+    date: 'Updated 2026',
+    author: 'Ayesha Malik, M.Phil.',
+    excerpt: 'Dreading weddings, family dinners, or public speaking is a widespread experience in collectivist cultures. Practical cognitive reframing to overcome evaluation fear.',
+    tags: ['Social Anxiety', 'Family Dynamics', 'Cognitive Restructuring'],
+    content: [
+      'In Pakistan, social expectations are intense. Large family weddings, festive dinners, and constant social evaluations can turn ordinary gatherings into high-pressure endurance tests for individuals dealing with social anxiety.',
+      'Social anxiety is driven by an internal spotlight effect: we mistakenly assume everyone is scrutinizing our posture, speech, or nervousness with harsh judgement.',
+      'Helpful Strategies for Pakistani Social Contexts:',
+      '• Move the Spotlight Outward: Instead of monitoring your heartbeat or what you sound like, focus on listening with curiosity to the person speaking to you.',
+      '• Establish Micro-Breaks: Step outside into the quiet or excuse yourself to wash your hands for 3 minutes to reset your nervous system.',
+      '• Challenge Catastrophic Stories: Ask yourself: "If I pause or lose my train of thought, what actually happens? Most people are too concerned with themselves to remember it tomorrow."',
+    ],
+  },
+  {
+    id: 'managing-intrusive-thoughts-ocd',
+    title: 'Breaking Free from the Mental Loop of Intrusive Thoughts and OCD',
+    slug: 'managing-intrusive-thoughts-ocd',
+    category: 'OCD',
+    readTime: '6 min read',
+    date: 'Updated 2026',
+    author: 'Dr. Farah Kamran',
+    excerpt: 'Distressing mental images or unwanted thoughts often cause intense guilt and repetitive reassurance-seeking. Understand ERP and how to defuse obsessive loops.',
+    tags: ['OCD', 'Intrusive Thoughts', 'ERP', 'CBT'],
+    content: [
+      'Almost every human experiences bizarre or shocking intrusive thoughts from time to time. However, individuals with OCD or high anxiety treat these thoughts as meaningful reflections of their moral character or real impending danger.',
+      'The harder you try to push an intrusive thought out of your mind, the stronger it bounces back—this is known as the rebound effect in cognitive psychology.',
+      'Evidence-Informed Steps for Intrusive Thoughts:',
+      '1. Label Without Judging: Notice the thought and mentally state: "That is an intrusive thought, not a fact or a desire."',
+      '2. Resist Reassurance Loops: Seeking repeated confirmation from family members or checking items multiple times temporarily relieves anxiety but reinforces the obsessive cycle.',
+      '3. Lean Into Uncertainty: Accept that human minds generate random cognitive noise. You do not need to analyze every thought that passes through your awareness.',
+    ],
+  },
+  {
+    id: 'grief-loss-emotional-healing',
+    title: 'Walking Through Grief and Bereavement Without Rushing Your Emotional Healing',
+    slug: 'grief-loss-emotional-healing',
+    category: 'Grief',
+    readTime: '5 min read',
+    date: 'Updated 2026',
+    author: 'Tariq Rehman, M.Sc.',
+    excerpt: 'Grief is not a linear set of stages to complete. Compassionate clinical perspectives on mourning the loss of a parent, spouse, or health without feeling broken.',
+    tags: ['Grief', 'Bereavement', 'Healing', 'Emotional Health'],
+    content: [
+      'After the loss of a cherished parent, spouse, or family member, well-intentioned friends often urge the bereaved to "stay strong" or "move on" after a few weeks.',
+      'In clinical psychotherapy, we understand that grief is not a problem to be solved; it is love with nowhere to go. It comes in unpredictable tidal waves rather than neat chronological stages.',
+      'Compassionate Mourning Frameworks:',
+      '• Honor the Waves: Allow tears and fatigue without self-criticism. Forcing happiness causes prolonged emotional strain.',
+      '• Protect Solitude When Needed: While social presence is helpful during initial mourning, taking private moments for prayer, quiet reflection, and rest is vital.',
+      '• Rebuilding Life Alongside the Loss: True healing does not mean forgetting the person; it means expanding your capacity to hold grief and love simultaneously.',
+    ],
+  },
 ];
+
+/**
+ * Helper to find an article by slug or ID
+ */
+export const findArticle = (slugOrId: string): ResourceArticle | undefined => {
+  if (!slugOrId) return undefined;
+  const clean = slugOrId.toLowerCase().trim();
+  return ARTICLES.find(
+    (a) => a.slug.toLowerCase() === clean || a.id.toLowerCase() === clean
+  );
+};
 
 export const TESTIMONIALS: PatientTestimonial[] = [
   {

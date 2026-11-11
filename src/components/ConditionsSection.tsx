@@ -23,9 +23,10 @@ import {
 } from 'lucide-react';
 import { CONDITIONS_CARDS } from '../data/conditionsCardsData';
 import { usePractice } from '../context/PracticeContext';
+import { Link } from 'react-router-dom';
 
 export const ConditionsSection: React.FC = () => {
-  const { openConditionDetail, openAppointment } = usePractice();
+  const { openConditionDetail, openAppointment, getWhatsAppLink } = usePractice();
   const [activeTab, setActiveTab] = useState<'all' | 'common-concerns' | 'specialised-care'>('all');
 
   const getConditionIcon = (iconName: string) => {
@@ -137,9 +138,9 @@ export const ConditionsSection: React.FC = () => {
               key={cond.id}
               className="bg-white rounded-2xl p-6 border border-[#286C6A]/10 shadow-xs hover:border-[#1C433E]/40 hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
             >
-              <div
-                onClick={() => openConditionDetail(cond.slug || cond.id)}
-                className="cursor-pointer space-y-3"
+              <Link
+                to={`/condition/${cond.slug || cond.id}`}
+                className="space-y-3 block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1C433E] rounded-xl"
               >
                 <div className="flex items-center justify-between">
                   <div className="w-11 h-11 rounded-xl bg-[#EAF2ED] flex items-center justify-center group-hover:bg-[#d8e6dc] transition-colors">
@@ -158,24 +159,26 @@ export const ConditionsSection: React.FC = () => {
                     {cond.twoLineExplanation}
                   </p>
                 </div>
-              </div>
+              </Link>
 
               <div className="pt-4 mt-2 border-t border-[#286C6A]/10 flex items-center justify-between">
-                <button
-                  onClick={() => openConditionDetail(cond.slug || cond.id)}
+                <Link
+                  to={`/condition/${cond.slug || cond.id}`}
                   aria-label={`Read comprehensive clinical guide on ${cond.title}`}
                   className="inline-flex items-center gap-1 text-xs font-semibold text-[#1C433E] hover:text-[#122e2a] transition-colors group-hover:underline cursor-pointer"
                 >
                   <span>READ FULL PAGE</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
 
-                <button
-                  onClick={() => openAppointment(cond.title)}
-                  className="px-2.5 py-1 text-xs font-semibold text-[#1C433E] bg-[#EAF2ED] hover:bg-[#1C433E] hover:text-white rounded-md transition-colors"
+                <a
+                  href={getWhatsAppLink(`Hello Life Reset Pakistan, I would like to book a consultation regarding ${cond.title}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 text-xs font-semibold text-[#1C433E] bg-[#EAF2ED] hover:bg-[#1C433E] hover:text-white rounded-md transition-colors inline-block"
                 >
                   Book Consult
-                </button>
+                </a>
               </div>
             </div>
           ))}

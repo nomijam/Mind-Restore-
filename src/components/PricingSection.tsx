@@ -269,9 +269,10 @@ export const PricingSection: React.FC = () => {
 
                   {/* Bottom CTAs: Aligned across cards */}
                   <div className="pt-8 space-y-2.5">
-                    <button
-                      type="button"
-                      onClick={() => handleBookPlan(plan)}
+                    <a
+                      href={getPlanWhatsAppLink(plan)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`w-full py-3.5 px-6 rounded-xl font-heading font-bold text-xs sm:text-sm tracking-wide transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] ${
                         isHighlight
                           ? 'bg-[#D8B878] hover:bg-[#e0c489] text-[#112A27] shadow-md hover:shadow-lg'
@@ -280,7 +281,7 @@ export const PricingSection: React.FC = () => {
                     >
                       <span>{plan.ctaText}</span>
                       <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </a>
 
                     <a
                       href={getPlanWhatsAppLink(plan)}
@@ -429,9 +430,10 @@ export const PricingSection: React.FC = () => {
 
                   {/* Bottom CTAs: Aligned across cards */}
                   <div className="pt-8 space-y-2.5">
-                    <button
-                      type="button"
-                      onClick={() => handleBookPlan(plan)}
+                    <a
+                      href={getPlanWhatsAppLink(plan)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`w-full py-3.5 px-6 rounded-xl font-heading font-bold text-xs sm:text-sm tracking-wide transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] ${
                         isHighlight
                           ? 'bg-[#D8B878] hover:bg-[#e0c489] text-[#112A27] shadow-md hover:shadow-lg'
@@ -440,7 +442,7 @@ export const PricingSection: React.FC = () => {
                     >
                       <span>{plan.ctaText}</span>
                       <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </a>
 
                     <a
                       href={getPlanWhatsAppLink(plan)}

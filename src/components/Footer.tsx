@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, ShieldCheck, Settings } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { usePractice } from '../context/PracticeContext';
 import { MindRestoreLogo } from './MindRestoreLogo';
 
@@ -10,20 +11,38 @@ export const Footer: React.FC = () => {
     openLegal,
     openAdmin,
     getPhoneCallLink,
-    activeConditionPage,
-    closeConditionPage,
-    openConditionPage,
+    getWhatsAppLink,
   } = usePractice();
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    if (activeConditionPage) {
-      closeConditionPage();
+    if (href === '#home' || href === '/' || href === '') {
+      if (location.pathname !== '/') {
+        navigate('/');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
     }
-    setTimeout(() => {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 50);
+
+    if (href.startsWith('/')) {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const anchor = href.startsWith('#') ? href : `#${href.replace(/^\//, '')}`;
+    if (location.pathname !== '/') {
+      navigate(`/${anchor}`);
+    } else {
+      setTimeout(() => {
+        const el = document.querySelector(anchor);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
   };
 
   return (
@@ -61,7 +80,7 @@ export const Footer: React.FC = () => {
                 <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className="hover:text-white transition-colors">Our Mission</a>
               </li>
               <li>
-                <a href="#pricing" onClick={(e) => handleNavClick(e, '#pricing')} className="hover:text-white transition-colors">Plans & Pricing</a>
+                <a href="/plans-and-pricing" onClick={(e) => handleNavClick(e, '/plans-and-pricing')} className="hover:text-white transition-colors">Plans & Pricing</a>
               </li>
               <li>
                 <a href="#timeline" onClick={(e) => handleNavClick(e, '#timeline')} className="hover:text-white transition-colors">1981 Timeline</a>
@@ -123,13 +142,13 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2 text-neutral-300">
               <li>
-                <a href="#resources" onClick={(e) => handleNavClick(e, '#resources')} className="hover:text-white transition-colors">Articles</a>
+                <a href="/blog" onClick={(e) => handleNavClick(e, '/blog')} className="hover:text-white transition-colors">Blog & Articles</a>
               </li>
               <li>
                 <a href="#tools" onClick={(e) => handleNavClick(e, '#tools')} className="hover:text-white transition-colors">Educational Tools</a>
               </li>
               <li>
-                <a href="#faq" onClick={(e) => handleNavClick(e, '#faq')} className="hover:text-white transition-colors">FAQs</a>
+                <a href="/faq" onClick={(e) => handleNavClick(e, '/faq')} className="hover:text-white transition-colors">FAQs</a>
               </li>
               <li>
                 <a href="#emergency" onClick={(e) => handleNavClick(e, '#emergency')} className="hover:text-white transition-colors">Emergency Information</a>
@@ -239,6 +258,59 @@ export const Footer: React.FC = () => {
                   </svg>
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SEO Crawlable Internal Links Matrix */}
+        <div className="py-8 border-b border-white/10 text-xs space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+            <span className="text-[11px] font-bold text-[#D8B878] uppercase tracking-wider shrink-0">
+              Clinical Focus Areas:
+            </span>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-neutral-300 text-[11px]">
+              <Link to="/condition/anxiety-counselling" className="hover:text-white transition-colors">Anxiety Counselling</Link>
+              <span>·</span>
+              <Link to="/condition/depression-counselling" className="hover:text-white transition-colors">Depression Support</Link>
+              <span>·</span>
+              <Link to="/condition/stress-burnout" className="hover:text-white transition-colors">Stress & Burnout</Link>
+              <span>·</span>
+              <Link to="/condition/marriage-couple-counselling" className="hover:text-white transition-colors">Couples Counselling</Link>
+              <span>·</span>
+              <Link to="/condition/family-counselling-therapy" className="hover:text-white transition-colors">Family Therapy</Link>
+              <span>·</span>
+              <Link to="/condition/student-counselling" className="hover:text-white transition-colors">Student Counselling</Link>
+              <span>·</span>
+              <Link to="/condition/child-teen-psychologist" className="hover:text-white transition-colors">Child & Teen Psychology</Link>
+              <span>·</span>
+              <Link to="/condition/ocd-treatment" className="hover:text-white transition-colors">OCD Care</Link>
+              <span>·</span>
+              <Link to="/condition/ptsd-trauma-therapy" className="hover:text-white transition-colors">Trauma & PTSD</Link>
+              <span>·</span>
+              <Link to="/condition/sleep-disorders" className="hover:text-white transition-colors">Sleep Difficulties</Link>
+              <span>·</span>
+              <Link to="/condition/female-psychologist-online" className="hover:text-white transition-colors">Female Psychologist</Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+            <span className="text-[11px] font-bold text-[#D8B878] uppercase tracking-wider shrink-0">
+              Regional Tele-Health:
+            </span>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-neutral-300 text-[11px]">
+              <Link to="/city/lahore" className="hover:text-white transition-colors">Lahore (Founded 1981)</Link>
+              <span>·</span>
+              <Link to="/city/karachi" className="hover:text-white transition-colors">Karachi</Link>
+              <span>·</span>
+              <Link to="/city/islamabad-rawalpindi" className="hover:text-white transition-colors">Islamabad & Rawalpindi</Link>
+              <span>·</span>
+              <Link to="/city/faisalabad" className="hover:text-white transition-colors">Faisalabad</Link>
+              <span>·</span>
+              <Link to="/city/peshawar" className="hover:text-white transition-colors">Peshawar</Link>
+              <span>·</span>
+              <Link to="/city/multan" className="hover:text-white transition-colors">Multan</Link>
+              <span>·</span>
+              <Link to="/city/overseas-worldwide" className="hover:text-white transition-colors">Global Diaspora Tele-Health</Link>
             </div>
           </div>
         </div>
