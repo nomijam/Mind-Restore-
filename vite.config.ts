@@ -235,6 +235,53 @@ function extractCriticalCss(fullCss: string, tokens: Set<string>): string {
   return criticalParts.join('');
 }
 
+function staticWellKnownPlugin(rootDir: string): Plugin {
+  const staticRoutes: Record<string, { relPath: string; contentType: string; cors?: boolean }> = {
+    '/llms.txt': {
+      relPath: 'public/llms.txt',
+      contentType: 'text/markdown; charset=utf-8',
+    },
+    '/.well-known/ard.json': {
+      relPath: 'public/.well-known/ard.json',
+      contentType: 'application/json; charset=utf-8',
+      cors: true,
+    },
+    '/.well-known/ai-catalog.json': {
+      relPath: 'public/.well-known/ai-catalog.json',
+      contentType: 'application/json; charset=utf-8',
+      cors: true,
+    },
+  };
+
+  const handleStaticWellKnown = (
+    req: { url?: string },
+    res: { statusCode: number; setHeader: (k: string, v: string) => void; end: (b: string) => void },
+    next: () => void
+  ) => {
+    const pathname = (req.url || '').split('?')[0];
+    const entry = staticRoutes[pathname];
+    if (!entry) return next();
+    const absPath = path.resolve(rootDir, entry.relPath);
+    if (!fs.existsSync(absPath)) return next();
+    res.statusCode = 200;
+    res.setHeader('Content-Type', entry.contentType);
+    if (entry.cors) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+    res.end(fs.readFileSync(absPath, 'utf8'));
+  };
+
+  return {
+    name: 'static-well-known-files',
+    configureServer(server) {
+      server.middlewares.use(handleStaticWellKnown);
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(handleStaticWellKnown);
+    },
+  };
+}
+
 function performanceBuildPlugin(rootDir: string): Plugin {
   return {
     name: 'critical-css-and-route-preload',
@@ -325,7 +372,12 @@ function performanceBuildPlugin(rootDir: string): Plugin {
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss(), performanceBuildPlugin(import.meta.dirname)],
+    plugins: [
+      staticWellKnownPlugin(import.meta.dirname),
+      react(),
+      tailwindcss(),
+      performanceBuildPlugin(import.meta.dirname),
+    ],
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, '.'),
