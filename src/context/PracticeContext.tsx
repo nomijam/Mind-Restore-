@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import {
   PracticeSettings,
   Specialist,
@@ -8,19 +8,9 @@ import {
   ResourceArticle,
   AppointmentInquiry,
 } from '../types';
-import {
-  DEFAULT_SETTINGS,
-  SPECIALISTS,
-  SERVICES,
-  EDUCATIONAL_TOOLS,
-  ARTICLES,
-  TESTIMONIALS,
-  TIMELINE_MILESTONES,
-  CORE_VALUES,
-} from '../data/practiceData';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { findCondition } from '../data/conditionsData';
-import { findCity, type CityInfo } from '../data/citiesData';
+import { DEFAULT_SETTINGS } from '../data/settingsData';
+import { HEADER_CONDITIONS, HEADER_CITIES } from '../data/headerNavData';
+import { useNavigate, useLocation } from '../lib/router';
 
 interface PracticeContextType {
   settings: PracticeSettings;
@@ -36,13 +26,12 @@ interface PracticeContextType {
   selectedArticle: ResourceArticle | null;
   selectedLegalTab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial';
 
-  // Dedicated Condition Page
-  activeConditionPage: ConditionItem | null;
+  // Dedicated Condition & City route indicators
+  activeConditionPage: { slug: string; title: string } | null;
   openConditionPage: (conditionIdOrSlug: string) => void;
   closeConditionPage: () => void;
 
-  // Dedicated City Page
-  activeCityPage: CityInfo | null;
+  activeCityPage: { slug: string; name: string } | null;
   openCityPage: (cityIdOrSlug: string) => void;
   closeCityPage: () => void;
 
@@ -76,7 +65,14 @@ interface PracticeContextType {
 
 const PracticeContext = createContext<PracticeContextType | undefined>(undefined);
 
+const SPECIALIST_NAMES: Record<string, string> = {
+  'dr-farah-kamran': 'Dr. Farah Kamran, Ph.D.',
+  'dr-tariq-mahmood': 'Dr. Tariq Mahmood, Ph.D.',
+  'ms-ayesha-siddiqui': 'Ms. Ayesha Siddiqui, M.Phil',
+};
+
 export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const hasInitializedSettings = useRef(false);
   const [settings, setSettings] = useState<PracticeSettings>(() => {
     try {
       const saved = localStorage.getItem('inst_1981_practice_settings');
@@ -135,16 +131,20 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [selectedArticle, setSelectedArticle] = useState<ResourceArticle | null>(null);
   const [selectedLegalTab, setSelectedLegalTab] = useState<'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial'>('disclaimer');
 
-  // Derive activeConditionPage and activeCityPage synchronously from clean pathname
+  // Derive active condition/city route metadata from lightweight headerNavData
   const activeConditionSlug = location.pathname.startsWith('/condition/')
     ? location.pathname.replace(/^\/condition\//, '').split('/')[0].split('#')[0]
     : null;
-  const activeConditionPage = activeConditionSlug ? findCondition(activeConditionSlug) || null : null;
+  const activeConditionPage = activeConditionSlug
+    ? HEADER_CONDITIONS.find((c) => c.slug === activeConditionSlug || c.id === activeConditionSlug) || null
+    : null;
 
   const activeCitySlug = location.pathname.startsWith('/city/')
     ? location.pathname.replace(/^\/city\//, '').split('/')[0].split('#')[0]
     : null;
-  const activeCityPage = activeCitySlug ? findCity(activeCitySlug) || null : null;
+  const activeCityPage = activeCitySlug
+    ? HEADER_CITIES.find((c) => c.slug === activeCitySlug || c.id === activeCitySlug) || null
+    : null;
 
   const [prefillReason, setPrefillReason] = useState<string>('');
   const [prefillSpecialistId, setPrefillSpecialistId] = useState<string>('');
@@ -181,7 +181,12 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, [location.pathname, location.hash, navigate]);
 
+  // Avoid redundant synchronous localStorage write on initial mount
   useEffect(() => {
+    if (!hasInitializedSettings.current) {
+      hasInitializedSettings.current = true;
+      return;
+    }
     try {
       localStorage.setItem('inst_1981_practice_settings', JSON.stringify(settings));
     } catch (e) {
@@ -208,8 +213,8 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (plan) {
       message = `Hello Life Reset Pakistan, I would like to book an appointment for the "${plan}" plan.`;
     } else if (specialistId) {
-      const spec = SPECIALISTS.find((s) => s.id === specialistId);
-      message = `Hello Life Reset Pakistan, I would like to book a consultation with ${spec ? spec.name : specialistId}.`;
+      const specName = SPECIALIST_NAMES[specialistId] || specialistId;
+      message = `Hello Life Reset Pakistan, I would like to book a consultation with ${specName}.`;
     } else if (reason) {
       message = `Hello Life Reset Pakistan, I would like to book a consultation regarding ${reason}.`;
     }
@@ -221,26 +226,31 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const openServiceDetail = (serviceId: string) => {
-    const s = SERVICES.find((item) => item.id === serviceId || item.slug === serviceId);
-    if (s) {
-      setSelectedService(s);
-      setActiveModal('service');
-    }
+    import('../data/practiceData').then(({ SERVICES }) => {
+      const s = SERVICES.find((item) => item.id === serviceId || item.slug === serviceId);
+      if (s) {
+        setSelectedService(s);
+        setActiveModal('service');
+      }
+    });
   };
 
   const openSpecialistProfile = (specialistId: string) => {
-    const spec = SPECIALISTS.find((item) => item.id === specialistId);
-    if (spec) {
-      setSelectedSpecialist(spec);
-      setActiveModal('specialist');
-    }
+    import('../data/practiceData').then(({ SPECIALISTS }) => {
+      const spec = SPECIALISTS.find((item) => item.id === specialistId);
+      if (spec) {
+        setSelectedSpecialist(spec);
+        setActiveModal('specialist');
+      }
+    });
   };
 
   const openConditionPage = (conditionIdOrSlug: string) => {
-    const c = findCondition(conditionIdOrSlug);
-    if (c) {
-      setSelectedCondition(c);
-      navigate(`/condition/${c.slug}`);
+    const clean = (conditionIdOrSlug || '').toLowerCase().trim();
+    const match = HEADER_CONDITIONS.find((c) => c.id === clean || c.slug === clean);
+    const slug = match?.slug || clean;
+    if (slug) {
+      navigate(`/condition/${slug}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -251,9 +261,11 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const openCityPage = (cityIdOrSlug: string) => {
-    const c = findCity(cityIdOrSlug);
-    if (c) {
-      navigate(`/city/${c.slug}`);
+    const clean = (cityIdOrSlug || '').toLowerCase().trim();
+    const match = HEADER_CITIES.find((c) => c.id === clean || c.slug === clean);
+    const slug = match?.slug || clean;
+    if (slug) {
+      navigate(`/city/${slug}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -264,28 +276,27 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const openConditionDetail = (conditionId: string) => {
-    const c = findCondition(conditionId);
-    if (c) {
-      setSelectedCondition(c);
-      navigate(`/condition/${c.slug}`);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    openConditionPage(conditionId);
   };
 
   const openEducationalTool = (toolId: string) => {
-    const t = EDUCATIONAL_TOOLS.find((item) => item.id === toolId);
-    if (t) {
-      setSelectedTool(t);
-      setActiveModal('tool');
-    }
+    import('../data/practiceData').then(({ EDUCATIONAL_TOOLS }) => {
+      const t = EDUCATIONAL_TOOLS.find((item) => item.id === toolId);
+      if (t) {
+        setSelectedTool(t);
+        setActiveModal('tool');
+      }
+    });
   };
 
   const openArticle = (articleId: string) => {
-    const art = ARTICLES.find((item) => item.id === articleId || item.slug === articleId);
-    if (art) {
-      navigate(`/blog/${art.slug}`);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    import('../data/practiceData').then(({ ARTICLES }) => {
+      const art = ARTICLES.find((item) => item.id === articleId || item.slug === articleId);
+      if (art) {
+        navigate(`/blog/${art.slug}`);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
   };
 
   const openLegal = (tab: 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'editorial') => {
@@ -299,11 +310,10 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Global keyboard listener for Escape key to close any modal or active overlay
   useEffect(() => {
+    if (!activeModal) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        if (activeModal) {
-          closeModal();
-        }
+        closeModal();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -332,7 +342,6 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const submitAppointment = (inquiry: Omit<AppointmentInquiry, 'timestamp' | 'ghlPipelineStage' | 'ghlTags'>) => {
-    // Generate GHL tags matching Section 38 requirements
     const sanitizedReason = inquiry.reasonForContact.toLowerCase().replace(/[^a-z0-9]/g, '-');
     const typeTag = `type-${inquiry.preferredAppointmentType.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
     const ghlTags = [
@@ -349,7 +358,6 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       ghlTags,
     };
 
-    // Store inquiry locally for clinic intake review
     try {
       const existing = JSON.parse(localStorage.getItem('inst_1981_inquiries') || '[]');
       existing.unshift(submission);
@@ -358,7 +366,7 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       console.warn('Could not save inquiry locally', e);
     }
 
-    // Save appointment inquiry to Supabase backend asynchronously
+    // Save appointment inquiry to Supabase backend lazily on form submission
     import('../lib/supabase')
       .then(({ saveAppointmentToSupabase }) => saveAppointmentToSupabase(inquiry))
       .then((res) => {
@@ -372,7 +380,6 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         console.warn('[Supabase] Connection error:', err);
       });
 
-    // Dispatch webhook to GoHighLevel endpoint if configured
     if (settings.ghlWebhookUrl) {
       fetch(settings.ghlWebhookUrl, {
         method: 'POST',

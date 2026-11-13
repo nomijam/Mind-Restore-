@@ -111,7 +111,7 @@ export const AboutSection: React.FC = () => {
                   const el = document.querySelector('#services');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full py-2.5 text-xs font-semibold text-[#1C433E] bg-white hover:bg-neutral-50 border border-[#1C433E]/20 rounded-xl transition-all shadow-2xs"
+                className="w-full min-h-[44px] py-2.5 px-4 text-xs font-semibold text-[#1C433E] bg-white hover:bg-neutral-50 border border-[#1C433E]/20 rounded-xl transition-all shadow-2xs cursor-pointer flex items-center justify-center"
               >
                 EXPLORE ALL CLINICAL SERVICES
               </button>

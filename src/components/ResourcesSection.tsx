@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../lib/router';
 import { BookOpen, Clock, Calendar, ArrowRight } from 'lucide-react';
-import { ARTICLES, resourcesImg } from '../data/practiceData';
+import { ARTICLES, resourcesImg, resourcesMobileImg } from '../data/practiceData';
 
 export const ResourcesSection: React.FC = () => {
   const navigate = useNavigate();
@@ -70,13 +70,15 @@ export const ResourcesSection: React.FC = () => {
                 <div className="relative aspect-[16/10] bg-[#EAF2ED] overflow-hidden">
                   <img
                     src={resourcesImg}
+                    srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+                    sizes="(max-width: 767px) 100vw, 300px"
                     alt={`Mental health psychoeducation: ${art.title}`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
                     loading="lazy"
                     decoding="async"
                     width={480}
-                    height={300}
+                    height={360}
                   />
                   <span className="absolute top-3 left-3 bg-white/95 text-[#1C433E] text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded">
                     {art.category}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../lib/router';
 import { ChevronDown, Phone, MessageCircle, HelpCircle, ArrowRight } from 'lucide-react';
 import { FAQS } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';

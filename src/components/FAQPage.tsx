@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../lib/router';
 import {
   Sparkles,
   ArrowLeft,
@@ -185,17 +185,17 @@ export const FAQPage: React.FC = () => {
           <button
             type="button"
             onClick={handleBackToHome}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#A3C2B1] hover:text-white transition-colors cursor-pointer group"
+            className="min-h-[44px] inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#D1E2DA] hover:text-white transition-colors cursor-pointer group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Return to Homepage</span>
           </button>
 
-          <nav aria-label="Breadcrumb" className="text-xs text-[#A3C2B1] flex items-center gap-2">
+          <nav aria-label="Breadcrumb" className="text-xs text-[#D1E2DA] flex items-center gap-2 min-h-[44px]">
             <button
               type="button"
               onClick={handleBackToHome}
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer min-h-[44px] inline-flex items-center"
             >
               Home
             </button>
@@ -228,7 +228,7 @@ export const FAQPage: React.FC = () => {
                 <Lock className="w-4 h-4" />
                 <span>100% Confidential</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Strict medical privacy protocols for all sessions.
               </p>
             </div>
@@ -238,7 +238,7 @@ export const FAQPage: React.FC = () => {
                 <ShieldCheck className="w-4 h-4" />
                 <span>Licensed Clinicians</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Postgraduate clinical psychologists (Est. 1981).
               </p>
             </div>
@@ -248,7 +248,7 @@ export const FAQPage: React.FC = () => {
                 <CreditCard className="w-4 h-4" />
                 <span>Transparent Fees</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Clear PKR pricing without hidden recurring charges.
               </p>
             </div>
@@ -258,7 +258,7 @@ export const FAQPage: React.FC = () => {
                 <MessageSquare className="w-4 h-4" />
                 <span>WhatsApp Care</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Fast responses and simple booking via WhatsApp.
               </p>
             </div>
@@ -268,6 +268,8 @@ export const FAQPage: React.FC = () => {
 
       {/* Main FAQ Content Area */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+        <h2 className="sr-only">Frequently Asked Questions Directory</h2>
+
         {/* Search & Category Filter Controls */}
         <div className="bg-white p-4 sm:p-6 rounded-2xl border border-[#286C6A]/15 shadow-2xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Category Tabs */}
@@ -277,10 +279,10 @@ export const FAQPage: React.FC = () => {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-2 text-xs font-medium rounded-xl transition-all cursor-pointer ${
+                className={`min-h-[44px] px-3.5 py-2 text-xs font-medium rounded-xl transition-all cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-[#1C433E] text-white shadow-2xs font-semibold'
-                    : 'bg-[#F8F7F2] text-[#334646] hover:bg-[#EAF2ED]'
+                    : 'bg-[#F8F7F2] text-[#243333] hover:bg-[#EAF2ED]'
                 }`}
               >
                 {cat}
@@ -290,13 +292,13 @@ export const FAQPage: React.FC = () => {
 
           {/* Search Input */}
           <div className="relative min-w-[240px]">
-            <Search className="w-4 h-4 text-[#526363] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#243333] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions..."
-              className="w-full pl-9 pr-4 py-2 bg-[#F8F7F2] border border-[#286C6A]/15 rounded-xl text-xs sm:text-sm text-[#243333] placeholder-[#526363] focus:outline-none focus:ring-2 focus:ring-[#1C433E] focus:bg-white"
+              className="w-full min-h-[44px] pl-9 pr-4 py-2 bg-[#F8F7F2] border border-[#286C6A]/15 rounded-xl text-xs sm:text-sm text-[#243333] placeholder-[#243333]/70 focus:outline-none focus:ring-2 focus:ring-[#1C433E] focus:bg-white"
             />
           </div>
         </div>
@@ -305,9 +307,9 @@ export const FAQPage: React.FC = () => {
         <div className="space-y-3.5">
           {filteredFaqs.length === 0 ? (
             <div className="p-12 text-center bg-white rounded-3xl border border-[#286C6A]/15 space-y-3">
-              <HelpCircle className="w-8 h-8 text-[#526363] mx-auto opacity-60" />
+              <HelpCircle className="w-8 h-8 text-[#243333] mx-auto opacity-60" />
               <h3 className="text-base font-bold text-[#1C433E]">No questions found</h3>
-              <p className="text-xs text-[#526363] max-w-sm mx-auto">
+              <p className="text-xs text-[#243333] max-w-sm mx-auto">
                 No questions matched "{searchQuery}". Try selecting another category or resetting your search.
               </p>
               <button
@@ -316,7 +318,7 @@ export const FAQPage: React.FC = () => {
                   setSearchQuery('');
                   setSelectedCategory('All');
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1C433E] text-white text-xs font-semibold hover:bg-[#286C6A] transition-colors cursor-pointer"
+                className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1C433E] text-white text-xs font-semibold hover:bg-[#286C6A] transition-colors cursor-pointer"
               >
                 <span>Reset Filters</span>
               </button>
@@ -332,7 +334,7 @@ export const FAQPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => toggleAccordion(index)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-[#EAF2ED]/30 transition-colors focus:outline-none cursor-pointer"
+                    className="w-full min-h-[48px] px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-[#EAF2ED]/30 transition-colors focus:outline-none cursor-pointer"
                     aria-expanded={isOpen}
                   >
                     <div className="space-y-1">
@@ -352,7 +354,7 @@ export const FAQPage: React.FC = () => {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-[#445555] leading-relaxed border-t border-[#286C6A]/10 animate-in fade-in duration-150 font-normal">
+                    <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-[#243333] leading-relaxed border-t border-[#286C6A]/10 animate-in fade-in duration-150 font-normal">
                       {faq.answer}
                     </div>
                   )}
@@ -369,9 +371,9 @@ export const FAQPage: React.FC = () => {
               <MessageSquare className="w-3.5 h-3.5" />
               <span>DIRECT INTAKE ASSISTANCE</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
+            <h2 className="text-xl sm:text-2xl font-heading font-bold text-white">
               Have a Specific Question Not Listed Here?
-            </h3>
+            </h2>
             <p className="text-xs sm:text-sm text-[#E2ECE7] leading-relaxed">
               Our clinical intake team is available on WhatsApp to answer questions regarding your symptoms, scheduling, psychologist matching, or payment logistics.
             </p>
@@ -382,7 +384,7 @@ export const FAQPage: React.FC = () => {
               href={coordinatorWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-[0.99] cursor-pointer"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-[0.99] cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>ASK ON WHATSAPP</span>
@@ -390,7 +392,7 @@ export const FAQPage: React.FC = () => {
 
             <a
               href={getPhoneCallLink()}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm border border-white/20 transition-all cursor-pointer"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm border border-white/20 transition-all cursor-pointer"
             >
               <Phone className="w-4 h-4" />
               <span>Call Reception</span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, ShieldCheck, Settings } from 'lucide-react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from '../lib/router';
 import { usePractice } from '../context/PracticeContext';
 import { MindRestoreLogo } from './MindRestoreLogo';
 
@@ -48,19 +48,21 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-[#1C433E] text-white pt-16 pb-12 text-left" id="contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="sr-only">Footer Directory and Clinical Information</h2>
+
         {/* Footer Top Message with Logo */}
         <div className="pb-12 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3">
             <MindRestoreLogo variant="horizontal" size="lg" lightMode={true} />
-            <p className="text-xs text-neutral-300 max-w-lg font-light leading-relaxed">
+            <p className="text-xs text-[#E2ECE7] max-w-lg font-normal leading-relaxed">
               Four decades of ethical clinical psychology, patient dignity, and evidence-informed psychotherapeutic care for individuals, couples and families.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-[#A3C2B1]">
+            <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-[#E2ECE7]">
               <span className="font-semibold block text-white mb-0.5">Nationwide & Worldwide Tele-Health</span>
-              <span>Encrypted digital video & confidential voice sessions.</span>
+              <span className="text-[#E2ECE7]">Encrypted digital video & confidential voice sessions.</span>
             </div>
           </div>
         </div>
@@ -72,7 +74,7 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading font-bold text-[#D8B878] uppercase tracking-wider text-[11px]">
               ABOUT
             </h3>
-            <ul className="space-y-2 text-neutral-300">
+            <ul className="space-y-2 text-[#E2ECE7]">
               <li>
                 <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className="hover:text-white transition-colors">Our History</a>
               </li>
@@ -106,29 +108,29 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading font-bold text-[#D8B878] uppercase tracking-wider text-[11px]">
               SERVICES
             </h3>
-            <ul className="space-y-2 text-neutral-300">
+            <ul className="space-y-2 text-[#E2ECE7]">
               <li>
-                <button onClick={() => openServiceDetail('individual-counselling')} className="hover:text-white text-left transition-colors">
+                <button onClick={() => openServiceDetail('individual-counselling')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Counselling
                 </button>
               </li>
               <li>
-                <button onClick={() => openServiceDetail('psychological-assessment')} className="hover:text-white text-left transition-colors">
+                <button onClick={() => openServiceDetail('psychological-assessment')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Psychological Assessment
                 </button>
               </li>
               <li>
-                <button onClick={() => openServiceDetail('family-counselling')} className="hover:text-white text-left transition-colors">
+                <button onClick={() => openServiceDetail('family-counselling')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Family Support
                 </button>
               </li>
               <li>
-                <button onClick={() => openServiceDetail('couples-counselling')} className="hover:text-white text-left transition-colors">
+                <button onClick={() => openServiceDetail('couples-counselling')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Relationship Support
                 </button>
               </li>
               <li>
-                <button onClick={() => openServiceDetail('online-counselling')} className="hover:text-white text-left transition-colors">
+                <button onClick={() => openServiceDetail('online-counselling')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Online Counselling
                 </button>
               </li>
@@ -140,18 +142,18 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading font-bold text-[#D8B878] uppercase tracking-wider text-[11px]">
               RESOURCES
             </h3>
-            <ul className="space-y-2 text-neutral-300">
+            <ul className="space-y-2 text-[#E2ECE7]">
               <li>
-                <a href="/blog" onClick={(e) => handleNavClick(e, '/blog')} className="hover:text-white transition-colors">Blog & Articles</a>
+                <a href="/blog" onClick={(e) => handleNavClick(e, '/blog')} className="hover:text-white transition-colors py-1 inline-block">Blog & Articles</a>
               </li>
               <li>
-                <a href="#tools" onClick={(e) => handleNavClick(e, '#tools')} className="hover:text-white transition-colors">Educational Tools</a>
+                <a href="#tools" onClick={(e) => handleNavClick(e, '#tools')} className="hover:text-white transition-colors py-1 inline-block">Educational Tools</a>
               </li>
               <li>
-                <a href="/faq" onClick={(e) => handleNavClick(e, '/faq')} className="hover:text-white transition-colors">FAQs</a>
+                <a href="/faq" onClick={(e) => handleNavClick(e, '/faq')} className="hover:text-white transition-colors py-1 inline-block">FAQs</a>
               </li>
               <li>
-                <a href="#emergency" onClick={(e) => handleNavClick(e, '#emergency')} className="hover:text-white transition-colors">Emergency Information</a>
+                <a href="#emergency" onClick={(e) => handleNavClick(e, '#emergency')} className="hover:text-white transition-colors py-1 inline-block">Emergency Information</a>
               </li>
             </ul>
           </div>
@@ -161,29 +163,29 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading font-bold text-[#D8B878] uppercase tracking-wider text-[11px]">
               LEGAL & GOVERNANCE
             </h3>
-            <ul className="space-y-2 text-neutral-300">
+            <ul className="space-y-2 text-[#E2ECE7]">
               <li>
-                <button onClick={() => openLegal('editorial')} className="hover:text-white text-left transition-colors cursor-pointer">
+                <button onClick={() => openLegal('editorial')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Editorial & Review Policy
                 </button>
               </li>
               <li>
-                <button onClick={() => openLegal('disclaimer')} className="hover:text-white text-left transition-colors cursor-pointer">
+                <button onClick={() => openLegal('disclaimer')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Medical Disclaimer
                 </button>
               </li>
               <li>
-                <button onClick={() => openLegal('privacy')} className="hover:text-white text-left transition-colors cursor-pointer">
+                <button onClick={() => openLegal('privacy')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Privacy Policy
                 </button>
               </li>
               <li>
-                <button onClick={() => openLegal('terms')} className="hover:text-white text-left transition-colors cursor-pointer">
+                <button onClick={() => openLegal('terms')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Terms of Service
                 </button>
               </li>
               <li>
-                <button onClick={() => openLegal('accessibility')} className="hover:text-white text-left transition-colors cursor-pointer">
+                <button onClick={() => openLegal('accessibility')} className="hover:text-white text-left transition-colors cursor-pointer py-1 inline-block">
                   Accessibility Statement
                 </button>
               </li>
@@ -195,25 +197,25 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading font-bold text-[#D8B878] uppercase tracking-wider text-[11px]">
               CONTACT
             </h3>
-            <ul className="space-y-2 text-neutral-300 text-[11px]">
+            <ul className="space-y-2.5 text-[#E2ECE7] text-[11px]">
               <li className="flex items-start gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-[#8EAD9A] shrink-0 mt-0.5" />
-                <a href={getPhoneCallLink()} className="hover:text-white hover:underline transition-colors">
+                <Phone className="w-3.5 h-3.5 text-[#D8B878] shrink-0 mt-0.5" />
+                <a href={getPhoneCallLink()} className="hover:text-white hover:underline transition-colors py-0.5">
                   {settings.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-start gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-[#8EAD9A] shrink-0 mt-0.5" />
-                <a href={`mailto:${settings.email}`} className="hover:text-white hover:underline transition-colors">
+                <Mail className="w-3.5 h-3.5 text-[#D8B878] shrink-0 mt-0.5" />
+                <a href={`mailto:${settings.email}`} className="hover:text-white hover:underline transition-colors py-0.5">
                   {settings.email}
                 </a>
               </li>
               <li className="flex items-start gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#8EAD9A] shrink-0 mt-0.5" />
+                <MapPin className="w-3.5 h-3.5 text-[#D8B878] shrink-0 mt-0.5" />
                 <span>{settings.inPersonClinicAddress}</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#8EAD9A] shrink-0 mt-0.5" />
+                <Clock className="w-3.5 h-3.5 text-[#D8B878] shrink-0 mt-0.5" />
                 <span>{settings.hoursOfOperation}</span>
               </li>
             </ul>
@@ -223,16 +225,16 @@ export const Footer: React.FC = () => {
               <span className="text-[10px] font-bold text-[#D8B878] uppercase tracking-wider block mb-2">
                 Follow Us
               </span>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <a
                   href="https://www.instagram.com/liferesetpakistan/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit Life Reset Pakistan on Instagram (opens in a new tab)"
-                  className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 hover:border-[#D8B878]/60 text-neutral-300 hover:text-[#D8B878] flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D8B878] focus:ring-offset-2 focus:ring-offset-[#1C433E]"
+                  className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#D8B878] text-[#E2ECE7] hover:text-[#D8B878] flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D8B878] focus:ring-offset-2 focus:ring-offset-[#1C433E]"
                 >
                   <svg
-                    className="w-4 h-4 fill-current"
+                    className="w-5 h-5 fill-current"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                     focusable="false"
@@ -246,10 +248,10 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit Life Reset Pakistan on Facebook (opens in a new tab)"
-                  className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 hover:border-[#D8B878]/60 text-neutral-300 hover:text-[#D8B878] flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D8B878] focus:ring-offset-2 focus:ring-offset-[#1C433E]"
+                  className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#D8B878] text-[#E2ECE7] hover:text-[#D8B878] flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D8B878] focus:ring-offset-2 focus:ring-offset-[#1C433E]"
                 >
                   <svg
-                    className="w-4 h-4 fill-current"
+                    className="w-5 h-5 fill-current"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                     focusable="false"
@@ -268,28 +270,28 @@ export const Footer: React.FC = () => {
             <span className="text-[11px] font-bold text-[#D8B878] uppercase tracking-wider shrink-0">
               Clinical Focus Areas:
             </span>
-            <div className="flex flex-wrap gap-x-3 gap-y-1 text-neutral-300 text-[11px]">
-              <Link to="/condition/anxiety-counselling" className="hover:text-white transition-colors">Anxiety Counselling</Link>
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[#E2ECE7] text-[11px]">
+              <Link to="/condition/anxiety-counselling" className="hover:text-white transition-colors py-0.5">Anxiety Counselling</Link>
               <span>·</span>
-              <Link to="/condition/depression-counselling" className="hover:text-white transition-colors">Depression Support</Link>
+              <Link to="/condition/depression-counselling" className="hover:text-white transition-colors py-0.5">Depression Support</Link>
               <span>·</span>
-              <Link to="/condition/stress-burnout" className="hover:text-white transition-colors">Stress & Burnout</Link>
+              <Link to="/condition/stress-burnout" className="hover:text-white transition-colors py-0.5">Stress & Burnout</Link>
               <span>·</span>
-              <Link to="/condition/marriage-couple-counselling" className="hover:text-white transition-colors">Couples Counselling</Link>
+              <Link to="/condition/marriage-couple-counselling" className="hover:text-white transition-colors py-0.5">Couples Counselling</Link>
               <span>·</span>
-              <Link to="/condition/family-counselling-therapy" className="hover:text-white transition-colors">Family Therapy</Link>
+              <Link to="/condition/family-counselling-therapy" className="hover:text-white transition-colors py-0.5">Family Therapy</Link>
               <span>·</span>
-              <Link to="/condition/student-counselling" className="hover:text-white transition-colors">Student Counselling</Link>
+              <Link to="/condition/student-counselling" className="hover:text-white transition-colors py-0.5">Student Counselling</Link>
               <span>·</span>
-              <Link to="/condition/child-teen-psychologist" className="hover:text-white transition-colors">Child & Teen Psychology</Link>
+              <Link to="/condition/child-teen-psychologist" className="hover:text-white transition-colors py-0.5">Child & Teen Psychology</Link>
               <span>·</span>
-              <Link to="/condition/ocd-treatment" className="hover:text-white transition-colors">OCD Care</Link>
+              <Link to="/condition/ocd-treatment" className="hover:text-white transition-colors py-0.5">OCD Care</Link>
               <span>·</span>
-              <Link to="/condition/ptsd-trauma-therapy" className="hover:text-white transition-colors">Trauma & PTSD</Link>
+              <Link to="/condition/ptsd-trauma-therapy" className="hover:text-white transition-colors py-0.5">Trauma & PTSD</Link>
               <span>·</span>
-              <Link to="/condition/sleep-disorders" className="hover:text-white transition-colors">Sleep Difficulties</Link>
+              <Link to="/condition/sleep-disorders" className="hover:text-white transition-colors py-0.5">Sleep Difficulties</Link>
               <span>·</span>
-              <Link to="/condition/female-psychologist-online" className="hover:text-white transition-colors">Female Psychologist</Link>
+              <Link to="/condition/female-psychologist-online" className="hover:text-white transition-colors py-0.5">Female Psychologist</Link>
             </div>
           </div>
 
@@ -297,36 +299,36 @@ export const Footer: React.FC = () => {
             <span className="text-[11px] font-bold text-[#D8B878] uppercase tracking-wider shrink-0">
               Regional Tele-Health:
             </span>
-            <div className="flex flex-wrap gap-x-3 gap-y-1 text-neutral-300 text-[11px]">
-              <Link to="/city/lahore" className="hover:text-white transition-colors">Lahore (Founded 1981)</Link>
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[#E2ECE7] text-[11px]">
+              <Link to="/city/lahore" className="hover:text-white transition-colors py-0.5">Lahore (Founded 1981)</Link>
               <span>·</span>
-              <Link to="/city/karachi" className="hover:text-white transition-colors">Karachi</Link>
+              <Link to="/city/karachi" className="hover:text-white transition-colors py-0.5">Karachi</Link>
               <span>·</span>
-              <Link to="/city/islamabad-rawalpindi" className="hover:text-white transition-colors">Islamabad & Rawalpindi</Link>
+              <Link to="/city/islamabad-rawalpindi" className="hover:text-white transition-colors py-0.5">Islamabad & Rawalpindi</Link>
               <span>·</span>
-              <Link to="/city/faisalabad" className="hover:text-white transition-colors">Faisalabad</Link>
+              <Link to="/city/faisalabad" className="hover:text-white transition-colors py-0.5">Faisalabad</Link>
               <span>·</span>
-              <Link to="/city/peshawar" className="hover:text-white transition-colors">Peshawar</Link>
+              <Link to="/city/peshawar" className="hover:text-white transition-colors py-0.5">Peshawar</Link>
               <span>·</span>
-              <Link to="/city/multan" className="hover:text-white transition-colors">Multan</Link>
+              <Link to="/city/multan" className="hover:text-white transition-colors py-0.5">Multan</Link>
               <span>·</span>
-              <Link to="/city/overseas-worldwide" className="hover:text-white transition-colors">Global Diaspora Tele-Health</Link>
+              <Link to="/city/overseas-worldwide" className="hover:text-white transition-colors py-0.5">Global Diaspora Tele-Health</Link>
             </div>
           </div>
         </div>
 
         {/* Footer Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#E2ECE7]">
           <p>© {new Date().getFullYear()} {settings.organizationName} (Est. {settings.foundedYear}). All rights reserved.</p>
 
           <div className="flex items-center gap-4 flex-wrap">
             <span className="text-[11px]">Strict Outpatient Clinical Standards</span>
             <button
               onClick={() => openAdmin()}
-              className="text-[#D8B878] hover:text-white transition-colors flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-[#D8B878]/30 cursor-pointer"
+              className="text-[#D8B878] hover:text-white transition-colors flex items-center gap-1.5 text-[11px] font-semibold min-h-[44px] px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-[#D8B878]/50 cursor-pointer"
               title="Life Reset Pakistan Administrator Portal"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#D8B878]" />
+              <ShieldCheck className="w-4 h-4 text-[#D8B878]" />
               <span>Admin Sign-up / Login</span>
             </button>
           </div>

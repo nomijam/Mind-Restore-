@@ -117,15 +117,15 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({ onClose,
                 <MessageCircle className="w-5 h-5 text-[#25D366]" />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-[#1C433E]">Prefer Instant Scheduling?</h4>
-                <p className="text-[11px] text-[#526363]">Book directly via WhatsApp with our clinical coordinator for fastest confirmation</p>
+                <h3 className="text-xs font-bold text-[#1C433E]">Prefer Instant Scheduling?</h3>
+                <p className="text-[11px] text-[#1C433E]/85">Book directly via WhatsApp with our clinical coordinator for fastest confirmation</p>
               </div>
             </div>
             <a
               href={getWhatsAppLink('Hello Life Reset Pakistan, I would like to book a confidential consultation (Est. 1981).')}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] transition-colors shadow-2xs whitespace-nowrap"
+              className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-[#1C433E] hover:bg-[#14322e] transition-colors shadow-2xs whitespace-nowrap"
             >
               <span>Book on WhatsApp</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#D8B878]" />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from '../lib/router';
 import {
   ArrowLeft,
   ArrowRight,
@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { SEOHead } from './SEOHead';
 import { NotFoundPage } from './NotFoundPage';
-import { findArticle, ARTICLES, resourcesImg } from '../data/practiceData';
+import { findArticle, ARTICLES, resourcesImg, resourcesMobileImg } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const ArticlePage: React.FC = () => {
@@ -137,20 +137,20 @@ export const ArticlePage: React.FC = () => {
           <button
             type="button"
             onClick={handleBackToBlog}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#A3C2B1] hover:text-white transition-colors cursor-pointer group"
+            className="min-h-[44px] inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#D1E2DA] hover:text-white transition-colors cursor-pointer group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to All Articles</span>
           </button>
 
-          <nav aria-label="Breadcrumb" className="text-xs text-[#A3C2B1] flex items-center gap-2">
+          <nav aria-label="Breadcrumb" className="text-xs text-[#D1E2DA] flex items-center gap-2 min-h-[44px]">
             <button
               type="button"
               onClick={() => {
                 navigate('/');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer min-h-[44px] inline-flex items-center"
             >
               Home
             </button>
@@ -158,7 +158,7 @@ export const ArticlePage: React.FC = () => {
             <button
               type="button"
               onClick={handleBackToBlog}
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer min-h-[44px] inline-flex items-center"
             >
               Blog
             </button>
@@ -175,7 +175,7 @@ export const ArticlePage: React.FC = () => {
             <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider text-[#D8B878] uppercase bg-white/10 border border-white/15">
               {article.category} Psychoeducation
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium text-[#A3C2B1] bg-white/5">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium text-[#D1E2DA] bg-white/5">
               <ShieldCheck className="w-3.5 h-3.5 text-[#D8B878]" />
               <span>Evidence-Informed Medical Sourcing</span>
             </span>
@@ -189,12 +189,12 @@ export const ArticlePage: React.FC = () => {
           <div className="pt-2 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#E2ECE7]">
             <span className="font-semibold text-[#D8B878]">{article.author}</span>
             <span aria-hidden="true">•</span>
-            <span className="flex items-center gap-1 text-[#A3C2B1]">
+            <span className="flex items-center gap-1 text-[#D1E2DA]">
               <Clock className="w-3.5 h-3.5" />
               <span>{article.readTime}</span>
             </span>
             <span aria-hidden="true">•</span>
-            <span className="text-[#A3C2B1]">{article.date}</span>
+            <span className="text-[#D1E2DA]">{article.date}</span>
           </div>
         </div>
       </div>
@@ -203,13 +203,36 @@ export const ArticlePage: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
         {/* Featured Image with Clinical Caption */}
         <div className="rounded-3xl overflow-hidden border border-[#286C6A]/20 shadow-xs bg-[#EAF2ED]">
-          <img
-            src={resourcesImg}
-            alt={article.title}
-            className="w-full aspect-[21/9] sm:aspect-[2/1] object-cover"
-            loading="eager"
-            decoding="async"
-          />
+          <picture className="block w-full">
+            <source
+              media="(max-width: 640px)"
+              srcSet={`${resourcesMobileImg} 480w`}
+              sizes="100vw"
+              type="image/webp"
+              width={480}
+              height={360}
+            />
+            <source
+              media="(min-width: 641px)"
+              srcSet={`${resourcesImg} 800w`}
+              sizes="(max-width: 896px) 100vw, 896px"
+              type="image/webp"
+              width={800}
+              height={600}
+            />
+            <img
+              src={resourcesImg}
+              srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+              sizes="(max-width: 896px) 100vw, 896px"
+              width={800}
+              height={600}
+              alt={article.title}
+              className="w-full aspect-[21/9] sm:aspect-[2/1] object-cover"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
           <div className="p-3 bg-white/80 border-t border-[#286C6A]/10 text-center text-xs text-[#526363] italic">
             Clinical psychoeducation provided for educational awareness and personal resilience.
           </div>
@@ -330,9 +353,9 @@ export const ArticlePage: React.FC = () => {
               <ShieldCheck className="w-4 h-4" />
               <span>CONFIDENTIAL CLINICAL CONSULTATION</span>
             </span>
-            <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
+            <h2 className="text-xl sm:text-2xl font-heading font-bold text-white">
               Speak Privately With a Clinical Psychologist
-            </h3>
+            </h2>
             <p className="text-xs sm:text-sm text-[#E2ECE7] leading-relaxed max-w-xl">
               If reading this article resonated with your personal experience, professional support is available. We provide 100% confidential online video, voice, and WhatsApp text counselling across Pakistan and overseas.
             </p>
@@ -343,7 +366,7 @@ export const ArticlePage: React.FC = () => {
               href={whatsappConsultationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-[0.99] cursor-pointer"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-[0.99] cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>DISCUSS THIS ON WHATSAPP</span>
@@ -355,7 +378,7 @@ export const ArticlePage: React.FC = () => {
                 navigate('/plans-and-pricing');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm border border-white/20 transition-all cursor-pointer"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm border border-white/20 transition-all cursor-pointer"
             >
               <span>View Counselling Plans & Fees</span>
             </button>
@@ -365,13 +388,13 @@ export const ArticlePage: React.FC = () => {
         {/* Related Articles Section */}
         <div className="space-y-6 pt-6 border-t border-[#286C6A]/15">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-heading font-bold text-[#1C433E]">
+            <h2 className="text-xl font-heading font-bold text-[#1C433E]">
               Related Psychoeducational Guides
-            </h3>
+            </h2>
             <button
               type="button"
               onClick={handleBackToBlog}
-              className="text-xs font-semibold text-[#1C433E] hover:underline cursor-pointer flex items-center gap-1"
+              className="min-h-[44px] text-xs font-semibold text-[#1C433E] hover:underline cursor-pointer inline-flex items-center gap-1"
             >
               <span>View All Articles</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -392,9 +415,9 @@ export const ArticlePage: React.FC = () => {
                   <span className="text-[10px] font-bold text-[#8A5C14] uppercase tracking-wider">
                     {rel.category}
                   </span>
-                  <h4 className="text-sm font-heading font-bold text-[#243333] group-hover:text-[#1C433E] transition-colors leading-snug line-clamp-2">
+                  <h3 className="text-sm font-heading font-bold text-[#243333] group-hover:text-[#1C433E] transition-colors leading-snug line-clamp-2">
                     {rel.title}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#526363] line-clamp-2 leading-relaxed">
                     {rel.excerpt}
                   </p>

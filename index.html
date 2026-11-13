@@ -49,23 +49,79 @@
     <link rel="shortcut icon" href="/favicon.svg?v=4" />
     <link rel="apple-touch-icon" href="/favicon.svg?v=4" />
     <link rel="manifest" href="/manifest.json" />
-    <!-- Preload Critical Hero LCP Image for Mobile & Desktop -->
-    <link
-      rel="preload"
-      as="image"
-      type="image/webp"
-      href="/images/heritage_clinical_consultation_mobile.webp"
-      media="(max-width: 640px)"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      type="image/webp"
-      href="/images/heritage_clinical_consultation_1791269818478.webp"
-      media="(min-width: 641px)"
-      fetchpriority="high"
-    />
+    <!-- Route-Aware Critical LCP Image Preload (Preloads ONLY the active route's LCP image) -->
+    <script>
+      (function () {
+        var path = (window.location.pathname || '/').replace(/\/+$/, '').toLowerCase() || '/';
+        var isMobile = window.matchMedia('(max-width: 640px)').matches;
+        var desktopHref = null;
+        var mobileHref = null;
+
+        var homeRoutes = ['/', '/services', '/about', '/how-it-works', '/timeline', '/tools', '/emergency', '/contact'];
+        if (homeRoutes.indexOf(path) !== -1) {
+          desktopHref = '/images/heritage_clinical_consultation_1791269818478.webp';
+          mobileHref = '/images/heritage_clinical_consultation_mobile.webp';
+        } else if (path.indexOf('/condition/') === 0) {
+          var condSlug = path.slice('/condition/'.length);
+          if (condSlug === 'anonymous-counselling') {
+            desktopHref = '/images/heritage_clinical_consultation_1791269818478.webp';
+            mobileHref = '/images/heritage_clinical_consultation_mobile.webp';
+          } else {
+            var condMap = {
+              'anxiety-counselling': 'hero_calm_sanctuary_1791725209855',
+              'stress-burnout': 'hero_calm_sanctuary_1791725209855',
+              'anger-management': 'hero_calm_sanctuary_1791725209855',
+              'phobia-treatment': 'hero_calm_sanctuary_1791725209855',
+              'grief-loss': 'hero_calm_sanctuary_1791725209855',
+              'addiction-counselling': 'hero_calm_sanctuary_1791725209855',
+              'depression-counselling': 'hero_therapy_haven_1791725247627',
+              'sleep-disorders': 'hero_therapy_haven_1791725247627',
+              'female-psychologist-online': 'hero_therapy_haven_1791725247627',
+              'ocd-treatment': 'hero_therapy_haven_1791725247627',
+              'ptsd-trauma-therapy': 'hero_therapy_haven_1791725247627',
+              'female-psychologist': 'hero_therapy_haven_1791725247627',
+              'health-anxiety': 'hero_therapy_session_1791220159037',
+              'relationship-breakup': 'hero_couple_dialogue_1791725291461',
+              'marriage-couple-counselling': 'hero_couple_dialogue_1791725291461',
+              'family-counselling-therapy': 'hero_couple_dialogue_1791725291461',
+              'child-teen-psychologist': 'hero_teen_counseling_1791725335471',
+              'student-counselling': 'hero_teen_counseling_1791725335471'
+            };
+            var condBase = condMap[condSlug] || 'hero_calm_sanctuary_1791725209855';
+            desktopHref = '/images/' + condBase + '.webp';
+            mobileHref = '/images/' + condBase + '_mobile.webp';
+          }
+        } else if (path.indexOf('/city/') === 0) {
+          var citySlug = path.slice('/city/'.length);
+          var cityMap = {
+            'lahore': 'hero_lahore_badshahi_1791725023747',
+            'karachi': 'hero_karachi_sea_1791725039726',
+            'islamabad-rawalpindi': 'hero_islamabad_faisal_1791725059621',
+            'faisalabad': 'hero_faisalabad_tower_1791725140269',
+            'peshawar': 'hero_peshawar_heritage_1791725084396',
+            'multan': 'hero_multan_saints_1791725110440',
+            'overseas-worldwide': 'hero_overseas_global_1791725172444'
+          };
+          var cityBase = cityMap[citySlug] || 'hero_lahore_badshahi_1791725023747';
+          desktopHref = '/images/' + cityBase + '.webp';
+          mobileHref = '/images/' + cityBase + '_mobile.webp';
+        } else if (path.indexOf('/blog/') === 0 || path.indexOf('/article/') === 0) {
+          desktopHref = '/images/resources_wellness_journal_1791220222535.webp';
+          mobileHref = '/images/resources_wellness_journal_mobile.webp';
+        }
+
+        var href = isMobile ? mobileHref : desktopHref;
+        if (href) {
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.type = 'image/webp';
+          link.href = href;
+          link.setAttribute('fetchpriority', 'high');
+          document.head.appendChild(link);
+        }
+      })();
+    </script>
 
     <!-- Non-Render-Blocking Typography with font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

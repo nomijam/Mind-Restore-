@@ -8,20 +8,17 @@ import {
   MapPin,
   CheckCircle2,
   Shield,
-  Clock,
   Video,
-  Globe,
   ChevronRight,
-  HelpCircle,
-  AlertCircle,
 } from 'lucide-react';
-import { CityInfo } from '../data/citiesData';
+import { CityInfo, CITIES_DATA, findCity } from '../data/citiesData';
 import { usePractice } from '../context/PracticeContext';
 import { SPECIALISTS } from '../data/practiceData';
-import { CITIES_DATA } from '../data/citiesData';
 import { getCityHeroImage } from '../data/heroImagesData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 import { SEOHead } from './SEOHead';
+import { useNavigate, useParams } from '../lib/router';
+import { NotFoundPage } from './NotFoundPage';
 
 interface CityPageProps {
   city: CityInfo;
@@ -30,13 +27,15 @@ interface CityPageProps {
 }
 
 export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }) => {
-  const { settings, openAppointment, getWhatsAppLink, getPhoneCallLink, openSpecialistProfile } =
+  const { settings, getWhatsAppLink, getPhoneCallLink, openSpecialistProfile } =
     usePractice();
 
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.scrollY > 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [city]);
 
   const toggleFaq = (index: number) => {
@@ -160,14 +159,37 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
       <section className="relative overflow-hidden border-b border-[#1C433E]/20 pt-12 pb-16 px-4 sm:px-6 lg:px-8 text-white min-h-[460px] flex items-center">
         {/* Background Landmark Image with Progressive Optimization */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={heroImage.src}
-            alt={heroImage.alt}
-            referrerPolicy="no-referrer"
-            loading="eager"
-            fetchPriority="high"
-            className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 ease-out"
-          />
+          <picture className="block w-full h-full">
+            <source
+              media="(max-width: 640px)"
+              srcSet={`${heroImage.mobileSrc} 640w`}
+              sizes="100vw"
+              type="image/webp"
+              width={640}
+              height={357}
+            />
+            <source
+              media="(min-width: 641px)"
+              srcSet={`${heroImage.src} 1280w`}
+              sizes="100vw"
+              type="image/webp"
+              width={heroImage.width}
+              height={heroImage.height}
+            />
+            <img
+              src={heroImage.src}
+              srcSet={`${heroImage.mobileSrc} 640w, ${heroImage.src} 1280w`}
+              sizes="100vw"
+              width={heroImage.width}
+              height={heroImage.height}
+              alt={heroImage.alt}
+              referrerPolicy="no-referrer"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 ease-out"
+            />
+          </picture>
           {/* Subtle Dark Gradient Overlay: Deep Pine (#112A27) with high readability across mobile & desktop */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#112A27]/95 via-[#112A27]/90 to-[#112A27]/80" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#112A27] via-transparent to-black/35" />
@@ -202,7 +224,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
           {/* Key Facts Grid with Frosted Glass Legibility */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
             <div className="bg-[#112A27]/75 backdrop-blur-md p-3.5 rounded-xl border border-white/15 shadow-xs">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3C2B1] block">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#D1E2DA] block">
                 Coverage
               </span>
               <span className="text-xs sm:text-sm font-bold text-white mt-0.5 block">
@@ -210,7 +232,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
               </span>
             </div>
             <div className="bg-[#112A27]/75 backdrop-blur-md p-3.5 rounded-xl border border-white/15 shadow-xs">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3C2B1] block">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#D1E2DA] block">
                 Session Mode
               </span>
               <span className="text-xs sm:text-sm font-bold text-white mt-0.5 block">
@@ -218,7 +240,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
               </span>
             </div>
             <div className="bg-[#112A27]/75 backdrop-blur-md p-3.5 rounded-xl border border-white/15 shadow-xs">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3C2B1] block">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#D1E2DA] block">
                 Languages
               </span>
               <span className="text-xs sm:text-sm font-bold text-white mt-0.5 block">
@@ -226,7 +248,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
               </span>
             </div>
             <div className="bg-[#112A27]/75 backdrop-blur-md p-3.5 rounded-xl border border-white/15 shadow-xs">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3C2B1] block">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#D1E2DA] block">
                 Confidentiality
               </span>
               <span className="text-xs sm:text-sm font-bold text-white mt-0.5 block">
@@ -243,7 +265,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 text-xs sm:text-sm font-semibold tracking-wide text-[#112A27] bg-[#D8B878] hover:bg-[#e0c489] rounded-xl shadow-md hover:shadow-lg transition-all active:scale-[0.98]"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs sm:text-sm font-semibold tracking-wide text-[#112A27] bg-[#D8B878] hover:bg-[#e0c489] rounded-xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
             >
               <Calendar className="w-4 h-4 text-[#112A27]" />
               <span>BOOK APPOINTMENT FOR {city.name.toUpperCase()}</span>
@@ -255,7 +277,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1C433E]/90 hover:bg-[#1C433E] border border-white/20 backdrop-blur-xs rounded-xl shadow-2xs hover:border-white transition-all"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1C433E]/90 hover:bg-[#1C433E] border border-white/20 backdrop-blur-xs rounded-xl shadow-2xs hover:border-white transition-all cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-[#25D366]" />
               <span>WHATSAPP RECEPTION</span>
@@ -263,7 +285,7 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
             <a
               href={getPhoneCallLink()}
-              className="inline-flex items-center gap-2 px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#E2ECE7] hover:text-white transition-colors"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#E2ECE7] hover:text-white transition-colors cursor-pointer"
             >
               <Phone className="w-4 h-4 text-[#D8B878]" />
               <span>Call: {settings.phoneDisplay}</span>
@@ -346,6 +368,10 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
                   <img
                     src={spec.image}
                     alt={spec.name}
+                    loading="lazy"
+                    decoding="async"
+                    width={56}
+                    height={56}
                     className="w-14 h-14 rounded-xl object-cover border border-[#1C433E]/15 shrink-0"
                   />
                   <div>
@@ -434,3 +460,29 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
     </article>
   );
 };
+
+export const CityRouteView: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const city = slug ? findCity(slug) : undefined;
+
+  if (!city) {
+    return <NotFoundPage />;
+  }
+
+  return (
+    <CityPage
+      city={city}
+      onBack={() => {
+        navigate('/');
+        if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+      }}
+      onSelectCity={(nextSlug) => {
+        navigate(`/city/${nextSlug}`);
+        if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+      }}
+    />
+  );
+};
+
+export default CityRouteView;

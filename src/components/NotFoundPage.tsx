@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../lib/router';
 import { ArrowLeft, Home, Phone, MessageCircle, ShieldCheck } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 import { SEOHead } from './SEOHead';

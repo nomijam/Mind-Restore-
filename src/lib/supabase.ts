@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import { AppointmentInquiry } from '../types';
 
 export const SUPABASE_PROJECT_ID = 'bvjzskzlwcbycmnmhsqf';
@@ -7,7 +6,131 @@ export const SUPABASE_URL =
 export const SUPABASE_ANON_KEY =
   import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_CaCkwvvh4t0gYKIYk9i6Ow_Fgzhe6Ao';
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+interface PostgrestResponse<T = any> {
+  data: T | null;
+  error: { code?: string; message?: string; details?: string; hint?: string } | null;
+}
+
+class PostgrestQuery {
+  private url: string;
+  private method: 'GET' | 'POST' | 'PATCH' | 'DELETE' = 'GET';
+  private bodyData: unknown = undefined;
+  private selectCols: string | null = null;
+  private filters: string[] = [];
+  private orderClause: string | null = null;
+  private limitCount: number | null = null;
+  private returnRepresentation = false;
+
+  constructor(private table: string) {
+    this.url = `${SUPABASE_URL}/rest/v1/${encodeURIComponent(table)}`;
+  }
+
+  select(columns = '*') {
+    this.selectCols = columns;
+    if (this.method === 'POST' || this.method === 'PATCH') {
+      this.returnRepresentation = true;
+    }
+    return this;
+  }
+
+  insert(rows: unknown[]) {
+    this.method = 'POST';
+    this.bodyData = rows;
+    return this;
+  }
+
+  update(values: Record<string, unknown>) {
+    this.method = 'PATCH';
+    this.bodyData = values;
+    return this;
+  }
+
+  delete() {
+    this.method = 'DELETE';
+    return this;
+  }
+
+  eq(column: string, value: string | number | boolean) {
+    this.filters.push(`${encodeURIComponent(column)}=eq.${encodeURIComponent(String(value))}`);
+    return this;
+  }
+
+  order(column: string, opts?: { ascending?: boolean }) {
+    const dir = opts?.ascending ? 'asc' : 'desc';
+    this.orderClause = `order=${encodeURIComponent(column)}.${dir}`;
+    return this;
+  }
+
+  limit(count: number) {
+    this.limitCount = count;
+    return this;
+  }
+
+  private async execute(): Promise<PostgrestResponse> {
+    const params: string[] = [];
+    if (this.selectCols && this.method === 'GET') {
+      params.push(`select=${encodeURIComponent(this.selectCols)}`);
+    } else if (this.selectCols && this.returnRepresentation) {
+      params.push(`select=${encodeURIComponent(this.selectCols)}`);
+    }
+    params.push(...this.filters);
+    if (this.orderClause) params.push(this.orderClause);
+    if (this.limitCount !== null) params.push(`limit=${this.limitCount}`);
+
+    const endpoint = params.length > 0 ? `${this.url}?${params.join('&')}` : this.url;
+    const headers: Record<string, string> = {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+    };
+    if (this.returnRepresentation) {
+      headers['Prefer'] = 'return=representation';
+    }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: this.method,
+        headers,
+        body: this.bodyData !== undefined ? JSON.stringify(this.bodyData) : undefined,
+      });
+
+      const text = await res.text();
+      let parsed: any = null;
+      if (text) {
+        try {
+          parsed = JSON.parse(text);
+        } catch {
+          parsed = null;
+        }
+      }
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: parsed || { message: `HTTP ${res.status}`, code: String(res.status) },
+        };
+      }
+
+      return { data: parsed, error: null };
+    } catch (err: any) {
+      return {
+        data: null,
+        error: { message: err?.message || 'Network error' },
+      };
+    }
+  }
+
+  then<TResult1 = PostgrestResponse, TResult2 = never>(
+    onfulfilled?: ((value: PostgrestResponse) => TResult1 | PromiseLike<TResult1>) | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null
+  ): Promise<TResult1 | TResult2> {
+    return this.execute().then(onfulfilled, onrejected);
+  }
+}
+
+export const supabase = {
+  from: (table: string) => new PostgrestQuery(table),
+};
 
 export interface SupabaseInsertResult {
   success: boolean;

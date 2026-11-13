@@ -4,26 +4,39 @@
  */
 
 import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from './lib/router';
 import { PracticeProvider, usePractice } from './context/PracticeContext';
 import { HeritageBar } from './components/HeritageBar';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { TrustSection } from './components/TrustSection';
-import { YouAreNotAloneSection } from './components/YouAreNotAloneSection';
-import { ConditionsSection } from './components/ConditionsSection';
-import { ServicesSection } from './components/ServicesSection';
-import { HowCareWorks } from './components/HowCareWorks';
-import { TimelineSection } from './components/TimelineSection';
-import { AboutSection } from './components/AboutSection';
-import { AppointmentSection } from './components/AppointmentSection';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
-import { NotFoundPage } from './components/NotFoundPage';
-import { findCondition } from './data/conditionsData';
-import { findCity } from './data/citiesData';
+import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
+import { MobileStickyBar } from './components/MobileStickyBar';
 
-// Below-the-fold sections code-split for performance
+// Below-the-fold Homepage sections code-split to minimize initial JS & main-thread work
+const YouAreNotAloneSection = React.lazy(() =>
+  import('./components/YouAreNotAloneSection').then((m) => ({ default: m.YouAreNotAloneSection }))
+);
+const ConditionsSection = React.lazy(() =>
+  import('./components/ConditionsSection').then((m) => ({ default: m.ConditionsSection }))
+);
+const ServicesSection = React.lazy(() =>
+  import('./components/ServicesSection').then((m) => ({ default: m.ServicesSection }))
+);
+const HowCareWorks = React.lazy(() =>
+  import('./components/HowCareWorks').then((m) => ({ default: m.HowCareWorks }))
+);
+const TimelineSection = React.lazy(() =>
+  import('./components/TimelineSection').then((m) => ({ default: m.TimelineSection }))
+);
+const AboutSection = React.lazy(() =>
+  import('./components/AboutSection').then((m) => ({ default: m.AboutSection }))
+);
+const AppointmentSection = React.lazy(() =>
+  import('./components/AppointmentSection').then((m) => ({ default: m.AppointmentSection }))
+);
 const PricingSection = React.lazy(() =>
   import('./components/PricingSection').then((m) => ({ default: m.PricingSection }))
 );
@@ -46,12 +59,12 @@ const FinalCtaSection = React.lazy(() =>
   import('./components/FinalCtaSection').then((m) => ({ default: m.FinalCtaSection }))
 );
 
-// Dedicated Condition, City, and Plans & Pricing Pages (Code-split)
-const ConditionPage = React.lazy(() =>
-  import('./components/ConditionPage').then((m) => ({ default: m.ConditionPage }))
+// Inner Route Pages (Code-split & preloaded per route via build plugin so Homepage stays lean)
+const ConditionRouteView = React.lazy(() =>
+  import('./components/ConditionPage').then((m) => ({ default: m.ConditionRouteView }))
 );
-const CityPage = React.lazy(() =>
-  import('./components/CityPage').then((m) => ({ default: m.CityPage }))
+const CityRouteView = React.lazy(() =>
+  import('./components/CityPage').then((m) => ({ default: m.CityRouteView }))
 );
 const PlansAndPricingPage = React.lazy(() =>
   import('./components/PlansAndPricingPage').then((m) => ({ default: m.PlansAndPricingPage }))
@@ -65,8 +78,11 @@ const ArticlePage = React.lazy(() =>
 const FAQPage = React.lazy(() =>
   import('./components/FAQPage').then((m) => ({ default: m.FAQPage }))
 );
+const NotFoundPage = React.lazy(() =>
+  import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage }))
+);
 
-// Modals & Drawers (Code-split)
+// Interactive Modals & Admin Portal (Code-split & conditionally mounted only when opened)
 const AppointmentModal = React.lazy(() =>
   import('./components/AppointmentModal').then((m) => ({ default: m.AppointmentModal }))
 );
@@ -92,26 +108,23 @@ const AdminPortal = React.lazy(() =>
   import('./components/AdminPortal').then((m) => ({ default: m.AdminPortal }))
 );
 
-// Floating & Mobile Controls
-import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
-import { MobileStickyBar } from './components/MobileStickyBar';
-
 /**
- * Scroll manager: handles route transitions and anchor scrolls
+ * Scroll manager: handles route transitions and anchor scrolls without forced reflows on initial mount
  */
 function ScrollManager() {
   const location = useLocation();
 
   useEffect(() => {
     if (location.hash) {
-      const element = document.querySelector(location.hash);
-      if (element) {
-        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 100);
-        return;
-      }
+      const rafId = window.requestAnimationFrame(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+      return () => window.cancelAnimationFrame(rafId);
     }
-    // Only scroll to top if there's no hash
-    if (!location.hash) {
+    if (window.scrollY > 0) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location.pathname, location.hash]);
@@ -120,7 +133,7 @@ function ScrollManager() {
 }
 
 /**
- * Home View: Landing page with all clinical sections and below-the-fold content
+ * Home View: Landing page with lean above-the-fold Hero/Trust and lazy below-the-fold sections
  */
 interface HomeViewProps {
   scrollTo?: string;
@@ -128,12 +141,16 @@ interface HomeViewProps {
 
 function HomeView({ scrollTo }: HomeViewProps) {
   useEffect(() => {
-    if (scrollTo) {
-      const element = document.getElementById(scrollTo);
-      if (element) {
-        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 120);
-      }
-    }
+    if (!scrollTo) return;
+    const timer = window.setTimeout(() => {
+      window.requestAnimationFrame(() => {
+        const element = document.getElementById(scrollTo);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }, 120);
+    return () => window.clearTimeout(timer);
   }, [scrollTo]);
 
   return (
@@ -144,119 +161,40 @@ function HomeView({ scrollTo }: HomeViewProps) {
         canonicalUrl="https://liferesetpakistan.com/"
       />
 
-      {/* Hero Section with Microcopy */}
+      {/* Above-the-fold Hero & Trust Section */}
       <Hero />
-
-      {/* Trust Section (Established 1981, Professional Care, Confidential, Human) */}
       <TrustSection />
 
-      {/* You Are Not Alone Section (Soft Pale Sage) */}
-      <YouAreNotAloneSection />
+      {/* Mid-page lazy sections */}
+      <React.Suspense fallback={<div className="min-h-[600px] bg-[#EAF2ED]" aria-hidden="true" />}>
+        <YouAreNotAloneSection />
+        <ConditionsSection />
+        <ServicesSection />
+        <HowCareWorks />
+        <TimelineSection />
+        <AboutSection />
+      </React.Suspense>
 
-      {/* Conditions Section (19 specialized clinical tracks) */}
-      <ConditionsSection />
-
-      {/* Services (10 real services) */}
-      <ServicesSection />
-
-      {/* How Care Works (4 steps) */}
-      <HowCareWorks />
-
-      {/* 1981 Timeline */}
-      <TimelineSection />
-
-      {/* About & Core Values */}
-      <AboutSection />
-
-      {/* Appointment Booking Section */}
-      <AppointmentSection />
-
-      {/* Below-the-fold lazy sections */}
-      <React.Suspense fallback={<div className="min-h-[400px] bg-[#F8F7F2]" aria-hidden="true" />}>
-        {/* Transparent Pricing Guidance */}
+      {/* Lower-page lazy sections */}
+      <React.Suspense fallback={<div className="min-h-[600px] bg-[#F8F7F2]" aria-hidden="true" />}>
+        <AppointmentSection />
         <PricingSection />
-
-        {/* Free Educational Screening Tools */}
         <EducationalToolsSection />
-
-        {/* Educational Resources Library */}
         <ResourcesSection />
-
-        {/* Testimonials */}
         <TestimonialsSection />
-
-        {/* Frequently Asked Questions */}
         <FAQSection />
-
-        {/* Clear Emergency Guidance */}
         <EmergencySection />
-
-        {/* Final Calm CTA */}
         <FinalCtaSection />
       </React.Suspense>
     </>
   );
 }
 
-/**
- * Condition Page View (Clean URL /condition/:slug)
- */
-function ConditionView() {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const condition = slug ? findCondition(slug) : undefined;
-
-  if (!condition) {
-    return <NotFoundPage />;
-  }
-
-  return (
-    <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-      <ConditionPage
-        condition={condition}
-        onBack={() => {
-          navigate('/');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        onSelectCondition={(nextSlug) => {
-          navigate(`/condition/${nextSlug}`);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
-    </React.Suspense>
-  );
-}
-
-/**
- * City Page View (Clean URL /city/:slug)
- */
-function CityView() {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const city = slug ? findCity(slug) : undefined;
-
-  if (!city) {
-    return <NotFoundPage />;
-  }
-
-  return (
-    <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-      <CityPage
-        city={city}
-        onBack={() => {
-          navigate('/');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        onSelectCity={(nextSlug) => {
-          navigate(`/city/${nextSlug}`);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
-    </React.Suspense>
-  );
-}
+const PageSuspenseFallback = <div className="min-h-screen bg-[#F8F7F2]" aria-hidden="true" />;
 
 function AppContent() {
+  const { activeModal } = usePractice();
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F7F2] text-[#243333] selection:bg-[#286C6A]/20 selection:text-[#243333]">
       {/* Accessibility: Skip to Main Content Link for screen readers & keyboard navigation */}
@@ -278,174 +216,70 @@ function AppContent() {
 
       {/* Main Content Area */}
       <main id="main-content" tabIndex={-1} className="flex-1 pb-16 xl:pb-0 outline-none">
-        <Routes>
-          {/* Main Homepage */}
-          <Route path="/" element={<HomeView />} />
+        <React.Suspense fallback={PageSuspenseFallback}>
+          <Routes>
+            {/* Main Homepage */}
+            <Route path="/" element={<HomeView />} />
 
-          {/* Clean URLs for 19 Clinical Condition Pages */}
-          <Route path="/condition/:slug" element={<ConditionView />} />
+            {/* Clean URLs for 19 Clinical Condition Pages */}
+            <Route path="/condition/:slug" element={<ConditionRouteView />} />
 
-          {/* Clean URLs for 7 Regional City Pages */}
-          <Route path="/city/:slug" element={<CityView />} />
+            {/* Clean URLs for 7 Regional City Pages */}
+            <Route path="/city/:slug" element={<CityRouteView />} />
 
-          {/* Dedicated Plans & Pricing Page (Clean URLs, no '#' required) */}
-          <Route
-            path="/plans-and-pricing"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <PlansAndPricingPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/pricing"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <PlansAndPricingPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/plans-pricing"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <PlansAndPricingPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/Plans & Pricing"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <PlansAndPricingPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/plans & pricing"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <PlansAndPricingPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/Plans-and-Pricing"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <PlansAndPricingPage />
-              </React.Suspense>
-            }
-          />
-          {/* Dedicated Blog and Individual Article Pages (Clean URLs, no '#' required) */}
-          <Route
-            path="/blog"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <BlogPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/Blog"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <BlogPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/articles"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <BlogPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/blog/:slug"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <ArticlePage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/article/:slug"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <ArticlePage />
-              </React.Suspense>
-            }
-          />
-          <Route path="/services" element={<HomeView scrollTo="services" />} />
-          <Route path="/about" element={<HomeView scrollTo="about" />} />
-          <Route path="/how-it-works" element={<HomeView scrollTo="how-it-works" />} />
-          <Route path="/timeline" element={<HomeView scrollTo="timeline" />} />
-          <Route
-            path="/resources"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <BlogPage />
-              </React.Suspense>
-            }
-          />
-          {/* Dedicated FAQ Page (Clean URLs, no '#' required) */}
-          <Route
-            path="/faq"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <FAQPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/FAQ"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <FAQPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/faqs"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <FAQPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/FAQs"
-            element={
-              <React.Suspense fallback={<div className="min-h-screen bg-[#F8F7F2]" />}>
-                <FAQPage />
-              </React.Suspense>
-            }
-          />
-          <Route path="/tools" element={<HomeView scrollTo="tools" />} />
-          <Route path="/emergency" element={<HomeView scrollTo="emergency" />} />
-          <Route path="/contact" element={<HomeView scrollTo="contact" />} />
+            {/* Dedicated Plans & Pricing Page (Clean URLs, no '#' required) */}
+            <Route path="/plans-and-pricing" element={<PlansAndPricingPage />} />
+            <Route path="/pricing" element={<PlansAndPricingPage />} />
+            <Route path="/plans-pricing" element={<PlansAndPricingPage />} />
+            <Route path="/Plans & Pricing" element={<PlansAndPricingPage />} />
+            <Route path="/plans & pricing" element={<PlansAndPricingPage />} />
+            <Route path="/Plans-and-Pricing" element={<PlansAndPricingPage />} />
 
-          {/* 404 Catch-All Page */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+            {/* Dedicated Blog and Individual Article Pages (Clean URLs, no '#' required) */}
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/Blog" element={<BlogPage />} />
+            <Route path="/articles" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<ArticlePage />} />
+            <Route path="/article/:slug" element={<ArticlePage />} />
+
+            {/* Section Anchor Clean Routes */}
+            <Route path="/services" element={<HomeView scrollTo="services" />} />
+            <Route path="/about" element={<HomeView scrollTo="about" />} />
+            <Route path="/how-it-works" element={<HomeView scrollTo="how-it-works" />} />
+            <Route path="/timeline" element={<HomeView scrollTo="timeline" />} />
+            <Route path="/resources" element={<BlogPage />} />
+
+            {/* Dedicated FAQ Page (Clean URLs, no '#' required) */}
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/FAQ" element={<FAQPage />} />
+            <Route path="/faqs" element={<FAQPage />} />
+            <Route path="/FAQs" element={<FAQPage />} />
+            <Route path="/tools" element={<HomeView scrollTo="tools" />} />
+            <Route path="/emergency" element={<HomeView scrollTo="emergency" />} />
+            <Route path="/contact" element={<HomeView scrollTo="contact" />} />
+
+            {/* 404 Catch-All Page */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </React.Suspense>
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Interactive Modals */}
-      <React.Suspense fallback={null}>
-        <AppointmentModal />
-        <SpecialistProfileModal />
-        <ConditionDetailModal />
-        <ServiceDetailModal />
-        <EducationalToolModal />
-        <ArticleModal />
-        <LegalModal />
-        <AdminPortal />
-      </React.Suspense>
+      {/* Interactive Modals & Admin Portal (Loaded ONLY when actively opened) */}
+      {activeModal && (
+        <React.Suspense fallback={null}>
+          {activeModal === 'appointment' && <AppointmentModal />}
+          {activeModal === 'specialist' && <SpecialistProfileModal />}
+          {activeModal === 'condition' && <ConditionDetailModal />}
+          {activeModal === 'service' && <ServiceDetailModal />}
+          {activeModal === 'tool' && <EducationalToolModal />}
+          {activeModal === 'article' && <ArticleModal />}
+          {activeModal === 'legal' && <LegalModal />}
+          {activeModal === 'admin' && <AdminPortal />}
+        </React.Suspense>
+      )}
 
       {/* Floating WhatsApp Control */}
       <WhatsAppFloatingButton />

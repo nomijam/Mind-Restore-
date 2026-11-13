@@ -1,5 +1,4 @@
 import React from 'react';
-import { Shield, Sparkles } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 
 export const HeritageBar: React.FC = () => {
@@ -17,24 +16,24 @@ export const HeritageBar: React.FC = () => {
           <span className="w-1.5 h-1.5 rounded-full bg-[#286C6A] inline-block" />
           <button
             onClick={() => scrollTo('#timeline')}
-            className="font-medium text-[12px] sm:text-[13px] tracking-wide text-[#286C6A] hover:underline focus:outline-none"
+            className="font-medium text-[12px] sm:text-[13px] tracking-wide text-[#1C433E] hover:underline focus:outline-none"
           >
             Trusted Mental Health Care Since {settings.foundedYear}
           </button>
-          <span className="hidden sm:inline text-[#286C6A]" aria-hidden="true">·</span>
-          <span className="hidden sm:inline text-[#526363] text-[12px]">
+          <span className="hidden sm:inline text-[#1C433E]" aria-hidden="true">·</span>
+          <span className="hidden sm:inline text-[#1C433E] text-[12px]">
             Four Decades of Clinical Experience and Human Compassion
           </span>
         </div>
 
-        <div className="hidden md:flex items-center gap-3 text-[12px] text-[#526363]">
+        <div className="hidden md:flex items-center gap-3 text-[12px] text-[#1C433E]">
           <button
             onClick={() => scrollTo('#services')}
-            className="hover:text-[#286C6A] hover:underline focus:outline-none transition-colors"
+            className="hover:text-[#1C433E] hover:underline focus:outline-none transition-colors"
           >
             Outpatient Practice & Tele-Mental Health
           </button>
-          <span className="text-[#286C6A]" aria-hidden="true">·</span>
+          <span className="text-[#1C433E]" aria-hidden="true">·</span>
           <span className="font-medium text-[#243333]">Urdu & English</span>
         </div>
       </div>

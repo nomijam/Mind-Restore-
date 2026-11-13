@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { CONDITIONS_CARDS } from '../data/conditionsCardsData';
 import { usePractice } from '../context/PracticeContext';
-import { Link } from 'react-router-dom';
+import { Link } from '../lib/router';
 
 export const ConditionsSection: React.FC = () => {
   const { openConditionDetail, openAppointment, getWhatsAppLink } = usePractice();

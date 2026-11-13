@@ -46,6 +46,10 @@ export const SpecialistProfileModal: React.FC = () => {
               src={selectedSpecialist.image}
               alt={selectedSpecialist.name}
               referrerPolicy="no-referrer"
+              loading="lazy"
+              decoding="async"
+              width={160}
+              height={160}
               className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover object-top border border-[#286C6A]/15 shadow-xs shrink-0"
             />
 

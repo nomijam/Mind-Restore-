@@ -42,7 +42,7 @@ export const SpecialistsSection: React.FC = () => {
                   loading="lazy"
                   decoding="async"
                   width={400}
-                  height={300}
+                  height={400}
                 />
 
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#243333]/85 via-transparent to-transparent p-4 text-white">

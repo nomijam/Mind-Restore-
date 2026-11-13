@@ -1,7 +1,6 @@
 import React from 'react';
-import { Calendar, ArrowRight, ShieldCheck, Check, Clock, UserCheck } from 'lucide-react';
+import { Calendar, ArrowRight, ShieldCheck, UserCheck } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
-import { heritageHeroImg, heritageHeroMobileWebp } from '../data/practiceData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const Hero: React.FC = () => {
@@ -98,19 +97,24 @@ export const Hero: React.FC = () => {
                   <picture className="block w-full aspect-16/10 sm:aspect-auto">
                     <source
                       media="(max-width: 640px)"
-                      srcSet="/images/heritage_clinical_consultation_mobile.webp"
+                      srcSet="/images/heritage_clinical_consultation_mobile.webp 640w"
+                      sizes="(max-width: 1023px) 100vw, 42vw"
                       type="image/webp"
-                      width="720"
-                      height="402"
+                      width={640}
+                      height={357}
                     />
                     <source
-                      srcSet="/images/heritage_clinical_consultation_1791269818478.webp"
+                      media="(min-width: 641px)"
+                      srcSet="/images/heritage_clinical_consultation_1791269818478.webp 1280w"
+                      sizes="(max-width: 1023px) 100vw, 42vw"
                       type="image/webp"
-                      width="1280"
-                      height="714"
+                      width={1280}
+                      height={714}
                     />
                     <img
                       src="/images/heritage_clinical_consultation_1791269818478.webp"
+                      srcSet="/images/heritage_clinical_consultation_mobile.webp 640w, /images/heritage_clinical_consultation_1791269818478.webp 1280w"
+                      sizes="(max-width: 1023px) 100vw, 42vw"
                       alt="A qualified clinical psychologist in a calm, respectful consultation with a patient at Life Reset Pakistan"
                       referrerPolicy="no-referrer"
                       className="w-full h-[400px] sm:h-[460px] object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../lib/router';
 import {
   Sparkles,
   ArrowLeft,
@@ -104,17 +104,17 @@ export const PlansAndPricingPage: React.FC = () => {
           <button
             type="button"
             onClick={handleBackToHome}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#A3C2B1] hover:text-white transition-colors cursor-pointer group"
+            className="min-h-[44px] inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#D1E2DA] hover:text-white transition-colors cursor-pointer group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Return to Homepage</span>
           </button>
 
-          <nav aria-label="Breadcrumb" className="text-xs text-[#A3C2B1] flex items-center gap-2">
+          <nav aria-label="Breadcrumb" className="text-xs text-[#D1E2DA] flex items-center gap-2 min-h-[44px]">
             <button
               type="button"
               onClick={handleBackToHome}
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer min-h-[44px] inline-flex items-center"
             >
               Home
             </button>
@@ -147,7 +147,7 @@ export const PlansAndPricingPage: React.FC = () => {
                 <CreditCard className="w-4 h-4" />
                 <span>Fixed PKR Rates</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Transparent local pricing starting at Rs. 2,000/session.
               </p>
             </div>
@@ -157,7 +157,7 @@ export const PlansAndPricingPage: React.FC = () => {
                 <ShieldCheck className="w-4 h-4" />
                 <span>Verified Psychologists</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Certified, postgraduate clinical psychologists in Pakistan.
               </p>
             </div>
@@ -167,7 +167,7 @@ export const PlansAndPricingPage: React.FC = () => {
                 <Lock className="w-4 h-4" />
                 <span>100% Confidential</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Strict medical privacy protocols in Urdu and English.
               </p>
             </div>
@@ -177,7 +177,7 @@ export const PlansAndPricingPage: React.FC = () => {
                 <MessageSquare className="w-4 h-4" />
                 <span>WhatsApp Booking</span>
               </div>
-              <p className="text-[11px] text-[#A3C2B1] leading-snug">
+              <p className="text-[11px] text-[#D1E2DA] leading-snug">
                 Instant confirmation directly on your phone.
               </p>
             </div>
@@ -276,7 +276,7 @@ export const PlansAndPricingPage: React.FC = () => {
               href={coordinatorWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm tracking-wide shadow-lg transition-transform hover:scale-[1.02] cursor-pointer"
+              className="min-h-[48px] inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm tracking-wide shadow-lg transition-transform hover:scale-[1.02] cursor-pointer"
             >
               <MessageSquare className="w-5 h-5" />
               <span>CHAT WITH INTAKE COORDINATOR ON WHATSAPP</span>
@@ -287,11 +287,11 @@ export const PlansAndPricingPage: React.FC = () => {
 
       {/* Bottom Navigation Links */}
       <div className="py-8 bg-[#F8F7F2] border-t border-[#286C6A]/10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#526363]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#243333]">
           <button
             type="button"
             onClick={handleBackToHome}
-            className="hover:text-[#1C433E] font-medium flex items-center gap-1.5 cursor-pointer"
+            className="min-h-[44px] hover:text-[#1C433E] font-medium flex items-center gap-1.5 cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Life Reset Pakistan Homepage</span>
@@ -304,29 +304,29 @@ export const PlansAndPricingPage: React.FC = () => {
                 navigate('/services');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="hover:text-[#1C433E] hover:underline cursor-pointer"
+              className="min-h-[44px] hover:text-[#1C433E] hover:underline cursor-pointer inline-flex items-center"
             >
               Clinical Services
             </button>
-            <span>•</span>
+            <span aria-hidden="true">•</span>
             <button
               type="button"
               onClick={() => {
                 navigate('/condition/anxiety-disorders');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="hover:text-[#1C433E] hover:underline cursor-pointer"
+              className="min-h-[44px] hover:text-[#1C433E] hover:underline cursor-pointer inline-flex items-center"
             >
               Anxiety Support
             </button>
-            <span>•</span>
+            <span aria-hidden="true">•</span>
             <button
               type="button"
               onClick={() => {
                 navigate('/contact');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="hover:text-[#1C433E] hover:underline cursor-pointer"
+              className="min-h-[44px] hover:text-[#1C433E] hover:underline cursor-pointer inline-flex items-center"
             >
               Contact & Hours
             </button>

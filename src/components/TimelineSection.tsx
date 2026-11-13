@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../lib/router';
 import { Calendar, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 import { TIMELINE_MILESTONES } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';

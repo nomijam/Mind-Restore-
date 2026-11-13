@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Calendar, Clock, ArrowRight, ShieldCheck, BookOpen, AlertCircle, CheckCircle } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
-import { resourcesImg } from '../data/practiceData';
+import { resourcesImg, resourcesMobileImg } from '../data/practiceData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const ArticleModal: React.FC = () => {
@@ -64,7 +64,7 @@ export const ArticleModal: React.FC = () => {
           <button
             type="button"
             onClick={closeModal}
-            className="p-2 rounded-full hover:bg-neutral-100 active:bg-neutral-200 text-[#243333] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1C433E] cursor-pointer"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 rounded-full hover:bg-neutral-100 active:bg-neutral-200 text-[#243333] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1C433E] cursor-pointer"
             aria-label="Close article modal"
           >
             <X className="w-5 h-5" />
@@ -84,9 +84,9 @@ export const ArticleModal: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-heading font-bold text-[#1C433E] leading-snug">
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-[#1C433E] leading-snug">
               {selectedArticle.title}
-            </h1>
+            </h2>
 
             {/* Author, Reviewer & Governance Metadata */}
             <div className="p-3.5 rounded-xl bg-[#F8F7F2] border border-[#1C433E]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[#526363]">
@@ -118,6 +118,10 @@ export const ArticleModal: React.FC = () => {
           <div className="aspect-[16/9] rounded-2xl overflow-hidden bg-[#EAF2ED] border border-[#1C433E]/10">
             <img
               src={resourcesImg}
+              srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+              sizes="(max-width: 768px) 100vw, 700px"
+              width={800}
+              height={600}
               alt={selectedArticle.title}
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
@@ -163,10 +167,10 @@ export const ArticleModal: React.FC = () => {
           {/* Contextual Guidance & Appointment CTA */}
           <div className="p-6 rounded-2xl bg-[#1C433E] text-white flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <h2 className="text-sm font-heading font-bold">
+              <h3 className="text-sm font-heading font-bold">
                 Would you like personalized psychological support?
-              </h2>
-              <p className="text-xs text-neutral-300 mt-0.5">
+              </h3>
+              <p className="text-xs text-[#E2ECE7] mt-0.5">
                 Our specialists provide confidential care tailored to your circumstances.
               </p>
             </div>
@@ -176,7 +180,7 @@ export const ArticleModal: React.FC = () => {
                 closeModal();
                 openAppointment(selectedArticle.title);
               }}
-              className="px-5 py-2.5 text-xs font-semibold tracking-wider text-[#1C433E] bg-white hover:bg-neutral-100 rounded-xl whitespace-nowrap shadow-xs transition-colors"
+              className="min-h-[44px] px-5 py-2.5 text-xs font-semibold tracking-wider text-[#1C433E] bg-white hover:bg-neutral-100 rounded-xl whitespace-nowrap shadow-xs transition-colors cursor-pointer"
             >
               CONSULT WITH A SPECIALIST
             </button>

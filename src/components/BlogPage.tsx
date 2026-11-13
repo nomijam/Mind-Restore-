@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '../lib/router';
 import {
   Sparkles,
   ArrowLeft,
@@ -14,7 +14,7 @@ import {
   Compass,
 } from 'lucide-react';
 import { SEOHead } from './SEOHead';
-import { ARTICLES, resourcesImg } from '../data/practiceData';
+import { ARTICLES, resourcesImg, resourcesMobileImg } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
 export const BlogPage: React.FC = () => {
@@ -98,17 +98,17 @@ export const BlogPage: React.FC = () => {
           <button
             type="button"
             onClick={handleBackToHome}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#A3C2B1] hover:text-white transition-colors cursor-pointer group"
+            className="min-h-[44px] inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#D1E2DA] hover:text-white transition-colors cursor-pointer group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Return to Homepage</span>
           </button>
 
-          <nav aria-label="Breadcrumb" className="text-xs text-[#A3C2B1] flex items-center gap-2">
+          <nav aria-label="Breadcrumb" className="text-xs text-[#D1E2DA] flex items-center gap-2 min-h-[44px]">
             <button
               type="button"
               onClick={handleBackToHome}
-              className="hover:underline cursor-pointer"
+              className="hover:underline cursor-pointer min-h-[44px] inline-flex items-center"
             >
               Home
             </button>
@@ -180,6 +180,10 @@ export const BlogPage: React.FC = () => {
             <div className="lg:col-span-5 relative aspect-[16/10] lg:aspect-auto bg-[#EAF2ED] overflow-hidden min-h-[260px]">
               <img
                 src={resourcesImg}
+                srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+                sizes="(max-width: 1023px) 100vw, 42vw"
+                width={800}
+                height={600}
                 alt={featuredArticle.title}
                 className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                 loading="eager"
@@ -275,6 +279,10 @@ export const BlogPage: React.FC = () => {
                     <div className="relative aspect-[16/10] bg-[#EAF2ED] overflow-hidden">
                       <img
                         src={resourcesImg}
+                        srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                        width={480}
+                        height={360}
                         alt={`Psychoeducation: ${art.title}`}
                         className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
                         loading="lazy"
@@ -335,9 +343,9 @@ export const BlogPage: React.FC = () => {
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>CONFIDENTIAL CLINICAL CARE</span>
             </div>
-            <h3 className="text-2xl font-heading font-bold text-white">
+            <h2 className="text-2xl font-heading font-bold text-white">
               Do These Symptoms Sound Familiar?
-            </h3>
+            </h2>
             <p className="text-xs sm:text-sm text-[#E2ECE7] leading-relaxed">
               Reading about anxiety, burnout, or low mood is often the first step toward recovery. You don't have to carry the emotional burden alone.
             </p>
@@ -347,7 +355,7 @@ export const BlogPage: React.FC = () => {
             href={getWhatsAppLink('Hello Life Reset Pakistan, I was reading your articles and would like to schedule an appointment with a psychologist.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-[0.99] shrink-0 cursor-pointer"
+            className="min-h-[48px] inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-[0.99] shrink-0 cursor-pointer"
           >
             <MessageSquare className="w-4 h-4" />
             <span>DISCUSS ON WHATSAPP</span>
