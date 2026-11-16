@@ -64,7 +64,7 @@ export function buildBreadcrumbSchema(
 
 export const HOME_ROUTE_META: Record<string, RouteSEOMeta> = {
   home: {
-    title: 'Life Reset Pakistan | Reset Your Life, Rebuild Your Future',
+    title: 'Online Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Confidential online counselling and mental wellness support in Pakistan and worldwide, in English and Urdu, by video, phone or text with Life Reset Pakistan.',
     canonicalUrl: `${SITE_URL}/`,
@@ -137,37 +137,37 @@ export const FAQ_PAGE_META: RouteSEOMeta = {
 
 export const CONDITION_META_BY_SLUG: Record<string, { title: string; description: string }> = {
   'anxiety-counselling': {
-    title: 'Anxiety Counselling | Life Reset Pakistan',
+    title: 'Anxiety Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Confidential online anxiety counselling in Pakistan and worldwide in English and Urdu. Support for worry, panic, and tension by video, phone, or text.',
   },
   'depression-counselling': {
-    title: 'Depression Counselling | Life Reset Pakistan',
+    title: 'Depression Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Compassionate online depression counselling in English and Urdu for clients in Pakistan and abroad via private video, voice call, or WhatsApp sessions.',
   },
   'stress-burnout': {
-    title: 'Stress & Burnout Counselling | Life Reset Pakistan',
+    title: 'Stress & Burnout Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Online stress and workplace burnout counselling in Pakistan and worldwide in English and Urdu. Rebuild balance through private video, phone, or text care.',
   },
   'sleep-disorders': {
-    title: 'Sleep & Insomnia Counselling | Life Reset Pakistan',
+    title: 'Sleep Problems Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Overcome insomnia, racing thoughts, and sleep disruption with private online counselling in English and Urdu by video, phone, or WhatsApp text support.',
   },
   'health-anxiety': {
-    title: 'Health Anxiety Counselling | Life Reset Pakistan',
+    title: 'Health Anxiety Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Private online counselling for health anxiety and symptom worry across Pakistan and abroad, available in English and Urdu via video, phone, or WhatsApp.',
   },
   'anger-management': {
-    title: 'Anger Management Counselling | Life Reset Pakistan',
+    title: 'Anger Management Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Confidential online anger management and emotional regulation counselling in English and Urdu for clients across Pakistan and abroad via video or text.',
   },
   'phobia-treatment': {
-    title: 'Phobia Support Counselling | Life Reset Pakistan',
+    title: 'Phobia Treatment in Pakistan | Life Reset Pakistan',
     description:
       'Structured online counselling for specific fears and phobias in Pakistan and worldwide, offered in English and Urdu via private video, phone, or text.',
   },
@@ -177,57 +177,57 @@ export const CONDITION_META_BY_SLUG: Record<string, { title: string; description
       'Speak privately with a female counsellor online in English or Urdu via video, voice, or text across Pakistan and worldwide at Life Reset Pakistan today.',
   },
   'ocd-treatment': {
-    title: 'OCD Counselling & Support | Life Reset Pakistan',
+    title: 'OCD Treatment in Pakistan | Life Reset Pakistan',
     description:
       'Confidential online counselling for OCD and intrusive thoughts in Pakistan and worldwide, delivered in English and Urdu via video, phone, or text care.',
   },
   'ptsd-trauma-therapy': {
-    title: 'PTSD & Trauma Counselling | Life Reset Pakistan',
+    title: 'PTSD & Trauma Therapy in Pakistan | Life Reset Pakistan',
     description:
       'Paced, trauma-informed online counselling in English and Urdu for clients in Pakistan and worldwide via confidential video, phone, or WhatsApp sessions.',
   },
   'relationship-breakup': {
-    title: 'Relationship & Breakup Support | Life Reset Pakistan',
+    title: 'Relationship Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Navigate breakup recovery and relationship distress with private online counselling in English and Urdu via video, phone, or text at Life Reset Pakistan.',
   },
   'grief-loss': {
-    title: 'Grief & Loss Counselling | Life Reset Pakistan',
+    title: 'Grief Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Gentle online grief and bereavement counselling in English and Urdu for clients across Pakistan and abroad via confidential video, phone, or text care.',
   },
   'addiction-counselling': {
-    title: 'Addiction Recovery Counselling | Life Reset Pakistan',
+    title: 'Addiction Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Private, non-judgmental online addiction and habit recovery counselling in English and Urdu across Pakistan and worldwide via video, phone, or WhatsApp.',
   },
   'anonymous-counselling': {
-    title: 'Anonymous Online Counselling | Life Reset Pakistan',
+    title: 'Anonymous Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Discreet, privacy-first online counselling with voice or text options in English and Urdu across Pakistan and worldwide via Life Reset Pakistan support.',
   },
   'female-psychologist': {
-    title: 'Female Counsellor Support | Life Reset Pakistan',
+    title: 'Female Psychologist in Pakistan | Life Reset Pakistan',
     description:
       'Confidential online sessions with female counsellors in English and Urdu for women, students, and families in Pakistan and worldwide via video or text.',
   },
   'marriage-couple-counselling': {
-    title: 'Marriage & Couple Counselling | Life Reset Pakistan',
+    title: 'Marriage Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Online marriage and couples counselling in English and Urdu to improve communication and resolve conflict across Pakistan and worldwide via video call.',
   },
   'family-counselling-therapy': {
-    title: 'Family Counselling Support | Life Reset Pakistan',
+    title: 'Family Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Online family counselling in English and Urdu helping households navigate generational dynamics and conflict across Pakistan and worldwide via video call.',
   },
   'child-teen-psychologist': {
-    title: 'Child & Teen Support | Life Reset Pakistan',
+    title: 'Child Psychologist in Pakistan | Life Reset Pakistan',
     description:
       'Supportive online counselling for children, adolescents, and parents in English and Urdu across Pakistan and worldwide via confidential video or text.',
   },
   'student-counselling': {
-    title: 'Student Counselling Online | Life Reset Pakistan',
+    title: 'Student Counselling in Pakistan | Life Reset Pakistan',
     description:
       'Online counselling for university and exam stress, focus, and career transitions in English and Urdu across Pakistan and worldwide via video or WhatsApp.',
   },
