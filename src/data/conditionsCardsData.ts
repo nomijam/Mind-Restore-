@@ -65,14 +65,6 @@ export const CONDITIONS_CARDS: ConditionCardItem[] = [
     "iconName": "Compass"
   },
   {
-    "id": "female-psychologist-online",
-    "slug": "female-psychologist-online",
-    "title": "Female Psychologist Online",
-    "category": "common-concerns",
-    "twoLineExplanation": "Confidential, culturally safe online sessions with qualified female clinical psychologists for women across Pakistan and overseas.",
-    "iconName": "UserCheck"
-  },
-  {
     "id": "ocd-treatment",
     "slug": "ocd-treatment",
     "title": "OCD Treatment",

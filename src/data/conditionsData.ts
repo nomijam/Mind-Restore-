@@ -690,104 +690,6 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     keywords: ['phobia treatment Pakistan', 'fear of flying therapist Lahore', 'public speaking phobia Islamabad', 'claustrophobia psychologist Karachi']
   },
 
-  {
-    id: 'female-psychologist-online',
-    slug: 'female-psychologist-online',
-    title: 'Female Psychologist Online',
-    category: 'common-concerns',
-    twoLineExplanation: 'Confidential, culturally safe online sessions with qualified female clinical psychologists for women across Pakistan and overseas.',
-    iconName: 'UserCheck',
-    relatedServiceId: 'individual-counselling',
-    badge: 'Confidential Safe Sanctuary for Women',
-    gentleGuidance: 'Every woman deserves a private, non-judgmental space to speak her truth. Our experienced female psychologists understand the cultural, familial, and emotional realities of Pakistani women.',
-    signs: [
-      'Hesitation to speak with male clinicians due to cultural comfort, modesty, or privacy',
-      'Navigating complex marital stress, in-law dynamics, or postpartum depression',
-      'Living in remote cities or overseas without access to qualified Pakistani female therapists',
-      'Carrying heavy domestic and professional responsibilities with no safe outlet for yourself'
-    ],
-    fullOverview: 'In Pakistan, women often carry the emotional weight of extended households, marital expectations, childcare, and professional duties—often while silencing their own psychological pain. For many women, consulting a male psychologist or traveling to a physical clinic raises logistical hurdles, family privacy concerns, and cultural discomfort. Life Reset Pakistan provides a dedicated online care track led by senior registered female clinical psychologists. Sessions are conducted over encrypted video or voice calls, allowing you to speak freely from the safety and privacy of your room.',
-    culturalContext: 'We recognize the intricate cultural landscape of Pakistani families—joint family pressures, rishta anxieties, divorce stigmas, and gendered emotional expectations. Our female clinicians provide deeply respectful, culturally intelligent therapy that honours your values while empowering your mental wellbeing.',
-    symptomsBreakdown: {
-      emotional: [
-        'Feeling emotionally trapped, unheard, or taken for granted within family roles',
-        'Postpartum anxiety, baby blues, or overwhelming guilt as a new mother',
-        'Grief following miscarriage, marital breakdown, or domestic disappointment',
-        'Chronic self-sacrifice leading to resentment, depression, and loss of identity'
-      ],
-      physical: [
-        'Persistent tension headaches and migraines triggered by domestic friction',
-        'Somatic fatigue and exhaustion from uninterrupted caregiving demands',
-        'Sleep disruptions from nighttime worrying about children and marital harmony',
-        'Unexplained aches, nausea, or appetite changes linked to chronic stress'
-      ],
-      behavioral: [
-        'Crying in private or in the bathroom so family members do not notice',
-        'Difficulty saying no to unreasonable extended family demands due to fear of conflict',
-        'Isolating from old friends and letting personal aspirations fade away',
-        'Over-controlling minor household details to cope with underlying lack of agency'
-      ]
-    },
-    therapeuticModalities: [
-      {
-        name: 'Culturally Sensitive Person-Centred Psychotherapy',
-        description: 'Unconditional positive regard and emotional validation in an authentic, empathetic setting.'
-      },
-      {
-        name: 'Cognitive Behavioural Therapy (CBT)',
-        description: 'Rebuilding healthy self-worth, emotional regulation, and assertiveness scripts.'
-      },
-      {
-        name: 'Perinatal & Maternal Mental Health Protocols',
-        description: 'Specialized psychological care for pregnancy, postpartum depression, and maternal adjustment.'
-      }
-    ],
-    treatmentRoadmap: [
-      {
-        step: '01',
-        title: 'Private & Secure Consultation Setup',
-        description: 'Establishing your confidential online connection (video or audio-only based on your preference).'
-      },
-      {
-        step: '02',
-        title: 'Validation & Emotional Unburdening',
-        description: 'A non-judgmental space to voice everything you have been keeping inside without fear of gossip.'
-      },
-      {
-        step: '03',
-        title: 'Empowerment & Boundary Frameworks',
-        description: 'Developing practical strategies to manage family tensions and protect your inner tranquility.'
-      },
-      {
-        step: '04',
-        title: 'Sustained Wellbeing & Self-Compassion',
-        description: 'Cultivating sustainable self-care rituals and relational harmony for lasting emotional health.'
-      }
-    ],
-    whoItIsFor: [
-      'Pakistani women seeking a female clinical psychologist they can relate to comfortably',
-      'Mothers navigating postpartum mood changes and parenting stress',
-      'Young women and university students dealing with marriage pressures and career aspirations',
-      'Pakistani diaspora and overseas women feeling isolated in foreign countries'
-    ],
-    recommendedSpecialistIds: ['dr-farah-kamran', 'ayesha-malik'],
-    faqs: [
-      {
-        question: 'Can I do audio-only sessions if I do not wish to turn on my video camera?',
-        answer: 'Yes, absolutely. We fully respect your comfort and privacy. You are welcome to conduct consultations via secure voice call without video.'
-      },
-      {
-        question: 'Will anyone in my family be informed about my sessions?',
-        answer: 'Never. Our clinical confidentiality is ironclad. We do not contact your family or share any notes or records with anyone.'
-      },
-      {
-        question: 'What qualifications do your female psychologists hold?',
-        answer: 'Our female psychologists hold advanced postgraduate clinical degrees (M.Phil. and Ph.D. in Clinical Psychology) with certified clinical practice registrations and up to 18 years of clinical experience.'
-      }
-    ],
-    keywords: ['female psychologist online Pakistan', 'lady psychologist Lahore Karachi', 'female therapist Islamabad', 'online counselling for Pakistani women']
-  },
-
   // ==========================================
   // SPECIALISED CARE (11 items)
   // ==========================================
@@ -1391,36 +1293,38 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     gentleGuidance: 'Our experienced female psychologists offer clinical expertise paired with deep cultural sensitivity for women, adolescents, and couples.',
     signs: [
       'Specific preference to consult an experienced female clinical psychologist',
-      'Needing care for marital strain, motherhood, teenage daughter support, or family conflict',
+      'Needing care for marital strain, motherhood, postpartum depression, in-law dynamics, or teenage daughter support',
       'Desire for a private video session or audio-only consultation from home',
-      'Looking for a practitioner with verifiable clinical degrees and registered credentials'
+      'Living in remote cities or overseas without access to qualified Pakistani female therapists',
+      'Carrying heavy domestic and professional responsibilities with no safe outlet for yourself'
     ],
-    fullOverview: 'Finding the right therapist is the single most critical factor in successful psychological outcomes. Many patients in Pakistan—including women, young girls, couples, and parents—feel significantly more understood, safe, and comfortable when working with a female clinician. Life Reset Pakistan is led by experienced senior female clinical psychologists, including Dr. Farah Kamran (18 years clinical experience) and Ayesha Malik (10 years experience). Our clinicians combine rigorous evidence-based science with warm, compassionate holding.',
-    culturalContext: 'Cultural modesty, shared gender experiences, and deep familiarity with Pakistani domestic realities allow our female psychologists to understand the unspoken nuances of your life without lengthy explanations.',
+    fullOverview: 'Finding the right therapist is the single most critical factor in successful psychological outcomes. Many patients in Pakistan—including women, young girls, couples, and parents—feel significantly more understood, safe, and comfortable when working with a female clinician. In Pakistan, women often carry the emotional weight of extended households, marital expectations, childcare, and professional duties—often while silencing their own psychological pain. For many women, consulting a male psychologist or traveling to a physical clinic raises logistical hurdles, family privacy concerns, and cultural discomfort. Life Reset Pakistan is led by experienced senior female clinical psychologists, including Dr. Farah Kamran (18 years clinical experience) and Ayesha Malik (10 years experience). Sessions are conducted over encrypted video or voice calls, allowing you to speak freely from the safety and privacy of your home.',
+    culturalContext: 'Cultural modesty, shared gender experiences, and deep familiarity with Pakistani domestic realities—including joint family pressures, rishta anxieties, divorce stigmas, and gendered emotional expectations—allow our female psychologists to understand the unspoken nuances of your life without lengthy explanations while honouring your values.',
     symptomsBreakdown: {
       emotional: [
         'Anxiety, depression, low self-esteem, or social dread in young women and mothers',
-        'Emotional exhaustion from navigating relational expectations and in-law dynamics',
+        'Postpartum anxiety, baby blues, or overwhelming guilt as a new mother',
+        'Emotional exhaustion or feeling trapped and unheard within marital or in-law roles',
         'Parental worry regarding a teenage daughter’s emotional withdrawal or academic drop',
-        'Grief and sadness that you feel uncomfortable sharing with male clinicians'
+        'Grief following miscarriage, marital breakdown, or bereavement you hesitate to share elsewhere'
       ],
       physical: [
-        'Somatic manifestations of stress: chronic tension, fatigue, and headaches',
-        'Sleep disruptions linked to domestic or marital worry',
-        'Loss of appetite or nervous stomach during stressful periods',
+        'Persistent tension headaches, migraines, and somatic fatigue from domestic or caregiving friction',
+        'Sleep disruptions linked to domestic, children, or marital worry',
+        'Loss of appetite, nausea, or nervous stomach linked to chronic stress',
         'Physical lethargy and lack of motivation'
       ],
       behavioral: [
         'Hesitation to attend mixed social events due to social anxiety or low confidence',
-        'Struggling to voice needs assertively in domestic or work environments',
-        'Putting everyone else’s needs first until you collapse from exhaustion',
-        'Avoiding discussing sensitive personal health matters out of shyness'
+        'Difficulty saying no to unreasonable extended family demands due to fear of conflict',
+        'Putting everyone else’s needs first until you collapse from exhaustion or cry in private',
+        'Isolating from old friends and avoiding sensitive personal health discussions'
       ]
     },
     therapeuticModalities: [
       {
         name: 'Cognitive Behavioural Therapy (CBT)',
-        description: 'Practical, evidence-based cognitive restructuring for depression, anxiety, and self-worth.'
+        description: 'Practical, evidence-based cognitive restructuring, emotional regulation, assertiveness scripts, and self-worth building.'
       },
       {
         name: 'Emotionally Focused Relational Therapy (EFT)',
@@ -1429,41 +1333,59 @@ export const CONDITIONS_DATA: ConditionItem[] = [
       {
         name: 'Adolescent & Young Adult Guidance',
         description: 'Developmentally tailored interventions for teenage girls, university students, and young brides.'
+      },
+      {
+        name: 'Culturally Sensitive Person-Centred Psychotherapy',
+        description: 'Unconditional positive regard and emotional validation in an authentic, empathetic setting.'
+      },
+      {
+        name: 'Perinatal & Maternal Mental Health Protocols',
+        description: 'Specialized psychological care for pregnancy, postpartum depression, and maternal adjustment.'
       }
     ],
     treatmentRoadmap: [
       {
         step: '01',
-        title: 'Empathetic Clinical Discovery',
-        description: 'A relaxed, warm initial conversation to understand your story, values, and goals.'
+        title: 'Empathetic & Private Consultation Setup',
+        description: 'Establishing a relaxed, confidential online connection (video or audio-only based on your preference) to hear your story and values.'
       },
       {
         step: '02',
-        title: 'Collaborative Formulation',
-        description: 'Mapping out the root causes and designing a realistic, step-by-step care plan.'
+        title: 'Validation & Collaborative Formulation',
+        description: 'A non-judgmental space to unburden safely without fear of gossip while mapping out root causes and a realistic care plan.'
       },
       {
         step: '03',
-        title: 'Skill-Building & Emotional Healing',
-        description: 'Mastering emotional regulation, self-compassion, and communication tools.'
+        title: 'Empowerment, Boundaries & Skill-Building',
+        description: 'Mastering emotional regulation, self-compassion, assertiveness, and practical strategies for family tensions.'
       },
       {
         step: '04',
-        title: 'Empowered Autonomy & Growth',
-        description: 'Stepping forward into your life with confidence, clarity, and peace of mind.'
+        title: 'Sustained Wellbeing & Empowered Autonomy',
+        description: 'Cultivating sustainable self-care rituals, relational harmony, and lasting confidence and peace of mind.'
       }
     ],
     whoItIsFor: [
-      'Women seeking a qualified female clinical psychologist for individual psychotherapy',
+      'Women seeking a qualified female clinical psychologist they can relate to comfortably across Pakistan and overseas',
+      'Mothers navigating postpartum mood changes, pregnancy adjustment, and parenting stress',
+      'Young women and university students dealing with rishta pressures, academic stress, and career aspirations',
       'Parents seeking supportive counselling for their teenage daughters',
       'Couples seeking joint counselling with an emotionally focused female psychologist',
-      'Clients across Pakistan and overseas looking for specialized female psychological consultations'
+      'Pakistani diaspora and overseas women feeling isolated abroad'
     ],
     recommendedSpecialistIds: ['dr-farah-kamran', 'ayesha-malik'],
     faqs: [
       {
         question: 'Are female psychologist appointments available online across Pakistan?',
         answer: 'Yes. Confidential video and private audio consultations are available with senior female licensed clinical psychologists across all Pakistani cities and overseas.'
+      },
+      {
+        question: 'Can I do audio-only sessions if I do not wish to turn on my video camera?',
+        answer: 'Yes, absolutely. We fully respect your comfort and privacy. You are welcome to conduct consultations via secure voice call without video.'
+      },
+      {
+        question: 'Will anyone in my family be informed about my sessions?',
+        answer: 'Never. Our clinical confidentiality is ironclad. We do not contact your family or share any notes or records with anyone.'
       },
       {
         question: 'What are the credentials of your female psychologists?',
@@ -1474,7 +1396,7 @@ export const CONDITIONS_DATA: ConditionItem[] = [
         answer: 'Yes. Parents can participate in initial consultations and joint reviews while ensuring the young person has her own confidential therapeutic space.'
       }
     ],
-    keywords: ['female psychologist Lahore', 'best lady psychologist Pakistan', 'female clinical psychologist Karachi', 'female counsellor Islamabad']
+    keywords: ['female psychologist Lahore', 'best lady psychologist Pakistan', 'female clinical psychologist Karachi', 'female counsellor Islamabad', 'female psychologist online Pakistan', 'online counselling for Pakistani women']
   },
 
   {
@@ -1905,7 +1827,8 @@ export function findCondition(idOrSlug: string): ConditionItem | undefined {
     child: 'child-teen-psychologist',
     marriage: 'marriage-couple-counselling',
     couples: 'marriage-couple-counselling',
-    female: 'female-psychologist'
+    female: 'female-psychologist',
+    'female-psychologist-online': 'female-psychologist'
   };
 
   const aliasedId = aliasMap[clean];

@@ -2,6 +2,13 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/condition/female-psychologist-online",
+      "destination": "/condition/female-psychologist",
+      "statusCode": 301
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!\\.well-known/|llms\\.txt$|assets/|images/|sitemap\\.xml$|robots\\.txt$|favicon\\.svg$|manifest\\.json$|site\\.webmanifest$).*)",

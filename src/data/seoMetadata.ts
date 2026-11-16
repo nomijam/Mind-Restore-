@@ -171,11 +171,6 @@ export const CONDITION_META_BY_SLUG: Record<string, { title: string; description
     description:
       'Structured online counselling for specific fears and phobias in Pakistan and worldwide, offered in English and Urdu via private video, phone, or text.',
   },
-  'female-psychologist-online': {
-    title: 'Female Psychologist Online | Life Reset Pakistan',
-    description:
-      'Speak privately with a female counsellor online in English or Urdu via video, voice, or text across Pakistan and worldwide at Life Reset Pakistan today.',
-  },
   'ocd-treatment': {
     title: 'OCD Treatment in Pakistan | Life Reset Pakistan',
     description:

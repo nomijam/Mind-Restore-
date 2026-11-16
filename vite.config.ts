@@ -259,6 +259,13 @@ function staticWellKnownPlugin(rootDir: string): Plugin {
     next: () => void
   ) => {
     const pathname = (req.url || '').split('?')[0];
+    if (pathname === '/condition/female-psychologist-online' || pathname === '/condition/female-psychologist-online/') {
+      res.statusCode = 301;
+      res.setHeader('Location', '/condition/female-psychologist');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+      res.end('');
+      return;
+    }
     const entry = staticRoutes[pathname];
     if (!entry) return next();
     const absPath = path.resolve(rootDir, entry.relPath);

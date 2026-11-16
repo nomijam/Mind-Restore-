@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from './lib/router';
+import { Routes, Route, useLocation, useNavigate } from './lib/router';
 import { PracticeProvider, usePractice } from './context/PracticeContext';
 import { HeritageBar } from './components/HeritageBar';
 import { Header } from './components/Header';
@@ -251,6 +251,14 @@ function HomeView({ scrollTo }: HomeViewProps) {
 
 const PageSuspenseFallback = <div className="min-h-screen bg-[#F8F7F2]" aria-hidden="true" />;
 
+function RouteRedirect({ to }: { to: string }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate(to, { replace: true });
+  }, [navigate, to]);
+  return null;
+}
+
 function AppContent() {
   const { activeModal } = usePractice();
 
@@ -280,7 +288,11 @@ function AppContent() {
             {/* Main Homepage */}
             <Route path="/" element={<HomeView />} />
 
-            {/* Clean URLs for 19 Clinical Condition Pages */}
+            {/* Clean URLs for 18 Clinical Condition Pages + Permanent Redirect for Merged Page */}
+            <Route
+              path="/condition/female-psychologist-online"
+              element={<RouteRedirect to="/condition/female-psychologist" />}
+            />
             <Route path="/condition/:slug" element={<ConditionRouteView />} />
 
             {/* Clean URLs for 7 Regional City Pages */}

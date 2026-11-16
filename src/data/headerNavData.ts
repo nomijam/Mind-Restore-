@@ -49,12 +49,6 @@ export const HEADER_CONDITIONS: HeaderConditionItem[] = [
     title: 'Phobia Treatment',
     category: 'common-concerns',
   },
-  {
-    id: 'female-psychologist-online',
-    slug: 'female-psychologist-online',
-    title: 'Female Psychologist Online',
-    category: 'common-concerns',
-  },
 
   // SPECIALISED CARE (11 items)
   {

@@ -291,7 +291,7 @@ export const Footer: React.FC = () => {
               <span>·</span>
               <Link to="/condition/sleep-disorders" className="hover:text-white transition-colors py-0.5">Sleep Difficulties</Link>
               <span>·</span>
-              <Link to="/condition/female-psychologist-online" className="hover:text-white transition-colors py-0.5">Female Psychologist</Link>
+              <Link to="/condition/female-psychologist" className="hover:text-white transition-colors py-0.5">Female Psychologist</Link>
             </div>
           </div>
 

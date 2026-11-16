@@ -159,16 +159,6 @@ export const CONDITION_HERO_IMAGES: Record<string, HeroImageData> = {
     landmark: 'Expansive Horizons · Systematic Desensitization',
     description: 'Gradual, clinician-guided exposure therapy for specific phobias, agoraphobia, and flight or social fears.'
   },
-  'female-psychologist-online': {
-    id: 'female-psychologist-online',
-    src: '/images/hero_therapy_haven_1791725247627.webp',
-    mobileSrc: '/images/hero_therapy_haven_1791725247627_mobile.webp',
-    width: 1280,
-    height: 714,
-    alt: 'Private, dignified consultation sanctuary with warm seating and soft lighting, designed for women seeking confidential mental healthcare',
-    landmark: 'Discreet Sanctuary · Female Psychological Care',
-    description: 'Safe, modest, and non-judgmental space with senior female licensed clinical psychologists.'
-  },
   'ocd-treatment': {
     id: 'ocd-treatment',
     src: '/images/hero_therapy_haven_1791725247627.webp',
