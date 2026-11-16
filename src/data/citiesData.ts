@@ -7,6 +7,7 @@ export interface CityInfo {
   subheadline: string;
   serviceType: 'Online Tele-Mental Health' | 'Global Telehealth';
   clinicLocation?: string;
+  directAnswer: string;
   description: string;
   localContext: string;
   sessionFormats: string[];
@@ -26,6 +27,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Confidential online video and audio psychotherapy for individuals, couples, and families across Lahore and surrounding areas.',
     serviceType: 'Online Tele-Mental Health',
+    directAnswer:
+      'Online psychological counselling in Lahore provides private psychotherapy for individuals, couples, and families through encrypted HD video and voice consultations from home. You can choose sessions in Urdu, English, or Punjabi and book via our online intake form or WhatsApp, with payment options including Raast/IBFT bank transfer, JazzCash, EasyPaisa, and Visa or MasterCard.',
     description:
       'Lahore is where our clinical practice was founded in 1981. For over four decades, Life Reset Pakistan has provided high-trust, ethical psychotherapy in Lahore. Through secure, encrypted digital video and confidential voice consultations from the comfort of your home, our licensed clinical psychologists offer compassionate, evidence-based care.',
     localContext:
@@ -62,6 +65,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Evidence-based psychotherapy and counselling delivered via secure, encrypted digital video directly to your home in Clifton, DHA, Gulshan, PECHS, and across Karachi.',
     serviceType: 'Online Tele-Mental Health',
+    directAnswer:
+      'Online psychological counselling for Karachi gives professionals, university students, and families across the city private therapy via encrypted HD video or voice-only calls without commuting through traffic. Sessions are available in Urdu and English—including flexible evening and weekend timings—with payments accepted via Raast/IBFT bank transfer, JazzCash, EasyPaisa, and Visa or MasterCard.',
     description:
       'Karachi is Pakistan’s bustling economic metropolis, where high-pressure corporate deadlines, demanding commutes, and economic stressors often leave little room for self-care. Life Reset Pakistan provides confidential online psychotherapy tailored to Karachi professionals, university students, and families, removing the burden of traversing city traffic.',
     localContext:
@@ -98,6 +103,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Confidential psychotherapy and mental wellness care for government professionals, diplomats, development sector workers, and families in the Twin Cities.',
     serviceType: 'Online Tele-Mental Health',
+    directAnswer:
+      'Online psychological support in Islamabad and Rawalpindi serves civil servants, NGO and development sector workers, diplomats, students, and families through confidential video or voice sessions. Consultations are offered in English, Urdu, and Punjabi with complete discretion, flexible couples and individual formats, and payment via Raast/IBFT bank transfer, JazzCash, EasyPaisa, or cards.',
     description:
       'Life Reset Pakistan provides structured, private psychological counselling for residents of Islamabad (F, G, E, and Bahria sectors) and Rawalpindi. Our senior clinicians work extensively with civil servants, development sector and NGO professionals, tech entrepreneurs, and university students facing stress and emotional strain.',
     localContext:
@@ -130,6 +137,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Discreet, culturally respectful mental wellness support for business leaders, textile professionals, homemakers, and students across Faisalabad.',
     serviceType: 'Online Tele-Mental Health',
+    directAnswer:
+      'Online clinical psychology in Faisalabad connects business leaders, textile professionals, homemakers, and students to confidential video or voice therapy without anyone in your local circle knowing. Consultations take place privately on your phone or laptop in Urdu, Punjabi, or English, with payment options via Raast/IBFT bank transfer, JazzCash, and EasyPaisa.',
     description:
       'In industrial and commercial hubs like Faisalabad, mental health concerns are often kept hidden due to strong social ties and fear of community gossip. Life Reset Pakistan offers a secure digital bridge, connecting you with elite clinical psychologists based in Lahore without anyone in your local circle knowing.',
     localContext:
@@ -154,6 +163,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Respectful, compassionate psychotherapy for individuals and families in Peshawar and Khyber Pakhtunkhwa, honoring local culture and traditions.',
     serviceType: 'Online Tele-Mental Health',
+    directAnswer:
+      'Online mental health counselling in Peshawar and across Khyber Pakhtunkhwa provides discreet, respectful HD video and voice-only sessions for individuals and families. Consultations honour local privacy traditions in Urdu, English, or Pashto-sensitive care, with payment options including Raast/IBFT bank transfer, JazzCash, and EasyPaisa.',
     description:
       'Life Reset Pakistan provides confidential online psychological care for clients in Peshawar, Hayatabad, Mardan, and across Khyber Pakhtunkhwa. We understand that modesty, honor, and family privacy are sacred values in KP, and our clinicians provide deeply respectful, non-judgmental guidance.',
     localContext:
@@ -178,6 +189,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Evidence-based clinical psychology, depression and anxiety support for Multan, Bahawalpur, and South Punjab.',
     serviceType: 'Online Tele-Mental Health',
+    directAnswer:
+      'Online psychological services in Multan and South Punjab let you attend private therapy sessions from home via a one-click video or voice link sent on WhatsApp or email without travelling to another city. Sessions are offered in Urdu, Punjabi/Saraiki-sensitive care, and English, with bank transfer, JazzCash, and EasyPaisa payment options.',
     description:
       'Access senior, qualified clinical psychologists from the comfort and privacy of your home in Multan. Avoid long travel to other cities while receiving the highest standard of evidence-based psychological therapy.',
     localContext:
@@ -202,6 +215,8 @@ export const CITIES_DATA: CityInfo[] = [
     subheadline:
       'Therapy in your native language with clinicians who truly understand Pakistani cultural values, family dynamics, and diaspora identity.',
     serviceType: 'Global Telehealth',
+    directAnswer:
+      'Online psychological support for overseas Pakistanis provides culturally fluent therapy in English, Urdu, or Punjabi for individuals and couples living in the UK, USA, Gulf, Canada, Australia, and worldwide. Appointments are scheduled across international time zones via video or confidential audio calls, with international card, PayPal, and wire payment options.',
     description:
       'Living abroad in the United Kingdom, United States, UAE, Saudi Arabia, Canada, or Australia often brings distinct psychological challenges: cultural isolation, diaspora identity conflict, loneliness, long-distance family guilt, and finding a local therapist who truly understands South Asian joint family dynamics and Muslim values. Life Reset Pakistan offers international video appointments tailored to global time zones.',
     localContext:

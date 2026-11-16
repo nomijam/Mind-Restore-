@@ -45,6 +45,8 @@ export interface ConditionItem {
 
   // Dedicated Condition Page attributes
   badge?: string;
+  directAnswer?: string;
+  relatedConditionSlugs?: [string, string];
   fullOverview?: string;
   culturalContext?: string;
   symptomsBreakdown?: {

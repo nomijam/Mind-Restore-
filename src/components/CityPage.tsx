@@ -25,7 +25,7 @@ import {
   buildBreadcrumbSchema,
   sanitizeSchemaText,
 } from '../data/seoMetadata';
-import { useNavigate, useParams } from '../lib/router';
+import { Link, useNavigate, useParams } from '../lib/router';
 import { NotFoundPage } from './NotFoundPage';
 
 interface CityPageProps {
@@ -303,6 +303,11 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
 
       {/* Main Body */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-12">
+        {/* Direct Answer Summary */}
+        <p className="text-sm sm:text-base text-[#243333] leading-[1.75] bg-white p-6 rounded-2xl border border-[#1C433E]/15 shadow-2xs">
+          {city.directAnswer}
+        </p>
+
         {/* City Overview */}
         <section className="space-y-4">
           <h2 className="text-2xl sm:text-3xl font-heading font-bold text-[#1C433E]">
@@ -444,6 +449,53 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
             </div>
           </section>
         )}
+
+        {/* Related Counselling Guides & Pricing */}
+        <section className="pt-8 border-t border-[#1C433E]/15 space-y-4">
+          <h2 className="text-base font-heading font-bold text-[#1C433E]">
+            Counselling Guides & Transparent Pricing
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <Link
+              to="/plans-and-pricing"
+              onClick={() => {
+                if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="p-3 rounded-xl bg-white border border-[#1C433E]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-colors block"
+            >
+              <span className="text-xs font-bold text-[#1C433E] block">Plans & Pricing</span>
+              <span className="text-[10px] text-[#526363] block truncate">
+                Session fees & packages
+              </span>
+            </Link>
+            <Link
+              to="/condition/anxiety-counselling"
+              onClick={() => {
+                if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="p-3 rounded-xl bg-white border border-[#1C433E]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-colors block"
+            >
+              <span className="text-xs font-bold text-[#1C433E] block">Anxiety Counselling</span>
+              <span className="text-[10px] text-[#526363] block truncate">
+                Worry, panic & stress support
+              </span>
+            </Link>
+            <Link
+              to="/condition/depression-counselling"
+              onClick={() => {
+                if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="p-3 rounded-xl bg-white border border-[#1C433E]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-colors block"
+            >
+              <span className="text-xs font-bold text-[#1C433E] block">
+                Depression Counselling
+              </span>
+              <span className="text-[10px] text-[#526363] block truncate">
+                Low mood & burnout care
+              </span>
+            </Link>
+          </div>
+        </section>
 
         {/* Explore Other Cities */}
         <section className="pt-8 border-t border-[#1C433E]/15 space-y-4">

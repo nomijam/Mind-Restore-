@@ -2,15 +2,43 @@
 
 > Online counselling and mental wellness support in Pakistan and worldwide, in English and Urdu, by video, phone or text. Contact: WhatsApp 0326 8791594, care@liferesetpakistan.com.
 
-## Pages
+## Core Pages
 
 - [Homepage](https://liferesetpakistan.com/)
 - [About](https://liferesetpakistan.com/about)
 - [Plans & Pricing](https://liferesetpakistan.com/plans-and-pricing)
 - [FAQ](https://liferesetpakistan.com/faq)
-- [Contact](https://liferesetpakistan.com/contact)
+- [Self-Care & Grounding Tools](https://liferesetpakistan.com/tools)
 - [Blog](https://liferesetpakistan.com/blog)
+- [Contact](https://liferesetpakistan.com/contact)
+
+## Condition Pages
+
 - [Anxiety Counselling](https://liferesetpakistan.com/condition/anxiety-counselling)
 - [Depression Counselling](https://liferesetpakistan.com/condition/depression-counselling)
+- [Stress & Burnout](https://liferesetpakistan.com/condition/stress-burnout)
+- [Sleep Disorders](https://liferesetpakistan.com/condition/sleep-disorders)
+- [Health Anxiety](https://liferesetpakistan.com/condition/health-anxiety)
+- [Anger Management](https://liferesetpakistan.com/condition/anger-management)
+- [Phobia Treatment](https://liferesetpakistan.com/condition/phobia-treatment)
+- [OCD Treatment](https://liferesetpakistan.com/condition/ocd-treatment)
+- [PTSD & Trauma Therapy](https://liferesetpakistan.com/condition/ptsd-trauma-therapy)
+- [Relationship & Breakup](https://liferesetpakistan.com/condition/relationship-breakup)
+- [Grief & Loss](https://liferesetpakistan.com/condition/grief-loss)
+- [Addiction Counselling](https://liferesetpakistan.com/condition/addiction-counselling)
+- [Anonymous Counselling](https://liferesetpakistan.com/condition/anonymous-counselling)
+- [Female Psychologist](https://liferesetpakistan.com/condition/female-psychologist)
+- [Marriage & Couple Counselling](https://liferesetpakistan.com/condition/marriage-couple-counselling)
+- [Family Counselling & Therapy](https://liferesetpakistan.com/condition/family-counselling-therapy)
+- [Child & Teen Psychologist](https://liferesetpakistan.com/condition/child-teen-psychologist)
+- [Student Counselling](https://liferesetpakistan.com/condition/student-counselling)
+
+## City Pages
+
 - [Lahore](https://liferesetpakistan.com/city/lahore)
 - [Karachi](https://liferesetpakistan.com/city/karachi)
+- [Islamabad & Rawalpindi](https://liferesetpakistan.com/city/islamabad-rawalpindi)
+- [Faisalabad](https://liferesetpakistan.com/city/faisalabad)
+- [Peshawar](https://liferesetpakistan.com/city/peshawar)
+- [Multan](https://liferesetpakistan.com/city/multan)
+- [Overseas Pakistanis (Worldwide)](https://liferesetpakistan.com/city/overseas-worldwide)

@@ -13,6 +13,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Activity',
     relatedServiceId: 'individual-counselling',
     badge: 'High Clinical Demand · Online Tele-Health',
+    directAnswer: 'Anxiety counselling at Life Reset Pakistan helps you calm persistent worry, panic surges, and racing thoughts using CBT, ACT, and somatic grounding. Each 50-minute session is held privately over encrypted video or voice call in English, Urdu, or Punjabi, starting with a diagnostic intake and immediate nervous-system stabilization tools.',
+    relatedConditionSlugs: ['health-anxiety', 'stress-burnout'],
     gentleGuidance: 'Anxiety is your nervous system’s alarm system stuck on high alert. Through structured psychological care, you can retrain catastrophic thoughts and regain physical calm.',
     signs: [
       'Frequent racing thoughts, worst-case scenario catastrophizing, and restless mind',
@@ -111,6 +113,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'CloudRain',
     relatedServiceId: 'individual-counselling',
     badge: 'Compassionate Evidence-Based Care',
+    directAnswer: 'Depression counselling provides a safe, non-judgmental space to address persistent low mood, emotional numbness, and daily exhaustion using Behavioral Activation, CBT, and Compassion-Focused Therapy. Sessions last 50 minutes via private video or voice call in English, Urdu, or Punjabi, paced gently around your current energy.',
+    relatedConditionSlugs: ['anxiety-counselling', 'grief-loss'],
     gentleGuidance: 'Depression is not a failure of character, a spiritual deficit, or simple laziness. It is a real neurobiological and psychological condition that heals with paced, empathetic support.',
     signs: [
       'Pervasive emptiness, unexplained crying spells, or emotional numbness',
@@ -209,6 +213,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Flame',
     relatedServiceId: 'stress-management',
     badge: 'Executive & Lifestyle Wellness',
+    directAnswer: 'Stress and burnout counselling helps professionals and caregivers recover from chronic workplace exhaustion, cynicism, and overwhelm through MBSR, boundary-setting scripts, and REBT. Your 50-minute online video or voice session in English, Urdu, or Punjabi begins with an energy audit to rebuild sustainable work-life balance.',
+    relatedConditionSlugs: ['anxiety-counselling', 'sleep-disorders'],
     gentleGuidance: 'Burnout is not a personal weakness; it is the natural consequence of giving continuously without replenishing your psychological reserves.',
     signs: [
       'Waking up feeling drained even after 8 hours in bed',
@@ -307,6 +313,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'BedDouble',
     relatedServiceId: 'stress-management',
     badge: 'CBT-I Non-Pharmacological Protocol',
+    directAnswer: 'Sleep disorders counselling restores natural sleep without relying on sleeping pills through Cognitive Behavioural Therapy for Insomnia (CBT-I), stimulus control, and bedtime cognitive offloading. Sessions run 50 minutes online via video or voice in English, Urdu, or Punjabi, starting with a sleep diary review to consolidate fragmented sleep.',
+    relatedConditionSlugs: ['stress-burnout', 'anxiety-counselling'],
     gentleGuidance: 'Sleep is a natural biological drive that functions best when we stop trying to force it. Our psychological methods reset your circadian rhythm without reliance on sleeping pills.',
     signs: [
       'Tossing and turning for over 45 minutes trying to fall asleep',
@@ -405,6 +413,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'ShieldAlert',
     relatedServiceId: 'individual-counselling',
     badge: 'Specialized Hypochondria & Somatic Care',
+    directAnswer: 'Health anxiety counselling helps break the exhausting cycle of obsessive illness worry, symptom Googling, and compulsive bodily checking using ERP, CBT, and interoceptive exposure. In private 50-minute video or voice sessions in English, Urdu, or Punjabi, you learn how stress amplifies bodily sensations and how to tolerate physical uncertainty.',
+    relatedConditionSlugs: ['anxiety-counselling', 'ocd-treatment'],
     gentleGuidance: 'Your symptoms are real, but their cause is an overactive nervous system, not the fatal illness your mind fears. We help you break the reassurance cycle.',
     signs: [
       'Compulsive Googling of minor physical sensations (headaches, twitches, aches)',
@@ -503,6 +513,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Zap',
     relatedServiceId: 'individual-counselling',
     badge: 'Constructive Emotional Regulation',
+    directAnswer: 'Anger management counselling helps you replace impulsive outbursts and chronic irritability with calm, assertive communication using CBT and somatic cooling techniques. During 50-minute private video or voice sessions in English, Urdu, or Punjabi, you map your physical warning signs and build circuit-breaker habits for home and work.',
+    relatedConditionSlugs: ['stress-burnout', 'marriage-couple-counselling'],
     gentleGuidance: 'Anger is a normal human emotion; destructive expression is not. We help you discover the vulnerable emotions beneath your anger and master calm communication.',
     signs: [
       'Snapping quickly over minor inconveniences or perceived disrespect',
@@ -601,6 +613,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Compass',
     relatedServiceId: 'individual-counselling',
     badge: 'Gentle Systematic Desensitization',
+    directAnswer: 'Phobia treatment gently retrains involuntary panic responses to triggers like flying, driving, public speaking, elevators, or needles through systematic desensitization and CBT. Each 50-minute online video or voice session in English, Urdu, or Punjabi moves strictly at your pace along a calm, step-by-step exposure hierarchy.',
+    relatedConditionSlugs: ['anxiety-counselling', 'ocd-treatment'],
     gentleGuidance: 'Phobias are conditioned fear responses stored in the brain’s amygdala. You can safely unlearn the panic through paced, supportive desensitization.',
     signs: [
       'Immediate terror, racing pulse, and urge to flee when facing the feared object or situation',
@@ -702,6 +716,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Repeat',
     relatedServiceId: 'behavioural-support',
     badge: 'ERP Gold Standard Treatment',
+    directAnswer: 'OCD treatment uses Exposure and Response Prevention (ERP), Inference-Based CBT, and ACT to break loops of intrusive thoughts and compulsive washing, checking, or scrupulosity rituals. Conducted in private 50-minute video or voice sessions in English, Urdu, or Punjabi, care starts with mapping triggers and tapering rituals without flooding.',
+    relatedConditionSlugs: ['anxiety-counselling', 'health-anxiety'],
     gentleGuidance: 'Intrusive thoughts are not your character or desires; they are neurological misfires. Exposure and Response Prevention (ERP) helps you reclaim your life.',
     signs: [
       'Horrific, blasphemous, aggressive, or contamination thoughts that cause intense guilt',
@@ -800,6 +816,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Shield',
     relatedServiceId: 'trauma-support',
     badge: 'Trauma-Informed Phased Care',
+    directAnswer: 'PTSD and trauma therapy follows a gentle, phased model prioritizing nervous-system safety, somatic grounding, and Trauma-Focused CBT before any memory processing. In strictly confidential 50-minute video or voice sessions in English, Urdu, or Punjabi, you stay in full control and are never pressured to relive traumatic details prematurely.',
+    relatedConditionSlugs: ['anxiety-counselling', 'grief-loss'],
     gentleGuidance: 'Trauma is not what happened to you; it is how your nervous system adapted to survive. We pace therapy gently around safety—you will never be forced to relive memories prematurely.',
     signs: [
       'Intrusive memories, vivid flashbacks, or nightmare replays of past terrifying events',
@@ -898,6 +916,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'HeartHandshake',
     relatedServiceId: 'couples-counselling',
     badge: 'Relational Healing & Self-Rebuilding',
+    directAnswer: 'Relationship and breakup counselling supports you through painful breakups, broken engagements, and divorce using attachment-informed therapy, radical acceptance, and boundary setting. Confidential 50-minute video or voice sessions in English, Urdu, or Punjabi focus on immediate emotional stabilization, healthy detachment, and rebuilding self-worth.',
+    relatedConditionSlugs: ['marriage-couple-counselling', 'depression-counselling'],
     gentleGuidance: 'Heartbreak is genuine psychological pain with neurochemical withdrawal. We guide you through grief, detachment, and rebuilding your independent identity.',
     signs: [
       'Obsessive replaying of past conversations, photos, and "what went wrong" questions',
@@ -996,6 +1016,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Moon',
     relatedServiceId: 'individual-counselling',
     badge: 'Compassionate Bereavement Holding',
+    directAnswer: 'Grief and loss counselling offers a private, unhurried space to mourn the loss of a loved one, health, or major life chapter using established bereavement models and narrative therapy. Through 50-minute online video or voice sessions in English, Urdu, or Punjabi, you process sorrow and guilt at your own pace while honoring lasting bonds.',
+    relatedConditionSlugs: ['depression-counselling', 'ptsd-trauma-therapy'],
     gentleGuidance: 'Grief is not a disease to cure or a problem to solve; it is love with nowhere to go. We accompany you through mourning at your own pace.',
     signs: [
       'Overwhelming waves of sorrow, yearning, or physical numbness following a loss',
@@ -1094,6 +1116,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Sparkles',
     relatedServiceId: 'individual-counselling',
     badge: 'Confidential Harm Reduction & Recovery',
+    directAnswer: 'Addiction counselling provides confidential outpatient support for smoking, vaping, substance habits, gaming, and screen dependency using Motivational Interviewing, CBT, and relapse prevention. In private 50-minute video or voice sessions in English, Urdu, or Punjabi, you explore underlying triggers and build practical urge-surfing strategies without judgment.',
+    relatedConditionSlugs: ['stress-burnout', 'anxiety-counselling'],
     gentleGuidance: 'Addiction is an attempt to soothe an underlying emotional ache. We provide private, non-judgmental psychological care focused on root causes and sustainable recovery.',
     signs: [
       'Difficulty controlling or stopping a substance or behavior despite negative consequences',
@@ -1192,6 +1216,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Lock',
     relatedServiceId: 'individual-counselling',
     badge: '100% Confidential · Aliases Welcome',
+    directAnswer: 'Anonymous counselling allows you to speak freely with a psychologist using a chosen first name or alias, without sharing government ID or turning on a video camera if you prefer voice-only. Every 50-minute confidential session in English, Urdu, or Punjabi uses person-centred, ACT, and solution-focused methods tailored to discreet support.',
+    relatedConditionSlugs: ['anxiety-counselling', 'relationship-breakup'],
     gentleGuidance: 'Your privacy is supreme. If shame, family prominence, or fear of societal judgment has kept you from therapy, this private pathway is designed for you.',
     signs: [
       'Deep desire to talk to a psychologist, but terrified someone in your social circle will find out',
@@ -1290,6 +1316,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'User',
     relatedServiceId: 'individual-counselling',
     badge: 'Clinical Excellence · Online Tele-Health',
+    directAnswer: 'Online female psychologist consultations connect women, teenage girls, couples, and families with senior female clinical practitioners from home via encrypted video or voice-only calls. Each 50-minute private session in English, Urdu, or Punjabi addresses anxiety, postpartum strain, marital pressure, and boundaries using culturally grounded CBT, EFT, and person-centred care.',
+    relatedConditionSlugs: ['depression-counselling', 'marriage-couple-counselling'],
     gentleGuidance: 'Our experienced female psychologists offer clinical expertise paired with deep cultural sensitivity for women, adolescents, and couples.',
     signs: [
       'Specific preference to consult an experienced female clinical psychologist',
@@ -1408,6 +1436,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Heart',
     relatedServiceId: 'couples-counselling',
     badge: 'Neutral, Compassionate Marital Care',
+    directAnswer: 'Marriage and couple counselling helps partners resolve recurring arguments, rebuild emotional trust, and set healthy joint-family boundaries through Emotionally Focused Therapy and Gottman-informed methods. Conducted in neutral 50-minute online sessions in English, Urdu, or Punjabi, both partners can join from the same location or separate cities.',
+    relatedConditionSlugs: ['family-counselling-therapy', 'relationship-breakup'],
     gentleGuidance: 'A struggling marriage is not necessarily a broken one. When both partners have a safe, neutral space to hear and be heard, profound healing is possible.',
     signs: [
       'Having the exact same escalating argument repeatedly without ever finding a resolution',
@@ -1506,6 +1536,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Users',
     relatedServiceId: 'family-counselling',
     badge: 'Systemic Harmony & Generational Healing',
+    directAnswer: 'Family counselling bridges generational divides, parent-child discord, and joint-family tension using Systemic, Structural, and Narrative family therapy. Private 50-minute video sessions in English, Urdu, or Punjabi respect family values while allowing 2 to 6 members in the same home or across cities to communicate safely.',
+    relatedConditionSlugs: ['marriage-couple-counselling', 'child-teen-psychologist'],
     gentleGuidance: 'Family is our greatest source of support and sometimes our deepest source of pain. We help families communicate with dignity without breaking bonds.',
     signs: [
       'Constant friction between parents and adult or adolescent children over life choices',
@@ -1604,6 +1636,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'Smile',
     relatedServiceId: 'child-adolescent-support',
     badge: 'Gentle Youth Psychology & Parent Guidance',
+    directAnswer: 'Child and teen psychology supports young people aged 10 to 19 facing exam anxiety, emotional withdrawal, behavioral shifts, or screen habits through Adolescent CBT and Parent Guidance. Starting with a parent consultation followed by private 50-minute online sessions in English, Urdu, or Punjabi, care builds coping tools and stronger parent-youth trust.',
+    relatedConditionSlugs: ['student-counselling', 'family-counselling-therapy'],
     gentleGuidance: 'Young people often express emotional pain through behavioral changes, withdrawal, or anger. We provide a warm, relatable space to help them flourish.',
     signs: [
       'Sudden drop in school grades, exam panic, or refusal to attend school',
@@ -1702,6 +1736,8 @@ export const CONDITIONS_DATA: ConditionItem[] = [
     iconName: 'GraduationCap',
     relatedServiceId: 'stress-management',
     badge: 'Academic Resilience & Career Focus',
+    directAnswer: 'Student counselling helps MDCAT, CSS, and university students overcome exam panic, chronic procrastination, imposter syndrome, and hostel burnout using performance CBT, executive scheduling, and ACT. Private 50-minute online video or voice sessions in English, Urdu, or Punjabi offer flexible late-afternoon and weekend slots around study timetables.',
+    relatedConditionSlugs: ['anxiety-counselling', 'stress-burnout'],
     gentleGuidance: 'Your worth is not defined by a single exam score or degree. We help you overcome performance panic, conquer procrastination, and reclaim clarity.',
     signs: [
       'Paralyzing dread and anxiety surrounding MDCAT, CSS, university exams, or board results',

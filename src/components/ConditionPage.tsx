@@ -26,19 +26,18 @@ import {
   buildBreadcrumbSchema,
   sanitizeSchemaText,
 } from '../data/seoMetadata';
-import { useNavigate, useParams } from '../lib/router';
+import { Link, useNavigate, useParams } from '../lib/router';
 import { NotFoundPage } from './NotFoundPage';
 
 interface ConditionPageProps {
   condition: ConditionItem;
   onBack: () => void;
-  onSelectCondition: (slug: string) => void;
+  onSelectCondition?: (slug: string) => void;
 }
 
 export const ConditionPage: React.FC<ConditionPageProps> = ({
   condition,
   onBack,
-  onSelectCondition,
 }) => {
   const { settings, getWhatsAppLink, getPhoneCallLink, openSpecialistProfile } =
     usePractice();
@@ -62,8 +61,15 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
   );
   const displaySpecialists = specialists.length > 0 ? specialists : SPECIALISTS.slice(0, 2);
 
-  // Related conditions from the same or other category
-  const relatedConditions = CONDITIONS_DATA.filter((c) => c.id !== condition.id).slice(0, 4);
+  // Two most relevant conditions for this care track
+  const mappedRelated =
+    condition.relatedConditionSlugs
+      ?.map((relSlug) => CONDITIONS_DATA.find((c) => c.slug === relSlug))
+      .filter((c): c is ConditionItem => Boolean(c && c.id !== condition.id)) || [];
+  const relevantConditions =
+    mappedRelated.length >= 2
+      ? mappedRelated.slice(0, 2)
+      : CONDITIONS_DATA.filter((c) => c.id !== condition.id).slice(0, 2);
 
   // High-resolution condition-tailored therapeutic atmosphere hero image
   const heroImage = getConditionHeroImage(condition.slug || condition.id);
@@ -317,6 +323,13 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
 
       {/* Main Content Layout */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-12 text-left">
+        {/* Direct Answer Summary */}
+        {condition.directAnswer && (
+          <p className="text-sm sm:text-base text-[#243333] leading-[1.75] bg-white p-6 rounded-2xl border border-[#286C6A]/15 shadow-2xs">
+            {condition.directAnswer}
+          </p>
+        )}
+
         {/* Gentle Guidance Banner */}
         <div className="bg-[#EAF2ED] border-l-4 border-[#1C433E] p-6 rounded-2xl shadow-2xs">
           <div className="flex items-start gap-3.5">
@@ -681,12 +694,15 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {relatedConditions.map((rel) => (
-              <button
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {relevantConditions.map((rel) => (
+              <Link
                 key={rel.id}
-                onClick={() => onSelectCondition(rel.slug)}
-                className="p-3.5 rounded-xl bg-white border border-[#286C6A]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-all group"
+                to={`/condition/${rel.slug}`}
+                onClick={() => {
+                  if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="p-3.5 rounded-xl bg-white border border-[#286C6A]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-all group block"
               >
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8A5C14] block">
                   {rel.category === 'common-concerns' ? 'Common' : 'Specialised'}
@@ -694,8 +710,22 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
                 <span className="text-xs sm:text-sm font-bold text-[#243333] group-hover:text-[#1C433E] line-clamp-1 mt-0.5 block">
                   {rel.title}
                 </span>
-              </button>
+              </Link>
             ))}
+            <Link
+              to="/plans-and-pricing"
+              onClick={() => {
+                if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="p-3.5 rounded-xl bg-white border border-[#286C6A]/10 hover:border-[#1C433E] hover:bg-[#EAF2ED] text-left transition-all group block"
+            >
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8A5C14] block">
+                Fees & Packages
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-[#243333] group-hover:text-[#1C433E] line-clamp-1 mt-0.5 block">
+                Plans & Pricing
+              </span>
+            </Link>
           </div>
         </section>
       </div>

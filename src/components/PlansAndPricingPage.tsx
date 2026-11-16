@@ -192,6 +192,11 @@ export const PlansAndPricingPage: React.FC = () => {
 
       {/* Main Pricing Section Cards */}
       <div className="bg-[#F8F7F2]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+          <p className="text-sm sm:text-base text-[#243333] leading-[1.75] bg-white p-6 rounded-2xl border border-[#286C6A]/15 shadow-2xs text-left">
+            Life Reset Pakistan offers confidential online counselling in Urdu and English starting at Rs. 2,500 for a 45–60 minute single video or voice session, or Rs. 10,000 for a 5-session package with the same psychologist. Structured WhatsApp text counselling is also available at Rs. 3,500 per week (7 days) or Rs. 11,000 per month (30 days), with daily replies between 9 AM and 9 PM PKT. You can book via WhatsApp using JazzCash, EasyPaisa, Bank Transfer, SadaPay, NayaPay, or international cards, with free rescheduling at least 12 hours in advance.
+          </p>
+        </div>
         <PricingSection />
       </div>
 
