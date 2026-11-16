@@ -56,8 +56,10 @@ export const ArticlePage: React.FC = () => {
     `Hello Life Reset Pakistan, I read the article "${article.title}" and would like to schedule a consultation with a psychologist.`
   );
 
+  const canonicalUrl = `${SITE_URL}/blog/${article.slug}`;
+
   const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
-    `Check out this mental health article: "${article.title}" - ${window.location.href}`
+    `Check out this mental health article: "${article.title}" - ${canonicalUrl}`
   )}`;
 
   const relatedArticles = ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
@@ -103,7 +105,6 @@ export const ArticlePage: React.FC = () => {
 
   const citations = getCitationsForCategory(article.category);
 
-  const canonicalUrl = `${SITE_URL}/blog/${article.slug}`;
   const ogImage = `${SITE_URL}${resourcesImg}`;
   const articleMeta = ARTICLE_META_BY_SLUG[article.slug] || {
     title: `${article.title.slice(0, 39)} | Life Reset Pakistan`,

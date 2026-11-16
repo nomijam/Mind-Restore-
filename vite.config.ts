@@ -2,7 +2,8 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
-import { defineConfig, type Plugin } from 'vite';
+import { pathToFileURL } from 'url';
+import { build as viteBuild, defineConfig, type Plugin } from 'vite';
 
 /**
  * Collects CSS class tokens used in above-the-fold shell & hero components so only
@@ -254,7 +255,7 @@ function staticWellKnownPlugin(rootDir: string): Plugin {
   };
 
   const handleStaticWellKnown = (
-    req: { url?: string },
+    req: { url?: string; method?: string; headers?: Record<string, string | string[] | undefined> },
     res: { statusCode: number; setHeader: (k: string, v: string) => void; end: (b: string) => void },
     next: () => void
   ) => {
@@ -289,9 +290,255 @@ function staticWellKnownPlugin(rootDir: string): Plugin {
     name: 'static-well-known-files',
     configureServer(server) {
       server.middlewares.use(handleStaticWellKnown);
+      server.middlewares.use(async (req, res, next) => {
+        const method = (req.method || 'GET').toUpperCase();
+        if (method !== 'GET' && method !== 'HEAD') return next();
+        const url = req.url || '/';
+        const pathname = url.split('?')[0];
+        const accept = String(req.headers?.accept || '');
+        if (
+          !accept.includes('text/html') ||
+          pathname.startsWith('/@') ||
+          pathname.startsWith('/src/') ||
+          pathname.startsWith('/node_modules/') ||
+          pathname.startsWith('/assets/') ||
+          pathname.startsWith('/images/') ||
+          pathname.includes('.')
+        ) {
+          return next();
+        }
+        try {
+          const rawTemplate = fs.readFileSync(path.resolve(rootDir, 'index.html'), 'utf8');
+          const { renderRoute } = await server.ssrLoadModule('/src/entry-server.tsx');
+          const { appHtml, head } = await renderRoute(pathname);
+          const populated = applyPrerenderedData(rawTemplate, pathname, appHtml, head);
+          const transformed = await server.transformIndexHtml(url, populated);
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.end(method === 'HEAD' ? '' : transformed);
+        } catch (err) {
+          server.ssrFixStacktrace(err as Error);
+          next();
+        }
+      });
     },
     configurePreviewServer(server) {
       server.middlewares.use(handleStaticWellKnown);
+      server.middlewares.use((req, res, next) => {
+        const method = (req.method || 'GET').toUpperCase();
+        if (method !== 'GET' && method !== 'HEAD') return next();
+        const pathname = (req.url || '/').split('?')[0];
+        if (pathname.includes('.') && !pathname.endsWith('.html')) return next();
+        const normalized = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+        const candidateRel =
+          normalized === '/' ? 'index.html' : `${normalized.replace(/^\/+/, '').replace(/\.html$/, '')}.html`;
+        const candidateAbs = path.resolve(rootDir, 'dist', candidateRel);
+        if (fs.existsSync(candidateAbs) && fs.statSync(candidateAbs).isFile()) {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.end(method === 'HEAD' ? '' : fs.readFileSync(candidateAbs, 'utf8'));
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
+interface PrerenderHeadData {
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  ogType: 'website' | 'article';
+  ogImage: string;
+  robots: string;
+  schemaData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+function escapeHtmlAttr(val: string): string {
+  return val
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeHtmlText(val: string): string {
+  return val.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function applyPrerenderedData(
+  templateHtml: string,
+  routePath: string,
+  appHtml: string,
+  head: PrerenderHeadData | null
+): string {
+  let html = templateHtml;
+
+  if (head) {
+    const t = escapeHtmlText(head.title);
+    const d = escapeHtmlAttr(head.description);
+    const tAttr = escapeHtmlAttr(head.title);
+    const c = escapeHtmlAttr(head.canonicalUrl);
+    const img = escapeHtmlAttr(head.ogImage);
+    const ogType = escapeHtmlAttr(head.ogType);
+    const robots = escapeHtmlAttr(head.robots);
+
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, () => `<title>${t}</title>`);
+    html = html.replace(
+      /<meta\s+name="description"[\s\S]*?\/>/i,
+      () => `<meta name="description" content="${d}" />`
+    );
+    html = html.replace(
+      /<link\s+rel="canonical"[\s\S]*?\/>/i,
+      () => `<link rel="canonical" href="${c}" />`
+    );
+    html = html.replace(
+      /<link\s+rel="alternate"\s+hreflang="en-pk"[\s\S]*?\/>/i,
+      () => `<link rel="alternate" hreflang="en-pk" href="${c}" />`
+    );
+    html = html.replace(
+      /<link\s+rel="alternate"\s+hreflang="x-default"[\s\S]*?\/>/i,
+      () => `<link rel="alternate" hreflang="x-default" href="${c}" />`
+    );
+    html = html.replace(
+      /<meta\s+name="robots"[\s\S]*?\/>/i,
+      () => `<meta name="robots" content="${robots}" />`
+    );
+    html = html.replace(
+      /<meta\s+property="og:type"[\s\S]*?\/>/i,
+      () => `<meta property="og:type" content="${ogType}" />`
+    );
+    html = html.replace(
+      /<meta\s+property="og:title"[\s\S]*?\/>/i,
+      () => `<meta property="og:title" content="${tAttr}" />`
+    );
+    html = html.replace(
+      /<meta\s+property="og:description"[\s\S]*?\/>/i,
+      () => `<meta property="og:description" content="${d}" />`
+    );
+    html = html.replace(
+      /<meta\s+property="og:url"[\s\S]*?\/>/i,
+      () => `<meta property="og:url" content="${c}" />`
+    );
+    html = html.replace(
+      /<meta\s+property="og:image"[\s\S]*?\/>/i,
+      () => `<meta property="og:image" content="${img}" />`
+    );
+    html = html.replace(
+      /<meta\s+name="twitter:title"[\s\S]*?\/>/i,
+      () => `<meta name="twitter:title" content="${tAttr}" />`
+    );
+    html = html.replace(
+      /<meta\s+name="twitter:description"[\s\S]*?\/>/i,
+      () => `<meta name="twitter:description" content="${d}" />`
+    );
+    html = html.replace(
+      /<meta\s+name="twitter:image"[\s\S]*?\/>/i,
+      () => `<meta name="twitter:image" content="${img}" />`
+    );
+
+    if (head.schemaData) {
+      const safeJson = JSON.stringify(head.schemaData).replace(/<\//g, '<\\/');
+      const schemaScript = `<script id="seo-page-structured-data" type="application/ld+json">${safeJson}</script>`;
+      if (/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/i.test(html)) {
+        html = html.replace(
+          /<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/i,
+          () => schemaScript
+        );
+      } else {
+        html = html.replace('</head>', () => `    ${schemaScript}\n  </head>`);
+      }
+    }
+  }
+
+  const normalizedRoute =
+    routePath.length > 1 && routePath.endsWith('/') ? routePath.slice(0, -1) : routePath || '/';
+  html = html.replace(
+    /<div\s+id="root"\s*><\/div>/i,
+    () => `<div id="root" data-prerendered-path="${escapeHtmlAttr(normalizedRoute)}">${appHtml}</div>`
+  );
+
+  return html;
+}
+
+function readSitemapRoutes(rootDir: string): string[] {
+  const sitemapPath = path.resolve(rootDir, 'public/sitemap.xml');
+  const xml = fs.readFileSync(sitemapPath, 'utf8');
+  const routes = new Set<string>();
+  const locRegex = /<loc>\s*https?:\/\/[^/<]+([^<]*)\s*<\/loc>/gi;
+  let match: RegExpExecArray | null;
+  while ((match = locRegex.exec(xml)) !== null) {
+    const raw = (match[1] || '/').trim();
+    const clean = raw.length > 1 && raw.endsWith('/') ? raw.slice(0, -1) : raw || '/';
+    routes.add(clean);
+  }
+  return Array.from(routes);
+}
+
+function prerenderPlugin(rootDir: string): Plugin {
+  return {
+    name: 'sitemap-ssg-prerender',
+    apply: 'build',
+    async closeBundle() {
+      const distDir = path.resolve(rootDir, 'dist');
+      const templatePath = path.resolve(distDir, 'index.html');
+      if (!fs.existsSync(templatePath)) return;
+
+      const templateHtml = fs.readFileSync(templatePath, 'utf8');
+      const ssrOutDir = path.resolve(distDir, '.ssr-temp');
+
+      try {
+        await viteBuild({
+          configFile: false,
+          root: rootDir,
+          plugins: [react()],
+          resolve: {
+            alias: {
+              '@': path.resolve(rootDir, '.'),
+            },
+          },
+          build: {
+            ssr: path.resolve(rootDir, 'src/entry-server.tsx'),
+            outDir: ssrOutDir,
+            emptyOutDir: true,
+            write: true,
+            minify: false,
+            rollupOptions: {
+              output: {
+                format: 'esm',
+              },
+            },
+          },
+          logLevel: 'silent',
+        });
+
+        const serverEntryUrl = pathToFileURL(path.resolve(ssrOutDir, 'entry-server.js')).href;
+        const { renderRoute } = (await import(serverEntryUrl)) as {
+          renderRoute: (urlPath: string) => Promise<{ appHtml: string; head: PrerenderHeadData | null }>;
+        };
+
+        const routes = readSitemapRoutes(rootDir);
+        for (const routePath of routes) {
+          const { appHtml, head } = await renderRoute(routePath);
+          const mainMatch = appHtml.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+          const mainInner = mainMatch ? mainMatch[1] : '';
+          if (!mainInner || !mainInner.includes('<h1') || mainInner.includes('<template id="B:')) {
+            throw new Error(`Prerender check failed for "${routePath}": <main> did not render full static HTML.`);
+          }
+          const finalHtml = applyPrerenderedData(templateHtml, routePath, appHtml, head);
+          const outFile =
+            routePath === '/'
+              ? templatePath
+              : path.resolve(distDir, `${routePath.replace(/^\/+/, '')}.html`);
+          fs.mkdirSync(path.dirname(outFile), { recursive: true });
+          fs.writeFileSync(outFile, finalHtml, 'utf8');
+        }
+
+        console.log(`[prerender] Successfully prerendered ${routes.length} routes from sitemap.xml`);
+      } finally {
+        fs.rmSync(ssrOutDir, { recursive: true, force: true });
+      }
     },
   };
 }
@@ -391,6 +638,7 @@ export default defineConfig(() => {
       react(),
       tailwindcss(),
       performanceBuildPlugin(import.meta.dirname),
+      prerenderPlugin(import.meta.dirname),
     ],
     resolve: {
       alias: {

@@ -16,7 +16,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!\\.well-known/|llms\\.txt$|assets/|images/|sitemap\\.xml$|robots\\.txt$|favicon\\.svg$|manifest\\.json$|site\\.webmanifest$).*)",
+      "source": "/((?!\\.well-known/|llms\\.txt$|assets/|images/|sitemap\\.xml$|robots\\.txt$|favicon\\.svg$|manifest\\.json$|site\\.webmanifest$|services$|plans-and-pricing$|about$|how-it-works$|timeline$|blog$|resources$|tools$|faq$|emergency$|contact$|blog/(?:understanding-anxiety-roots|depression-and-hope|healthy-boundaries-relationships|workplace-burnout-recovery|panic-attacks-emergency-toolkit|overcoming-social-anxiety-pakistan|managing-intrusive-thoughts-ocd|grief-loss-emotional-healing)$|condition/(?:anxiety-counselling|depression-counselling|stress-burnout|sleep-disorders|health-anxiety|anger-management|phobia-treatment|ocd-treatment|ptsd-trauma-therapy|relationship-breakup|grief-loss|addiction-counselling|anonymous-counselling|female-psychologist|marriage-couple-counselling|family-counselling-therapy|child-teen-psychologist|student-counselling)$|city/(?:lahore|karachi|islamabad-rawalpindi|faisalabad|peshawar|multan|overseas-worldwide)$|.*\\.html$).*)",
       "destination": "/index.html"
     }
   ],

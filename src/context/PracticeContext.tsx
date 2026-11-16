@@ -73,7 +73,9 @@ const SPECIALIST_NAMES: Record<string, string> = {
 
 export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const hasInitializedSettings = useRef(false);
-  const [settings, setSettings] = useState<PracticeSettings>(() => {
+  const [settings, setSettings] = useState<PracticeSettings>(DEFAULT_SETTINGS);
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem('inst_1981_practice_settings');
       if (saved) {
@@ -112,13 +114,12 @@ export const PracticeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           parsed.whatsappDisplayNumber = '+92 326 8791594';
           parsed.whatsappNumber = '923268791594';
         }
-        return { ...DEFAULT_SETTINGS, ...parsed };
+        setSettings({ ...DEFAULT_SETTINGS, ...parsed });
       }
     } catch {
       // fallback
     }
-    return DEFAULT_SETTINGS;
-  });
+  }, []);
 
   const navigate = useNavigate();
   const location = useLocation();

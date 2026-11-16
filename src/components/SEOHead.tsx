@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import {
   DEFAULT_OG_IMAGE,
   HOME_ROUTE_META,
@@ -13,6 +13,25 @@ export interface SEOHeadProps {
   robots?: string;
   schemaData?: Record<string, any> | Record<string, any>[];
 }
+
+export interface CollectedHeadData {
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  ogType: 'website' | 'article';
+  ogImage: string;
+  robots: string;
+  schemaData?: Record<string, any> | Record<string, any>[];
+}
+
+const HeadCollectorContext = createContext<{ current: CollectedHeadData | null } | null>(null);
+
+export const HeadCollectorProvider: React.FC<{
+  collector: { current: CollectedHeadData | null };
+  children: React.ReactNode;
+}> = ({ collector, children }) => (
+  <HeadCollectorContext.Provider value={collector}>{children}</HeadCollectorContext.Provider>
+);
 
 const DEFAULT_TITLE = HOME_ROUTE_META.home.title;
 const DEFAULT_DESCRIPTION = HOME_ROUTE_META.home.description;
@@ -29,6 +48,19 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   robots = DEFAULT_ROBOTS,
   schemaData,
 }) => {
+  const headCollector = useContext(HeadCollectorContext);
+  if (headCollector) {
+    headCollector.current = {
+      title,
+      description,
+      canonicalUrl,
+      ogType,
+      ogImage,
+      robots,
+      schemaData,
+    };
+  }
+
   useEffect(() => {
     // 1. Page Title
     document.title = title;

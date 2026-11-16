@@ -62,6 +62,27 @@ export const BrowserRouter: React.FC<{ children: React.ReactNode }> = ({ childre
   return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>;
 };
 
+export const StaticRouter: React.FC<{ location: string; children: React.ReactNode }> = ({
+  location: initialUrl,
+  children,
+}) => {
+  const [pathAndSearch, hashPart = ''] = initialUrl.split('#');
+  const [pathnamePart, searchPart = ''] = pathAndSearch.split('?');
+  const parsed: RouterLocation = useMemo(
+    () => ({
+      pathname: pathnamePart || '/',
+      search: searchPart ? `?${searchPart}` : '',
+      hash: hashPart ? `#${hashPart}` : '',
+    }),
+    [pathnamePart, searchPart, hashPart]
+  );
+
+  const noopNavigate = useCallback(() => {}, []);
+  const value = useMemo(() => ({ location: parsed, navigate: noopNavigate }), [parsed, noopNavigate]);
+
+  return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>;
+};
+
 export function useLocation(): RouterLocation {
   const ctx = useContext(RouterContext);
   if (!ctx) {
