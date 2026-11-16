@@ -266,6 +266,13 @@ function staticWellKnownPlugin(rootDir: string): Plugin {
       res.end('');
       return;
     }
+    if (pathname === '/pricing' || pathname === '/pricing/') {
+      res.statusCode = 301;
+      res.setHeader('Location', '/plans-and-pricing');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+      res.end('');
+      return;
+    }
     const entry = staticRoutes[pathname];
     if (!entry) return next();
     const absPath = path.resolve(rootDir, entry.relPath);
@@ -355,7 +362,7 @@ function performanceBuildPlugin(rootDir: string): Plugin {
         var list = null;
         if (p.indexOf('/condition/') === 0) list = m.condition;
         else if (p.indexOf('/city/') === 0) list = m.city;
-        else if (p === '/plans-and-pricing' || p === '/pricing' || p === '/plans-pricing' || p === '/plans & pricing') list = m.pricing;
+        else if (p === '/plans-and-pricing' || p === '/plans-pricing' || p === '/plans & pricing') list = m.pricing;
         else if (p.indexOf('/blog/') === 0 || p.indexOf('/article/') === 0) list = m.article;
         else if (p === '/blog' || p === '/articles' || p === '/resources') list = m.blog;
         else if (p === '/faq' || p === '/faqs') list = m.faq;

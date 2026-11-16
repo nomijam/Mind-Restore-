@@ -7,6 +7,11 @@
       "source": "/condition/female-psychologist-online",
       "destination": "/condition/female-psychologist",
       "statusCode": 301
+    },
+    {
+      "source": "/pricing",
+      "destination": "/plans-and-pricing",
+      "statusCode": 301
     }
   ],
   "rewrites": [

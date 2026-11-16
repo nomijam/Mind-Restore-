@@ -300,7 +300,7 @@ function AppContent() {
 
             {/* Dedicated Plans & Pricing Page (Clean URLs, no '#' required) */}
             <Route path="/plans-and-pricing" element={<PlansAndPricingPage />} />
-            <Route path="/pricing" element={<PlansAndPricingPage />} />
+            <Route path="/pricing" element={<RouteRedirect to="/plans-and-pricing" />} />
             <Route path="/plans-pricing" element={<PlansAndPricingPage />} />
             <Route path="/Plans & Pricing" element={<PlansAndPricingPage />} />
             <Route path="/plans & pricing" element={<PlansAndPricingPage />} />

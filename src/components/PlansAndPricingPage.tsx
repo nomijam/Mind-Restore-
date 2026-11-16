@@ -153,7 +153,7 @@ export const PlansAndPricingPage: React.FC = () => {
                 <span>Fixed PKR Rates</span>
               </div>
               <p className="text-[11px] text-[#D1E2DA] leading-snug">
-                Transparent local pricing starting at Rs. 2,000/session.
+                Transparent local pricing starting at Rs. 2,500/session.
               </p>
             </div>
 
