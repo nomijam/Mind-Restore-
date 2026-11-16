@@ -14,6 +14,14 @@ import {
   Compass,
 } from 'lucide-react';
 import { SEOHead } from './SEOHead';
+import {
+  BLOG_INDEX_META,
+  DEFAULT_OG_IMAGE,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+  sanitizeSchemaText,
+} from '../data/seoMetadata';
 import { ARTICLES, resourcesImg, resourcesMobileImg } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
@@ -58,37 +66,39 @@ export const BlogPage: React.FC = () => {
 
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Blog',
-    name: 'Life Reset Pakistan Mental Health Blog',
-    description:
-      'Evidence-informed mental health articles, coping frameworks, and psychological recovery guides written by licensed clinical psychologists in Pakistan.',
-    url: 'https://liferesetpakistan.com/blog',
-    publisher: {
-      '@type': 'MedicalOrganization',
-      name: 'Life Reset Pakistan',
-      url: 'https://liferesetpakistan.com',
-      foundingDate: '1981',
-      telephone: settings.whatsappDisplayNumber,
-    },
-    blogPost: ARTICLES.map((art) => ({
-      '@type': 'BlogPosting',
-      headline: art.title,
-      description: art.excerpt,
-      author: {
-        '@type': 'Person',
-        name: art.author,
+    '@graph': [
+      VERIFIED_ORGANIZATION,
+      {
+        '@type': 'Blog',
+        '@id': `${BLOG_INDEX_META.canonicalUrl}#blog`,
+        name: BLOG_INDEX_META.title,
+        description: BLOG_INDEX_META.description,
+        url: BLOG_INDEX_META.canonicalUrl,
+        publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+        blogPost: ARTICLES.map((art) => ({
+          '@type': 'BlogPosting',
+          headline: sanitizeSchemaText(art.title),
+          description: sanitizeSchemaText(art.excerpt),
+          author: { '@id': VERIFIED_ORGANIZATION['@id'] },
+          datePublished: '2026-01-01',
+          url: `${SITE_URL}/blog/${art.slug}`,
+        })),
       },
-      datePublished: '2026-01-01',
-      url: `https://liferesetpakistan.com/blog/${art.slug}`,
-    })),
+      buildBreadcrumbSchema(BLOG_INDEX_META.canonicalUrl, [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: 'Blog', url: BLOG_INDEX_META.canonicalUrl },
+      ]),
+    ],
   };
 
   return (
     <div className="min-h-screen bg-[#F8F7F2] text-[#243333] text-left">
       <SEOHead
-        title="Mental Health Blog & Articles | Life Reset Pakistan"
-        description="Evidence-informed psychoeducational articles, coping strategies, and clinical psychological frameworks by certified psychologists in Pakistan (Est. 1981)."
-        canonicalUrl="https://liferesetpakistan.com/blog"
+        title={BLOG_INDEX_META.title}
+        description={BLOG_INDEX_META.description}
+        canonicalUrl={BLOG_INDEX_META.canonicalUrl}
+        ogType="website"
+        ogImage={BLOG_INDEX_META.ogImage || DEFAULT_OG_IMAGE}
         schemaData={structuredData}
       />
 

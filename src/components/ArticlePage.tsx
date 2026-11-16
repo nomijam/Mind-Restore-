@@ -15,6 +15,13 @@ import {
   HelpCircle,
 } from 'lucide-react';
 import { SEOHead } from './SEOHead';
+import {
+  ARTICLE_META_BY_SLUG,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+  sanitizeSchemaText,
+} from '../data/seoMetadata';
 import { NotFoundPage } from './NotFoundPage';
 import { findArticle, ARTICLES, resourcesImg, resourcesMobileImg } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
@@ -96,38 +103,49 @@ export const ArticlePage: React.FC = () => {
 
   const citations = getCitationsForCategory(article.category);
 
+  const canonicalUrl = `${SITE_URL}/blog/${article.slug}`;
+  const ogImage = `${SITE_URL}${resourcesImg}`;
+  const articleMeta = ARTICLE_META_BY_SLUG[article.slug] || {
+    title: `${article.title.slice(0, 39)} | Life Reset Pakistan`,
+    description: sanitizeSchemaText(article.excerpt).slice(0, 160),
+  };
+
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.excerpt,
-    articleSection: article.category,
-    author: {
-      '@type': 'Person',
-      name: article.author,
-    },
-    publisher: {
-      '@type': 'MedicalOrganization',
-      name: 'Life Reset Pakistan',
-      url: 'https://liferesetpakistan.com',
-      foundingDate: '1981',
-      telephone: settings.whatsappDisplayNumber,
-    },
-    datePublished: '2026-01-01',
-    dateModified: '2026-11-11',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://liferesetpakistan.com/blog/${article.slug}`,
-    },
+    '@graph': [
+      VERIFIED_ORGANIZATION,
+      {
+        '@type': 'Article',
+        '@id': `${canonicalUrl}#article`,
+        headline: sanitizeSchemaText(article.title),
+        description: articleMeta.description,
+        articleSection: article.category,
+        image: ogImage,
+        author: { '@id': VERIFIED_ORGANIZATION['@id'] },
+        publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+        datePublished: '2026-01-01',
+        dateModified: '2026-11-11',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': canonicalUrl,
+        },
+      },
+      buildBreadcrumbSchema(canonicalUrl, [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: 'Blog', url: `${SITE_URL}/blog` },
+        { name: article.title, url: canonicalUrl },
+      ]),
+    ],
   };
 
   return (
     <article className="min-h-screen bg-[#F8F7F2] text-[#243333] text-left">
       <SEOHead
-        title={`${article.title} | Life Reset Pakistan Blog`}
-        description={article.excerpt}
-        canonicalUrl={`https://liferesetpakistan.com/blog/${article.slug}`}
-        ogType="article"
+        title={articleMeta.title}
+        description={articleMeta.description}
+        canonicalUrl={canonicalUrl}
+        ogType="website"
+        ogImage={ogImage}
         schemaData={structuredData}
       />
 

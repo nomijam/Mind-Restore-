@@ -16,6 +16,14 @@ import {
   Lock,
 } from 'lucide-react';
 import { SEOHead } from './SEOHead';
+import {
+  DEFAULT_OG_IMAGE,
+  FAQ_PAGE_META,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+  sanitizeSchemaText,
+} from '../data/seoMetadata';
 import { FAQS } from '../data/practiceData';
 import { usePractice } from '../context/PracticeContext';
 
@@ -144,26 +152,29 @@ export const FAQPage: React.FC = () => {
 
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    name: 'Life Reset Pakistan Frequently Asked Questions',
-    description:
-      'Comprehensive clinical FAQ covering online counselling, confidentiality, psychologist qualifications, fees, and appointment scheduling in Pakistan.',
-    url: 'https://liferesetpakistan.com/faq',
-    publisher: {
-      '@type': 'MedicalOrganization',
-      name: 'Life Reset Pakistan',
-      url: 'https://liferesetpakistan.com',
-      foundingDate: '1981',
-      telephone: settings.whatsappDisplayNumber,
-    },
-    mainEntity: EXTENDED_FAQS.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
+    '@graph': [
+      VERIFIED_ORGANIZATION,
+      {
+        '@type': 'FAQPage',
+        '@id': `${FAQ_PAGE_META.canonicalUrl}#faq`,
+        name: FAQ_PAGE_META.title,
+        description: FAQ_PAGE_META.description,
+        url: FAQ_PAGE_META.canonicalUrl,
+        publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+        mainEntity: EXTENDED_FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: sanitizeSchemaText(faq.question),
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: sanitizeSchemaText(faq.answer),
+          },
+        })),
       },
-    })),
+      buildBreadcrumbSchema(FAQ_PAGE_META.canonicalUrl, [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: 'FAQ', url: FAQ_PAGE_META.canonicalUrl },
+      ]),
+    ],
   };
 
   const coordinatorWhatsAppUrl = getWhatsAppLink(
@@ -173,9 +184,11 @@ export const FAQPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F8F7F2] text-[#243333] text-left">
       <SEOHead
-        title="Frequently Asked Questions (FAQ) | Life Reset Pakistan"
-        description="Find clear answers to common questions about online psychological counselling, confidentiality, fees, psychologist qualifications, and appointments at Life Reset Pakistan (Est. 1981)."
-        canonicalUrl="https://liferesetpakistan.com/faq"
+        title={FAQ_PAGE_META.title}
+        description={FAQ_PAGE_META.description}
+        canonicalUrl={FAQ_PAGE_META.canonicalUrl}
+        ogType="website"
+        ogImage={DEFAULT_OG_IMAGE}
         schemaData={structuredData}
       />
 

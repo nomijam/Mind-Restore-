@@ -3,6 +3,7 @@ import { Link } from '../lib/router';
 import { ArrowLeft, Home, Phone, MessageCircle, ShieldCheck } from 'lucide-react';
 import { usePractice } from '../context/PracticeContext';
 import { SEOHead } from './SEOHead';
+import { DEFAULT_OG_IMAGE, NOT_FOUND_META } from '../data/seoMetadata';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 
 export const NotFoundPage: React.FC = () => {
@@ -11,9 +12,12 @@ export const NotFoundPage: React.FC = () => {
   return (
     <article className="min-h-[75vh] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 text-center bg-[#F8F7F2]">
       <SEOHead
-        title="Page Not Found (404) | Life Reset Pakistan"
-        description="The page you were looking for does not exist, but support is always available at Life Reset Pakistan (Est. 1981)."
-        canonicalUrl="https://liferesetpakistan.com/404"
+        title={NOT_FOUND_META.title}
+        description={NOT_FOUND_META.description}
+        canonicalUrl={NOT_FOUND_META.canonicalUrl}
+        ogType="website"
+        ogImage={DEFAULT_OG_IMAGE}
+        robots="noindex, follow"
       />
 
       <div className="max-w-xl mx-auto space-y-7">

@@ -12,6 +12,13 @@ import { Hero } from './components/Hero';
 import { TrustSection } from './components/TrustSection';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
+import {
+  DEFAULT_OG_IMAGE,
+  HOME_ROUTE_META,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+} from './data/seoMetadata';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { MobileStickyBar } from './components/MobileStickyBar';
 
@@ -139,6 +146,16 @@ interface HomeViewProps {
   scrollTo?: string;
 }
 
+const SECTION_LABELS: Record<string, string> = {
+  services: 'Services',
+  about: 'About',
+  'how-it-works': 'How It Works',
+  timeline: 'Care Standards',
+  tools: 'Self-Care Tools',
+  emergency: 'Emergency Support',
+  contact: 'Contact',
+};
+
 function HomeView({ scrollTo }: HomeViewProps) {
   useEffect(() => {
     if (!scrollTo) return;
@@ -153,12 +170,54 @@ function HomeView({ scrollTo }: HomeViewProps) {
     return () => window.clearTimeout(timer);
   }, [scrollTo]);
 
+  const routeKey = scrollTo && HOME_ROUTE_META[scrollTo] ? scrollTo : 'home';
+  const meta = HOME_ROUTE_META[routeKey];
+  const isSectionRoute = Boolean(scrollTo && SECTION_LABELS[scrollTo]);
+
+  const schemaGraph: Record<string, any>[] = [
+    VERIFIED_ORGANIZATION,
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: 'Life Reset Pakistan',
+      description: VERIFIED_ORGANIZATION.description,
+      publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+      inLanguage: 'en-PK',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${meta.canonicalUrl}#webpage`,
+      url: meta.canonicalUrl,
+      name: meta.title,
+      description: meta.description,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: { '@id': VERIFIED_ORGANIZATION['@id'] },
+      inLanguage: 'en-PK',
+    },
+  ];
+
+  if (isSectionRoute && scrollTo) {
+    schemaGraph.push(
+      buildBreadcrumbSchema(meta.canonicalUrl, [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: SECTION_LABELS[scrollTo], url: meta.canonicalUrl },
+      ])
+    );
+  }
+
   return (
     <>
       <SEOHead
-        title="Life Reset Pakistan | Reset Your Life, Rebuild Your Future"
-        description="Life Reset Pakistan: Professional, confidential and accessible online psychological support for individuals, couples and families in Pakistan and worldwide (Est. 1981)."
-        canonicalUrl="https://liferesetpakistan.com/"
+        title={meta.title}
+        description={meta.description}
+        canonicalUrl={meta.canonicalUrl}
+        ogType="website"
+        ogImage={DEFAULT_OG_IMAGE}
+        schemaData={{
+          '@context': 'https://schema.org',
+          '@graph': schemaGraph,
+        }}
       />
 
       {/* Above-the-fold Hero & Trust Section */}

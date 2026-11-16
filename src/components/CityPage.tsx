@@ -17,6 +17,14 @@ import { SPECIALISTS } from '../data/practiceData';
 import { getCityHeroImage } from '../data/heroImagesData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 import { SEOHead } from './SEOHead';
+import {
+  CITY_META_BY_SLUG,
+  DEFAULT_OG_IMAGE,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+  sanitizeSchemaText,
+} from '../data/seoMetadata';
 import { useNavigate, useParams } from '../lib/router';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -51,63 +59,62 @@ export const CityPage: React.FC<CityPageProps> = ({ city, onBack, onSelectCity }
   // High-resolution location-specific landmark image for this city
   const heroImage = getCityHeroImage(city.slug || city.id);
 
+  const cityMeta = CITY_META_BY_SLUG[city.slug] || {
+    title: `Online Counselling in ${city.name} | Life Reset Pakistan`,
+    description: sanitizeSchemaText(city.description).slice(0, 160),
+  };
+  const canonicalUrl = `${SITE_URL}/city/${city.slug}`;
+  const ogImage = heroImage?.src ? `${SITE_URL}${heroImage.src}` : DEFAULT_OG_IMAGE;
+
   return (
     <article className="min-h-screen bg-[#F8F7F2] text-[#243333] pb-24 text-left">
       <SEOHead
-        title={`${city.name} Online Counselling & Therapy | Life Reset Pakistan`}
-        description={city.subheadline || city.description.slice(0, 155)}
-        canonicalUrl={`https://liferesetpakistan.com/city/${city.slug}`}
+        title={cityMeta.title}
+        description={cityMeta.description}
+        canonicalUrl={canonicalUrl}
+        ogType="website"
+        ogImage={ogImage}
         schemaData={{
-          "@context": "https://schema.org",
-          "@graph": [
+          '@context': 'https://schema.org',
+          '@graph': [
+            VERIFIED_ORGANIZATION,
             {
-              "@type": "MedicalBusiness",
-              "@id": `https://liferesetpakistan.com/city/${city.slug}#service`,
-              "name": `Life Reset Pakistan - ${city.name} Online Tele-Mental Health`,
-              "description": city.description,
-              "url": `https://liferesetpakistan.com/city/${city.slug}`,
-              "telephone": "+923268791594",
-              "priceRange": "$$",
-              "areaServed": {
-                "@type": "City",
-                "name": city.name,
+              '@type': 'WebPage',
+              '@id': `${canonicalUrl}#webpage`,
+              url: canonicalUrl,
+              name: cityMeta.title,
+              description: cityMeta.description,
+              about: { '@id': `${canonicalUrl}#service` },
+              publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+              inLanguage: 'en-PK',
+            },
+            {
+              '@type': 'Service',
+              '@id': `${canonicalUrl}#service`,
+              name: `Life Reset Pakistan - ${city.name} Online Counselling`,
+              description: cityMeta.description,
+              url: canonicalUrl,
+              provider: { '@id': VERIFIED_ORGANIZATION['@id'] },
+              areaServed: {
+                '@type': city.slug === 'overseas-worldwide' ? 'Place' : 'City',
+                name: city.name,
               },
             },
-            {
-              "@type": "BreadcrumbList",
-              "@id": `https://liferesetpakistan.com/city/${city.slug}#breadcrumb`,
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://liferesetpakistan.com/",
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Regional Tele-Health",
-                  "item": "https://liferesetpakistan.com/#cities",
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": city.name,
-                  "item": `https://liferesetpakistan.com/city/${city.slug}`,
-                },
-              ],
-            },
+            buildBreadcrumbSchema(canonicalUrl, [
+              { name: 'Home', url: `${SITE_URL}/` },
+              { name: city.name, url: canonicalUrl },
+            ]),
             ...(city.faqs && city.faqs.length > 0
               ? [
                   {
-                    "@type": "FAQPage",
-                    "@id": `https://liferesetpakistan.com/city/${city.slug}#faq`,
-                    "mainEntity": city.faqs.map((f) => ({
-                      "@type": "Question",
-                      "name": f.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": f.answer,
+                    '@type': 'FAQPage',
+                    '@id': `${canonicalUrl}#faq`,
+                    mainEntity: city.faqs.map((f) => ({
+                      '@type': 'Question',
+                      name: sanitizeSchemaText(f.question),
+                      acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: sanitizeSchemaText(f.answer),
                       },
                     })),
                   },

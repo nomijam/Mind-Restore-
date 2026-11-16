@@ -16,6 +16,13 @@ import {
   Compass,
 } from 'lucide-react';
 import { SEOHead } from './SEOHead';
+import {
+  DEFAULT_OG_IMAGE,
+  PLANS_PRICING_META,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+} from '../data/seoMetadata';
 import { PricingSection } from './PricingSection';
 import { usePractice } from '../context/PracticeContext';
 
@@ -34,67 +41,65 @@ export const PlansAndPricingPage: React.FC = () => {
 
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'MedicalWebPage',
-    name: 'Counselling Plans & Transparent Pricing | Life Reset Pakistan',
-    description:
-      'Transparent, affordable psychological counselling plans in Pakistan. Single sessions, 5-session packages, and monthly WhatsApp text counselling with verified clinical psychologists.',
-    url: 'https://liferesetpakistan.com/plans-and-pricing',
-    publisher: {
-      '@type': 'MedicalOrganization',
-      name: 'Life Reset Pakistan',
-      url: 'https://liferesetpakistan.com',
-      foundingDate: '1981',
-      telephone: settings.whatsappDisplayNumber,
-    },
-    mainEntity: {
-      '@type': 'MedicalBusiness',
-      name: 'Life Reset Pakistan Online Clinical Psychology',
-      priceRange: 'PKR 2,000 - PKR 11,000',
-      currenciesAccepted: 'PKR',
-      paymentAccepted: 'Cash, Bank Transfer, EasyPaisa, JazzCash, SadaPay, NayaPay, Credit Card',
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Mental Health Counselling Plans',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            name: 'Single Video/Voice Counselling Session',
-            price: '2500',
-            priceCurrency: 'PKR',
-            description: 'One 45–60 minute confidential online counselling session with a qualified clinical psychologist.',
-          },
-          {
-            '@type': 'Offer',
-            name: '5-Session Package (Online Counselling)',
-            price: '10000',
-            priceCurrency: 'PKR',
-            description: 'Five 45–60 minute online counselling sessions with priority scheduling and progress tracking.',
-          },
-          {
-            '@type': 'Offer',
-            name: 'Weekly WhatsApp Text Counselling Plan',
-            price: '3500',
-            priceCurrency: 'PKR',
-            description: '7 days of structured WhatsApp text counselling with replies between 9 AM and 9 PM PKT.',
-          },
-          {
-            '@type': 'Offer',
-            name: 'Monthly WhatsApp Text Counselling Plan',
-            price: '11000',
-            priceCurrency: 'PKR',
-            description: '30 days of ongoing text support with the same psychologist throughout.',
-          },
-        ],
+    '@graph': [
+      VERIFIED_ORGANIZATION,
+      {
+        '@type': 'WebPage',
+        '@id': `${PLANS_PRICING_META.canonicalUrl}#webpage`,
+        name: PLANS_PRICING_META.title,
+        description: PLANS_PRICING_META.description,
+        url: PLANS_PRICING_META.canonicalUrl,
+        publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+        mainEntity: {
+          '@type': 'OfferCatalog',
+          name: 'Online Counselling Plans & Pricing',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              name: 'Single Video/Voice Counselling Session',
+              price: '2500',
+              priceCurrency: 'PKR',
+              description: 'One 45–60 minute confidential online counselling session by video or voice.',
+            },
+            {
+              '@type': 'Offer',
+              name: '5-Session Package (Online Counselling)',
+              price: '10000',
+              priceCurrency: 'PKR',
+              description: 'Five 45–60 minute confidential online counselling sessions in English or Urdu.',
+            },
+            {
+              '@type': 'Offer',
+              name: 'Weekly WhatsApp Text Counselling Plan',
+              price: '3500',
+              priceCurrency: 'PKR',
+              description: '7 days of structured WhatsApp text counselling with replies between 9 AM and 9 PM PKT.',
+            },
+            {
+              '@type': 'Offer',
+              name: 'Monthly WhatsApp Text Counselling Plan',
+              price: '11000',
+              priceCurrency: 'PKR',
+              description: '30 days of ongoing WhatsApp text support in English or Urdu.',
+            },
+          ],
+        },
       },
-    },
+      buildBreadcrumbSchema(PLANS_PRICING_META.canonicalUrl, [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: 'Plans & Pricing', url: PLANS_PRICING_META.canonicalUrl },
+      ]),
+    ],
   };
 
   return (
     <div className="min-h-screen bg-[#F8F7F2] text-[#243333] text-left">
       <SEOHead
-        title="Plans & Pricing | Transparent Mental Health Fees | Life Reset Pakistan"
-        description="Explore clear, compassionate mental health counselling plans and fees in Pakistan. Single sessions (Rs. 2,500), 5-session packages (Rs. 10,000), and weekly/monthly WhatsApp text counselling."
-        canonicalUrl="https://liferesetpakistan.com/plans-and-pricing"
+        title={PLANS_PRICING_META.title}
+        description={PLANS_PRICING_META.description}
+        canonicalUrl={PLANS_PRICING_META.canonicalUrl}
+        ogType="website"
+        ogImage={DEFAULT_OG_IMAGE}
         schemaData={structuredData}
       />
 

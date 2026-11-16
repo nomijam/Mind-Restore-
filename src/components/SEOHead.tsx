@@ -1,37 +1,56 @@
 import React, { useEffect } from 'react';
+import {
+  DEFAULT_OG_IMAGE,
+  HOME_ROUTE_META,
+} from '../data/seoMetadata';
 
 export interface SEOHeadProps {
   title?: string;
   description?: string;
   canonicalUrl?: string;
   ogType?: 'website' | 'article';
+  ogImage?: string;
+  robots?: string;
   schemaData?: Record<string, any> | Record<string, any>[];
 }
 
-const DEFAULT_TITLE = 'Life Reset Pakistan | Reset Your Life, Rebuild Your Future (Est. 1981)';
-const DEFAULT_DESCRIPTION =
-  'Life Reset Pakistan: Professional, confidential and accessible online psychological support for individuals, couples and families in Pakistan and worldwide (Est. 1981).';
-const BASE_URL = 'https://liferesetpakistan.com';
+const DEFAULT_TITLE = HOME_ROUTE_META.home.title;
+const DEFAULT_DESCRIPTION = HOME_ROUTE_META.home.description;
+const BASE_URL = HOME_ROUTE_META.home.canonicalUrl;
+const DEFAULT_ROBOTS =
+  'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   canonicalUrl = BASE_URL,
   ogType = 'website',
+  ogImage = DEFAULT_OG_IMAGE,
+  robots = DEFAULT_ROBOTS,
   schemaData,
 }) => {
   useEffect(() => {
     // 1. Page Title
     document.title = title;
 
-    // 2. Meta Description
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute('content', description);
+    const setMetaTag = (
+      selector: string,
+      attr: 'name' | 'property',
+      attrValue: string,
+      content: string
+    ) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, attrValue);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    // 2. Meta Description & Robots
+    setMetaTag('meta[name="description"]', 'name', 'description', description);
+    setMetaTag('meta[name="robots"]', 'name', 'robots', robots);
 
     // 3. Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -43,24 +62,18 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     canonical.setAttribute('href', canonicalUrl);
 
     // 4. OpenGraph Tags
-    const setMetaTag = (selector: string, attr: 'name' | 'property', attrValue: string, content: string) => {
-      let el = document.querySelector(selector);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attr, attrValue);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', content);
-    };
-
     setMetaTag('meta[property="og:title"]', 'property', 'og:title', title);
     setMetaTag('meta[property="og:description"]', 'property', 'og:description', description);
     setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
     setMetaTag('meta[property="og:type"]', 'property', 'og:type', ogType);
+    setMetaTag('meta[property="og:image"]', 'property', 'og:image', ogImage);
+    setMetaTag('meta[property="og:site_name"]', 'property', 'og:site_name', 'Life Reset Pakistan');
 
     // 5. Twitter Card Tags
+    setMetaTag('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image');
     setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', title);
     setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', description);
+    setMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', ogImage);
 
     // 6. Dynamic JSON-LD Structured Data
     const scriptId = 'seo-page-structured-data';
@@ -77,7 +90,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     } else if (scriptTag) {
       scriptTag.remove();
     }
-  }, [title, description, canonicalUrl, ogType, schemaData]);
+  }, [title, description, canonicalUrl, ogType, ogImage, robots, schemaData]);
 
   return null;
 };

@@ -18,6 +18,14 @@ import { CONDITIONS_DATA, findCondition } from '../data/conditionsData';
 import { getConditionHeroImage } from '../data/heroImagesData';
 import { MindRestoreEmblem } from './MindRestoreLogo';
 import { SEOHead } from './SEOHead';
+import {
+  CONDITION_META_BY_SLUG,
+  DEFAULT_OG_IMAGE,
+  SITE_URL,
+  VERIFIED_ORGANIZATION,
+  buildBreadcrumbSchema,
+  sanitizeSchemaText,
+} from '../data/seoMetadata';
 import { useNavigate, useParams } from '../lib/router';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -60,62 +68,64 @@ export const ConditionPage: React.FC<ConditionPageProps> = ({
   // High-resolution condition-tailored therapeutic atmosphere hero image
   const heroImage = getConditionHeroImage(condition.slug || condition.id);
 
+  const conditionMeta = CONDITION_META_BY_SLUG[condition.slug] || {
+    title: `${condition.title} | Life Reset Pakistan`,
+    description: sanitizeSchemaText(
+      `Confidential online ${condition.title.toLowerCase()} support in English and Urdu across Pakistan and worldwide via video, phone, or text.`
+    ).slice(0, 160),
+  };
+  const canonicalUrl = `${SITE_URL}/condition/${condition.slug}`;
+  const ogImage = heroImage?.src ? `${SITE_URL}${heroImage.src}` : DEFAULT_OG_IMAGE;
+
   return (
     <article className="min-h-screen bg-[#F8F7F2] text-[#243333] pb-24">
       <SEOHead
-        title={`${condition.title} | Life Reset Pakistan (Est. 1981)`}
-        description={`${condition.twoLineExplanation} Evidence-informed, confidential clinical psychology support in Pakistan & worldwide.`}
-        canonicalUrl={`https://liferesetpakistan.com/condition/${condition.slug}`}
-        ogType="article"
+        title={conditionMeta.title}
+        description={conditionMeta.description}
+        canonicalUrl={canonicalUrl}
+        ogType="website"
+        ogImage={ogImage}
         schemaData={{
-          "@context": "https://schema.org",
-          "@graph": [
+          '@context': 'https://schema.org',
+          '@graph': [
+            VERIFIED_ORGANIZATION,
             {
-              "@type": "MedicalCondition",
-              "@id": `https://liferesetpakistan.com/condition/${condition.slug}#condition`,
-              "name": condition.title,
-              "description": condition.twoLineExplanation,
-              "possibleTreatment": condition.therapeuticModalities?.map((m) => ({
-                "@type": "MedicalTherapy",
-                "name": m.name,
-                "description": m.description,
+              '@type': 'WebPage',
+              '@id': `${canonicalUrl}#webpage`,
+              url: canonicalUrl,
+              name: conditionMeta.title,
+              description: conditionMeta.description,
+              about: { '@id': `${canonicalUrl}#condition` },
+              publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
+              inLanguage: 'en-PK',
+            },
+            {
+              '@type': 'MedicalCondition',
+              '@id': `${canonicalUrl}#condition`,
+              name: condition.title,
+              description: conditionMeta.description,
+              possibleTreatment: condition.therapeuticModalities?.map((m) => ({
+                '@type': 'MedicalTherapy',
+                name: sanitizeSchemaText(m.name),
+                description: sanitizeSchemaText(m.description),
               })),
             },
-            {
-              "@type": "BreadcrumbList",
-              "@id": `https://liferesetpakistan.com/condition/${condition.slug}#breadcrumb`,
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://liferesetpakistan.com/",
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Clinical Focus Areas",
-                  "item": "https://liferesetpakistan.com/#conditions",
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": condition.title,
-                  "item": `https://liferesetpakistan.com/condition/${condition.slug}`,
-                },
-              ],
-            },
+            buildBreadcrumbSchema(canonicalUrl, [
+              { name: 'Home', url: `${SITE_URL}/` },
+              { name: 'Services', url: `${SITE_URL}/services` },
+              { name: condition.title, url: canonicalUrl },
+            ]),
             ...(condition.faqs && condition.faqs.length > 0
               ? [
                   {
-                    "@type": "FAQPage",
-                    "@id": `https://liferesetpakistan.com/condition/${condition.slug}#faq`,
-                    "mainEntity": condition.faqs.map((f) => ({
-                      "@type": "Question",
-                      "name": f.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": f.answer,
+                    '@type': 'FAQPage',
+                    '@id': `${canonicalUrl}#faq`,
+                    mainEntity: condition.faqs.map((f) => ({
+                      '@type': 'Question',
+                      name: sanitizeSchemaText(f.question),
+                      acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: sanitizeSchemaText(f.answer),
                       },
                     })),
                   },
