@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from '../lib/router';
+import { Link, useParams, useNavigate } from '../lib/router';
 import {
   ArrowLeft,
   ArrowRight,
@@ -105,10 +105,40 @@ export const ArticlePage: React.FC = () => {
 
   const citations = getCitationsForCategory(article.category);
 
-  const ogImage = `${SITE_URL}${resourcesImg}`;
+  const ogImage = `${SITE_URL}${article.image || resourcesImg}`;
   const articleMeta = ARTICLE_META_BY_SLUG[article.slug] || {
     title: `${article.title.slice(0, 39)} | Life Reset Pakistan`,
     description: sanitizeSchemaText(article.excerpt).slice(0, 160),
+  };
+
+  const renderInlineContent = (text: string) => {
+    const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
+    return parts.map((part, idx) => {
+      const boldMatch = part.match(/^\*\*(.+)\*\*$/);
+      if (boldMatch) {
+        return (
+          <strong key={idx} className="font-semibold text-[#1C433E]">
+            {boldMatch[1]}
+          </strong>
+        );
+      }
+      const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (linkMatch) {
+        return (
+          <Link
+            key={idx}
+            to={linkMatch[2]}
+            onClick={() => {
+              if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="font-semibold text-[#1C433E] underline decoration-[#286C6A]/50 hover:text-[#286C6A] transition-colors"
+          >
+            {linkMatch[1]}
+          </Link>
+        );
+      }
+      return part;
+    });
   };
 
   const structuredData = {
@@ -124,8 +154,8 @@ export const ArticlePage: React.FC = () => {
         image: ogImage,
         author: { '@id': VERIFIED_ORGANIZATION['@id'] },
         publisher: { '@id': VERIFIED_ORGANIZATION['@id'] },
-        datePublished: '2026-01-01',
-        dateModified: '2026-11-11',
+        datePublished: article.datePublished || '2026-01-01',
+        dateModified: article.datePublished || '2026-11-11',
         mainEntityOfPage: {
           '@type': 'WebPage',
           '@id': canonicalUrl,
@@ -225,26 +255,30 @@ export const ArticlePage: React.FC = () => {
           <picture className="block w-full">
             <source
               media="(max-width: 640px)"
-              srcSet={`${resourcesMobileImg} 480w`}
+              srcSet={`${article.mobileImage || article.image || resourcesMobileImg} ${article.image ? 600 : 480}w`}
               sizes="100vw"
               type="image/webp"
-              width={480}
-              height={360}
+              width={article.image ? 600 : 480}
+              height={article.image ? 315 : 360}
             />
             <source
               media="(min-width: 641px)"
-              srcSet={`${resourcesImg} 800w`}
+              srcSet={`${article.image || resourcesImg} ${article.imageWidth || 800}w`}
               sizes="(max-width: 896px) 100vw, 896px"
               type="image/webp"
-              width={800}
-              height={600}
+              width={article.imageWidth || 800}
+              height={article.imageHeight || 600}
             />
             <img
-              src={resourcesImg}
-              srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+              src={article.image || resourcesImg}
+              srcSet={
+                article.image
+                  ? `${article.mobileImage || article.image} 600w, ${article.image} ${article.imageWidth || 1200}w`
+                  : `${resourcesMobileImg} 480w, ${resourcesImg} 800w`
+              }
               sizes="(max-width: 896px) 100vw, 896px"
-              width={800}
-              height={600}
+              width={article.imageWidth || 800}
+              height={article.imageHeight || 600}
               alt={article.title}
               className="w-full aspect-[21/9] sm:aspect-[2/1] object-cover"
               loading="eager"
@@ -265,6 +299,22 @@ export const ArticlePage: React.FC = () => {
         {/* Article Body Content */}
         <div className="prose prose-neutral max-w-none space-y-6 text-[#243333] text-sm sm:text-base leading-relaxed">
           {article.content.map((paragraph, idx) => {
+            if (paragraph.trim() === '---') {
+              return <hr key={idx} className="border-[#286C6A]/15 my-6" />;
+            }
+
+            if (paragraph.startsWith('## ')) {
+              return (
+                <h2
+                  key={idx}
+                  className="text-lg sm:text-xl font-heading font-bold text-[#1C433E] pt-4 border-t border-[#286C6A]/10 flex items-center gap-2"
+                >
+                  <Sparkles className="w-5 h-5 text-[#8A5C14] shrink-0" />
+                  <span>{paragraph.slice(3)}</span>
+                </h2>
+              );
+            }
+
             // Highlight action steps or lists
             if (
               paragraph.startsWith('1.') ||
@@ -304,9 +354,17 @@ export const ArticlePage: React.FC = () => {
               );
             }
 
+            if (/^\*[^*]+\*$/.test(paragraph.trim())) {
+              return (
+                <p key={idx} className="text-xs sm:text-sm italic text-[#526363] leading-relaxed">
+                  {paragraph.trim().slice(1, -1)}
+                </p>
+              );
+            }
+
             return (
               <p key={idx} className="leading-relaxed">
-                {paragraph}
+                {renderInlineContent(paragraph)}
               </p>
             );
           })}

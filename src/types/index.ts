@@ -101,6 +101,11 @@ export interface ResourceArticle {
   excerpt: string;
   content: string[];
   tags: string[];
+  image?: string;
+  mobileImage?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  datePublished?: string;
 }
 
 export interface PatientTestimonial {

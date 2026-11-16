@@ -69,16 +69,20 @@ export const ResourcesSection: React.FC = () => {
               <div>
                 <div className="relative aspect-[16/10] bg-[#EAF2ED] overflow-hidden">
                   <img
-                    src={resourcesImg}
-                    srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+                    src={art.image || resourcesImg}
+                    srcSet={
+                      art.image
+                        ? `${art.mobileImage || art.image} 600w, ${art.image} ${art.imageWidth || 1200}w`
+                        : `${resourcesMobileImg} 480w, ${resourcesImg} 800w`
+                    }
                     sizes="(max-width: 767px) 100vw, 300px"
                     alt={`Mental health psychoeducation: ${art.title}`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
                     loading="lazy"
                     decoding="async"
-                    width={480}
-                    height={360}
+                    width={art.imageWidth || 480}
+                    height={art.imageHeight || 360}
                   />
                   <span className="absolute top-3 left-3 bg-white/95 text-[#1C433E] text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded">
                     {art.category}

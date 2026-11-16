@@ -117,11 +117,15 @@ export const ArticleModal: React.FC = () => {
 
           <div className="aspect-[16/9] rounded-2xl overflow-hidden bg-[#EAF2ED] border border-[#1C433E]/10">
             <img
-              src={resourcesImg}
-              srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+              src={selectedArticle.image || resourcesImg}
+              srcSet={
+                selectedArticle.image
+                  ? `${selectedArticle.mobileImage || selectedArticle.image} 600w, ${selectedArticle.image} ${selectedArticle.imageWidth || 1200}w`
+                  : `${resourcesMobileImg} 480w, ${resourcesImg} 800w`
+              }
               sizes="(max-width: 768px) 100vw, 700px"
-              width={800}
-              height={600}
+              width={selectedArticle.imageWidth || 800}
+              height={selectedArticle.imageHeight || 600}
               alt={selectedArticle.title}
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"

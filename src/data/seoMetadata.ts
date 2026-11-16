@@ -307,6 +307,11 @@ export const ARTICLE_META_BY_SLUG: Record<string, { title: string; description: 
     description:
       'Compassionate perspectives on mourning bereavement and navigating grief at your own pace without feeling broken, published by Life Reset Pakistan today.',
   },
+  'marriage-conflict-money-in-laws-parenting': {
+    title: 'Marriage Conflict in Pakistan | Life Reset Pakistan',
+    description:
+      'Money, in-laws and parenting cause most marriage arguments in Pakistan. Learn what these fights are really about, and three small things that help couples.',
+  },
 };
 
 export const NOT_FOUND_META: RouteSEOMeta = {

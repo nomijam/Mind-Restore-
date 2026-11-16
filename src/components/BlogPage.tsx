@@ -80,7 +80,7 @@ export const BlogPage: React.FC = () => {
           headline: sanitizeSchemaText(art.title),
           description: sanitizeSchemaText(art.excerpt),
           author: { '@id': VERIFIED_ORGANIZATION['@id'] },
-          datePublished: '2026-01-01',
+          datePublished: art.datePublished || '2026-01-01',
           url: `${SITE_URL}/blog/${art.slug}`,
         })),
       },
@@ -288,11 +288,15 @@ export const BlogPage: React.FC = () => {
                   <div>
                     <div className="relative aspect-[16/10] bg-[#EAF2ED] overflow-hidden">
                       <img
-                        src={resourcesImg}
-                        srcSet={`${resourcesMobileImg} 480w, ${resourcesImg} 800w`}
+                        src={art.image || resourcesImg}
+                        srcSet={
+                          art.image
+                            ? `${art.mobileImage || art.image} 600w, ${art.image} ${art.imageWidth || 1200}w`
+                            : `${resourcesMobileImg} 480w, ${resourcesImg} 800w`
+                        }
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                        width={480}
-                        height={360}
+                        width={art.imageWidth || 480}
+                        height={art.imageHeight || 360}
                         alt={`Psychoeducation: ${art.title}`}
                         className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
                         loading="lazy"
